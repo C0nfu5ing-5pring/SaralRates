@@ -1,5 +1,11 @@
+import Card from "../components/Card";
+
 const Dashboard = () => {
-  return <div>Dashboard</div>;
+  return (
+    <>
+      <Card />
+    </>
+  );
 };
 
 export default Dashboard;
