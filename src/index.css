@@ -1,1 +1,37 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: sublimaBold;
+  src: url("./fonts//Sublima-ExtraBold.otf");
+}
+
+@font-face {
+  font-family: sublimaBoldItalic;
+  src: url("./fonts//Sublima-ExtraBoldItalic.otf");
+}
+
+@font-face {
+  font-family: sublimaLight;
+  src: url("./fonts//Sublima-ExtraLight.otf");
+}
+
+@font-face {
+  font-family: sublimaLightItalic;
+  src: url("./fonts//Sublima-ExtraLightItalic.otf");
+}
+
+.bold {
+  font-family: sublimaBold;
+}
+
+.boldItalic {
+  font-family: sublimaBoldItalic;
+}
+
+.thin {
+  font-family: sublimaLight;
+}
+
+.thinItalic {
+  font-family: sublimaLightItalic;
+}
