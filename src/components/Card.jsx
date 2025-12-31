@@ -94,7 +94,7 @@ function PriceWithTooltip({ modalPrice, previousModalPrice }) {
   );
 }
 
-const Card = () => {
+const Card = ({ search }) => {
   const [cardArray, setCardArray] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -192,6 +192,18 @@ const Card = () => {
     };
   });
 
+  const filteredCards = search.trim()
+    ? enrichedCards.filter((card) => {
+        const userInput = search.toLowerCase();
+        return (
+          card.commodity?.toLowerCase().includes(userInput) ||
+          card.market?.toLowerCase().includes(userInput) ||
+          card.district?.toLowerCase().includes(userInput) ||
+          card.state?.toLowerCase().includes(userInput)
+        );
+      })
+    : enrichedCards;
+
   if (loading) {
     return (
       <div className="col-span-full flex justify-center items-center min-h-[40vh]">
@@ -202,10 +214,18 @@ const Card = () => {
     );
   }
 
+  if (!filteredCards.length) {
+    return (
+      <p className="text-gray-500 text-center col-span-full">
+        No results found
+      </p>
+    );
+  }
+
   return (
     <>
       {Array.isArray(enrichedCards) &&
-        enrichedCards.map((card, index) => (
+        filteredCards.map((card, index) => (
           <div
             key={index}
             className="w-full max-w-sm bg-white rounded-2xl border p-4 sm:p-6 lg:p-7 flex flex-col gap-3 sm:gap-4 lg:gap-5"
