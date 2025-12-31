@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Card from "../components/Card";
+import { Virtuoso } from "react-virtuoso";
 
 const Dashboard = () => {
   const [search, setSearch] = useState("");
@@ -43,9 +44,7 @@ const Dashboard = () => {
       </div>
 
       <div className="max-w-7xl mx-auto w-full">
-        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
-          <Card search={search} trendFilter={trendFilter} />
-        </div>
+        <Card search={search} trendFilter={trendFilter} />
       </div>
     </div>
   );

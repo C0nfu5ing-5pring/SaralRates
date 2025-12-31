@@ -18,6 +18,7 @@ import {
   shift,
   autoUpdate,
 } from "@floating-ui/react";
+import { VirtuosoGrid } from "react-virtuoso";
 
 const intl = new Intl.NumberFormat("en-IN", {
   style: "currency",
@@ -111,7 +112,7 @@ const Card = ({ search, trendFilter }) => {
 
     axios
       .get(
-        "https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=579b464db66ec23bdd00000161044603d2b74a674677081bf7f413a5&format=json&limit=1"
+        "https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=579b464db66ec23bdd00000161044603d2b74a674677081bf7f413a5&format=json&limit=100000"
       )
       .then((res) => {
         setCardArray(res.data.records);
@@ -227,94 +228,101 @@ const Card = ({ search, trendFilter }) => {
 
   return (
     <>
-      {Array.isArray(enrichedCards) &&
-        filteredCards.map((card, index) => (
-          <div
-            key={index}
-            className="w-full max-w-sm bg-white rounded-2xl border p-4 sm:p-6 lg:p-7 flex flex-col gap-3 sm:gap-4 lg:gap-5"
-          >
-            <div>
-              <p className="text-sm sm:text-base lg:text-lg font-semibold flex items-center gap-2">
-                <Leaf size={16} className="text-green-600" />
-                {card.commodity}
-              </p>
-              <p className="text-xs sm:text-sm text-gray-600">
-                Variety: {card.variety}
-              </p>
+      <VirtuosoGrid
+        style={{ height: "90vh", width: "100%" }}
+        totalCount={filteredCards.length}
+        listClassName="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 w-full overflow-y-scroll [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+        itemContent={(index) => {
+          const card = filteredCards[index];
+          return (
+            <div
+              key={index}
+              className="w-full max-w-sm bg-white rounded-2xl border p-4 sm:p-6 lg:p-7 flex flex-col gap-3 sm:gap-4 lg:gap-5"
+            >
+              <div>
+                <p className="text-sm sm:text-base lg:text-lg font-semibold flex items-center gap-2">
+                  <Leaf size={16} className="text-green-600" />
+                  {card.commodity}
+                </p>
+                <p className="text-xs sm:text-sm text-gray-600">
+                  Variety: {card.variety}
+                </p>
+              </div>
+
+              <div>
+                <PriceWithTooltip
+                  modalPrice={card.modal_price}
+                  previousModalPrice={card.previousModalPrice}
+                  trend={card.trend}
+                />
+                <p className="text-xs text-gray-500">per quintal</p>
+                <p className="text-xs sm:text-sm text-gray-600">
+                  ≈ ₹{(card.modal_price / 100).toFixed(2)} / kg
+                </p>
+              </div>
+
+              <div className="flex justify-between gap-3 text-xs sm:text-sm text-gray-600">
+                <p className="flex items-center">
+                  <ArrowDown size={14} />
+                  {intl.format(card.min_price)}
+                </p>
+                <p className="flex items-center">
+                  <ArrowUp size={14} />
+                  {intl.format(card.max_price)}
+                </p>
+              </div>
+
+              <div>
+                {card.trend === "up" && (
+                  <span className="flex items-center py-0.5 text-xs px-3 rounded-full w-fit bg-green-50  text-green-700">
+                    ↑ Increase
+                  </span>
+                )}
+
+                {card.trend === "down" && (
+                  <span className="flex items-center py-0.5 text-xs px-3 rounded-full w-fit bg-red-50  text-red-700">
+                    ↓ Decrease
+                  </span>
+                )}
+
+                {card.trend === "same" && (
+                  <span className="flex items-center py-0.5 text-xs px-3 rounded-full w-fit bg-gray-100  text-gray-600">
+                    — Stable
+                  </span>
+                )}
+
+                {card.trend === "new" && (
+                  <span className="flex items-center py-0.5 text-xs px-3 rounded-full w-fit bg-blue-50  text-blue-700">
+                    New
+                  </span>
+                )}
+              </div>
+
+              <div className="text-xs sm:text-sm text-gray-700">
+                <p className="flex items-center gap-2">
+                  <Store size={14} />
+                  {card.market}
+                </p>
+                <p className="flex items-center gap-2 text-gray-600">
+                  <MapPin size={14} />
+                  {card.district}, {card.state}
+                </p>
+              </div>
+
+              <div className="flex justify-between text-xs text-gray-500 pt-2 border-t">
+                <p className="flex items-center gap-1">
+                  <Tag size={12} />
+                  {card.grade}
+                </p>
+                <p className="flex items-center gap-1">
+                  <Calendar size={12} />
+                  {card.arrival_date}
+                </p>
+              </div>
             </div>
-
-            <div>
-              <PriceWithTooltip
-                modalPrice={card.modal_price}
-                previousModalPrice={card.previousModalPrice}
-                trend={card.trend}
-              />
-              <p className="text-xs text-gray-500">per quintal</p>
-              <p className="text-xs sm:text-sm text-gray-600">
-                ≈ ₹{(card.modal_price / 100).toFixed(2)} / kg
-              </p>
-            </div>
-
-            <div className="flex justify-between gap-3 text-xs sm:text-sm text-gray-600">
-              <p className="flex items-center">
-                <ArrowDown size={14} />
-                {intl.format(card.min_price)}
-              </p>
-              <p className="flex items-center">
-                <ArrowUp size={14} />
-                {intl.format(card.max_price)}
-              </p>
-            </div>
-
-            <div>
-              {card.trend === "up" && (
-                <span className="flex items-center py-0.5 text-xs px-3 rounded-full w-fit bg-green-50  text-green-700">
-                  ↑ Increase
-                </span>
-              )}
-
-              {card.trend === "down" && (
-                <span className="flex items-center py-0.5 text-xs px-3 rounded-full w-fit bg-red-50  text-red-700">
-                  ↓ Decrease
-                </span>
-              )}
-
-              {card.trend === "same" && (
-                <span className="flex items-center py-0.5 text-xs px-3 rounded-full w-fit bg-gray-100  text-gray-600">
-                  — Stable
-                </span>
-              )}
-
-              {card.trend === "new" && (
-                <span className="flex items-center py-0.5 text-xs px-3 rounded-full w-fit bg-blue-50  text-blue-700">
-                  New
-                </span>
-              )}
-            </div>
-
-            <div className="text-xs sm:text-sm text-gray-700">
-              <p className="flex items-center gap-2">
-                <Store size={14} />
-                {card.market}
-              </p>
-              <p className="flex items-center gap-2 text-gray-600">
-                <MapPin size={14} />
-                {card.district}, {card.state}
-              </p>
-            </div>
-
-            <div className="flex justify-between text-xs text-gray-500 pt-2 border-t">
-              <p className="flex items-center gap-1">
-                <Tag size={12} />
-                {card.grade}
-              </p>
-              <p className="flex items-center gap-1">
-                <Calendar size={12} />
-                {card.arrival_date}
-              </p>
-            </div>
-          </div>
-        ))}
+          );
+        }}
+      />
     </>
   );
 };
