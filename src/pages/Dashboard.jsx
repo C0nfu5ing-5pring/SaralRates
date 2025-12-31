@@ -3,6 +3,7 @@ import Card from "../components/Card";
 
 const Dashboard = () => {
   const [search, setSearch] = useState("");
+  const [trendFilter, setTrendFilter] = useState("all");
 
   return (
     <div className="px-4 sm:px-6 lg:px-12 py-6 flex flex-col gap-8">
@@ -20,9 +21,30 @@ const Dashboard = () => {
         "
       />
 
+      <div className="flex flex-wrap justify-center gap-2">
+        {[
+          { label: "All", value: "all" },
+          { label: "Increase", value: "up" },
+          { label: "Decrease", value: "down" },
+          { label: "New", value: "new" },
+        ].map((item) => (
+          <button
+            key={item.value}
+            onClick={() => setTrendFilter(item.value)}
+            className={`px-4 cursor-pointer py-1.5 rounded-full text-xs sm:text-sm border transition ${
+              trendFilter === item.value
+                ? "bg-black text-white border-black"
+                : "bg-white text-gray-600 hover:bg-gray-100"
+            }`}
+          >
+            {item.label}
+          </button>
+        ))}
+      </div>
+
       <div className="max-w-7xl mx-auto w-full">
         <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
-          <Card search={search} />
+          <Card search={search} trendFilter={trendFilter} />
         </div>
       </div>
     </div>

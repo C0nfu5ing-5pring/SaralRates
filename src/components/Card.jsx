@@ -94,7 +94,7 @@ function PriceWithTooltip({ modalPrice, previousModalPrice }) {
   );
 }
 
-const Card = ({ search }) => {
+const Card = ({ search, trendFilter }) => {
   const [cardArray, setCardArray] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -192,17 +192,20 @@ const Card = ({ search }) => {
     };
   });
 
-  const filteredCards = search.trim()
-    ? enrichedCards.filter((card) => {
-        const userInput = search.toLowerCase();
-        return (
-          card.commodity?.toLowerCase().includes(userInput) ||
-          card.market?.toLowerCase().includes(userInput) ||
-          card.district?.toLowerCase().includes(userInput) ||
-          card.state?.toLowerCase().includes(userInput)
-        );
-      })
-    : enrichedCards;
+  const filteredCards = enrichedCards.filter((card) => {
+    const userInput = search.toLowerCase();
+
+    const matchesSearch =
+      card.commodity?.toLowerCase().includes(userInput) ||
+      card.market?.toLowerCase().includes(userInput) ||
+      card.district?.toLowerCase().includes(userInput) ||
+      card.state?.toLowerCase().includes(userInput);
+
+    const matchesTrend =
+      trendFilter === "all" ? true : card.trend === trendFilter;
+
+    return matchesSearch && matchesTrend;
+  });
 
   if (loading) {
     return (
