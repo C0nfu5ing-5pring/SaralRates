@@ -105,6 +105,8 @@ const Card = ({ search, trendFilter }) => {
     const lastFetchDate = localStorage.getItem("lastFetchDate");
 
     if (lastFetchDate === today) {
+      const cache = JSON.parse(localStorage.getItem("cachedRecords") || "[]");
+      setCardArray(cache);
       setLoading(false);
       return;
     }
@@ -126,6 +128,8 @@ const Card = ({ search, trendFilter }) => {
           ? res.data.records
           : [];
         setCardArray(records);
+
+        localStorage.setItem("cachedRecords", JSON.stringify(records));
 
         const previousPriceData = res.data.records.map(
           ({
