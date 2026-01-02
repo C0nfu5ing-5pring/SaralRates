@@ -8,9 +8,10 @@ import {
   Tag,
   Calendar,
   Info,
+  TriangleAlert,
 } from "lucide-react";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import {
   useFloating,
   offset,
@@ -19,6 +20,7 @@ import {
   autoUpdate,
 } from "@floating-ui/react";
 import { VirtuosoGrid } from "react-virtuoso";
+import { PuffLoader } from "react-spinners";
 
 const intl = new Intl.NumberFormat("en-IN", {
   style: "currency",
@@ -44,8 +46,7 @@ function PriceWithTooltip({ modalPrice, previousModalPrice }) {
 
   return (
     <div className="flex items-center gap-2 relative">
-      <p className="flex items-center gap-2 font-semibold text-lg sm:text-xl">
-        <HandCoins size={22} />
+      <p className="flex items-center gap-2 font-semibold text-lg md:text-xl lg:text-2xl">
         {intl.format(modalPrice)}
       </p>
 
@@ -63,7 +64,7 @@ function PriceWithTooltip({ modalPrice, previousModalPrice }) {
           onMouseLeave={!isTouch ? closeTip : undefined}
           onClick={isTouch ? toggleTip : undefined}
         >
-          <Info size={16} />
+          <Info className="text-blue-500" size={16} />
         </button>
       )}
 
@@ -75,9 +76,9 @@ function PriceWithTooltip({ modalPrice, previousModalPrice }) {
             ref={floating}
             style={{ position: strategy, top: y ?? 0, left: x ?? 0 }}
             className="
-              z-50 max-w-60
-              rounded-lg bg-gray-900 px-3 py-2
-              text-xs text-white shadow-xl
+              z-50 max-w-56
+  rounded-xl bg-gray-900 px-3 py-2
+  text-xs text-white shadow-2xl
             "
           >
             <p className="text-gray-400">Previous price</p>
@@ -100,8 +101,6 @@ const Card = ({ search, trendFilter }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios;
-
     const today = new Date().toISOString().split("T")[0];
     const lastFetchDate = localStorage.getItem("lastFetchDate");
 
@@ -112,10 +111,21 @@ const Card = ({ search, trendFilter }) => {
 
     axios
       .get(
-        "https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=579b464db66ec23bdd00000161044603d2b74a674677081bf7f413a5&format=json&limit=100000"
+        "https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070",
+        {
+          params: {
+            "api-key":
+              "579b464db66ec23bdd00000161044603d2b74a674677081bf7f413a5",
+            format: "json",
+            limit: 10000,
+          },
+        }
       )
       .then((res) => {
-        setCardArray(res.data.records);
+        const records = Array.isArray(res.data?.records)
+          ? res.data.records
+          : [];
+        setCardArray(records);
 
         const previousPriceData = res.data.records.map(
           ({
@@ -148,81 +158,70 @@ const Card = ({ search, trendFilter }) => {
 
   // localStorage.clear();
 
-  const lastPrices = JSON.parse(localStorage.getItem("lastPrices") || "[]");
+  const lastPriceMap = useMemo(() => {
+    const rawData = JSON.parse(localStorage.getItem("lastPrices") || "[]");
 
-  const findLastPrice = (card) => {
-    return lastPrices.find((price) => {
-      return (
-        price.commodity === card.commodity &&
-        price.market === card.market &&
-        price.district === card.district
-      );
-    });
-  };
+    return new Map(
+      rawData.map((product) => [
+        `${product.commodity}|${product.market}|${product.district}`,
+        product.modal_price,
+      ])
+    );
+  }, []);
 
-  const enrichedCards = cardArray.map((card) => {
-    const last = findLastPrice(card);
+  const enriched = useMemo(() => {
+    return cardArray.map((card) => {
+      const key = `${card.commodity}|${card.market}|${card.district}`;
+      const prev = lastPriceMap.get(key);
 
-    if (!last) {
+      let trend = "new";
+      if (prev != null) {
+        if (card.modal_price > prev) trend = "up";
+        else if (card.modal_price < prev) trend = "down";
+        else trend = "same";
+      }
+
       return {
         ...card,
-        modalDifference: 0,
-        minDifference: 0,
-        maxDifference: 0,
-        trend: "new",
-        previousModalPrice: null,
+        trend,
+        previousModalPrice: prev ?? null,
       };
-    }
+    });
+  }, [cardArray, lastPriceMap]);
 
-    const modalDifference = card.modal_price - last.modal_price;
-    const minDifference = card.min_price - last.min_price;
-    const maxDifference = card.max_price - last.max_price;
-
-    let trend = "same";
-
-    if (modalDifference > 0) trend = "up";
-    else if (modalDifference < 0) trend = "down";
-
-    return {
-      ...card,
-      modalDifference,
-      minDifference,
-      maxDifference,
-      trend,
-      previousModalPrice: last.modal_price,
-    };
-  });
-
-  const filteredCards = enrichedCards.filter((card) => {
+  const filtered = useMemo(() => {
     const userInput = search.toLowerCase();
+    return enriched.filter((c) => {
+      const matchesSearch =
+        c.commodity?.toLowerCase().includes(userInput) ||
+        c.market?.toLowerCase().includes(userInput) ||
+        c.district?.toLowerCase().includes(userInput) ||
+        c.state?.toLowerCase().includes(userInput);
 
-    const matchesSearch =
-      card.commodity?.toLowerCase().includes(userInput) ||
-      card.market?.toLowerCase().includes(userInput) ||
-      card.district?.toLowerCase().includes(userInput) ||
-      card.state?.toLowerCase().includes(userInput);
+      const matchesTrend = trendFilter === "all" || c.trend === trendFilter;
 
-    const matchesTrend =
-      trendFilter === "all" ? true : card.trend === trendFilter;
-
-    return matchesSearch && matchesTrend;
-  });
+      return matchesSearch && matchesTrend;
+    });
+  }, [enriched, search, trendFilter]);
 
   if (loading) {
     return (
-      <div className="col-span-full flex justify-center items-center min-h-[40vh]">
+      <div className="flex flex-col justify-center p-10 h-[80vh] items-center">
+        <PuffLoader color="#000000" size={120} />
+
         <p className="text-gray-500 text-lg sm:text-2xl animate-pulse">
-          Fetching mandi prices…
+          Fetching mandi prices. Please wait.
         </p>
       </div>
     );
   }
 
-  if (!filteredCards.length) {
+  if (!filtered.length) {
     return (
-      <p className="text-gray-500 text-center col-span-full">
-        No results found
-      </p>
+      <div className="flex flex-col justify-center p-10 h-[80vh] items-center">
+        <TriangleAlert size={120} style={{ color: "red" }} />
+        <p className="text-gray-500 text-lg sm:text-4xl">No results found</p>
+      </div>
     );
   }
 
@@ -230,22 +229,32 @@ const Card = ({ search, trendFilter }) => {
     <>
       <VirtuosoGrid
         style={{ height: "90vh", width: "100%" }}
-        totalCount={filteredCards.length}
+        totalCount={filtered.length}
         listClassName="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 w-full overflow-y-scroll [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
         itemContent={(index) => {
-          const card = filteredCards[index];
+          const card = filtered[index];
           return (
             <div
               key={index}
-              className="w-full max-w-sm bg-white rounded-2xl border p-4 sm:p-6 lg:p-7 flex flex-col gap-3 sm:gap-4 lg:gap-5"
+              className="w-full max-w-sm cursor-pointer
+  bg-white rounded-2xl
+  border-2 border-gray-300
+  p-5
+  flex flex-col gap-4
+  hover:shadow-md hover:-translate-y-0.5
+  mt-5
+  transition-all duration-200 sm:p-6 lg:p-7 sm:gap-4 lg:gap-5"
             >
               <div>
-                <p className="text-sm sm:text-base lg:text-lg font-semibold flex items-center gap-2">
-                  <Leaf size={16} className="text-green-600" />
-                  {card.commodity}
-                </p>
+                <div className="flex justify-start items-center">
+                  <p className="text-lg md:text-xl lg:text-2xl font-semibold whitespace-pre-wrap flex items-center gap-2">
+                    {card.commodity}
+                  </p>
+                </div>
+
                 <p className="text-xs sm:text-sm text-gray-600">
-                  Variety: {card.variety}
+                  <span className="font-semibold text-black">Variety:</span>{" "}
+                  {card.variety}
                 </p>
               </div>
 
@@ -256,19 +265,17 @@ const Card = ({ search, trendFilter }) => {
                   trend={card.trend}
                 />
                 <p className="text-xs text-gray-500">per quintal</p>
-                <p className="text-xs sm:text-sm text-gray-600">
+                <p className="text-base  md:text-lg text-gray-600">
                   ≈ ₹{(card.modal_price / 100).toFixed(2)} / kg
                 </p>
               </div>
 
-              <div className="flex justify-between gap-3 text-xs sm:text-sm text-gray-600">
-                <p className="flex items-center">
-                  <ArrowDown size={14} />
-                  {intl.format(card.min_price)}
+              <div className="text-xs text-gray-600">
+                <p className="uppercase tracking-wide text-[10px] text-gray-400 mb-1">
+                  Today's Range
                 </p>
-                <p className="flex items-center">
-                  <ArrowUp size={14} />
-                  {intl.format(card.max_price)}
+                <p className="font-medium text-gray-700">
+                  {intl.format(card.min_price)} – {intl.format(card.max_price)}
                 </p>
               </div>
 
@@ -300,24 +307,18 @@ const Card = ({ search, trendFilter }) => {
 
               <div className="text-xs sm:text-sm text-gray-700">
                 <p className="flex items-center gap-2">
-                  <Store size={14} />
+                  <Store className="text-gray-500" size={14} />
                   {card.market}
                 </p>
                 <p className="flex items-center gap-2 text-gray-600">
-                  <MapPin size={14} />
+                  <MapPin className="text-red-600" size={14} />
                   {card.district}, {card.state}
                 </p>
               </div>
 
               <div className="flex justify-between text-xs text-gray-500 pt-2 border-t">
-                <p className="flex items-center gap-1">
-                  <Tag size={12} />
-                  {card.grade}
-                </p>
-                <p className="flex items-center gap-1">
-                  <Calendar size={12} />
-                  {card.arrival_date}
-                </p>
+                <p className="flex items-center gap-1">{card.grade}</p>
+                <p className="flex items-center gap-1">{card.arrival_date}</p>
               </div>
             </div>
           );
