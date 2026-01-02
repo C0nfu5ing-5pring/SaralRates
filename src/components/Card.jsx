@@ -1,15 +1,4 @@
-import {
-  Leaf,
-  HandCoins,
-  ArrowDown,
-  ArrowUp,
-  Store,
-  MapPin,
-  Tag,
-  Calendar,
-  Info,
-  TriangleAlert,
-} from "lucide-react";
+import { Store, MapPin, Info, TriangleAlert } from "lucide-react";
 import axios from "axios";
 import { useEffect, useState, useMemo } from "react";
 import {
@@ -159,8 +148,6 @@ const Card = ({ search, trendFilter }) => {
         setLoading(false);
       });
   }, []);
-
-  // localStorage.clear();
 
   const lastPriceMap = useMemo(() => {
     const rawData = JSON.parse(localStorage.getItem("lastPrices") || "[]");
