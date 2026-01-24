@@ -35,7 +35,7 @@ function PriceWithTooltip({ modalPrice, previousModalPrice }) {
 
   return (
     <div className="flex items-center gap-2 relative">
-      <p className="flex items-center gap-2 font-semibold text-lg md:text-xl lg:text-2xl">
+      <p className="flex items-center gap-2 font-semibold text-lg md:text-xl lg:text-2xl text-black">
         {intl.format(modalPrice)}
       </p>
 
@@ -45,8 +45,9 @@ function PriceWithTooltip({ modalPrice, previousModalPrice }) {
           type="button"
           className="
             rounded-full p-1
-            text-gray-400 hover:text-gray-700
-            hover:bg-gray-100 active:scale-95
+            text-gray-400  hover:text-gray-700 
+            hover:bg-gray-100 
+            active:scale-95
             transition
           "
           onMouseEnter={!isTouch ? openTip : undefined}
@@ -66,8 +67,8 @@ function PriceWithTooltip({ modalPrice, previousModalPrice }) {
             style={{ position: strategy, top: y ?? 0, left: x ?? 0 }}
             className="
               z-50 max-w-56
-  rounded-xl bg-gray-900 px-3 py-2
-  text-xs text-white shadow-2xl
+              rounded-xl bg-gray-900 px-3 py-2
+              text-xs text-white shadow-2xl
             "
           >
             <p className="text-gray-400">Previous price</p>
@@ -197,10 +198,10 @@ const Card = ({ search, trendFilter }) => {
 
   if (loading) {
     return (
-      <div className="flex flex-col justify-center p-10 h-[80vh] items-center">
+      <div className="flex flex-col justify-center p-10 h-[80vh] items-center bg-white  transition-colors duration-300">
         <PuffLoader color="#000000" size={120} />
 
-        <p className="text-gray-500 text-lg sm:text-2xl animate-pulse">
+        <p className="text-gray-500  text-lg sm:text-2xl animate-pulse">
           Fetching mandi prices. Please wait.
         </p>
       </div>
@@ -209,9 +210,11 @@ const Card = ({ search, trendFilter }) => {
 
   if (!filtered.length) {
     return (
-      <div className="flex flex-col justify-center p-10 h-[80vh] items-center">
-        <TriangleAlert size={120} style={{ color: "red" }} />
-        <p className="text-gray-500 text-lg sm:text-4xl">No results found</p>
+      <div className="flex flex-col justify-center p-10 h-[80vh] items-center bg-white  transition-colors duration-300">
+        <TriangleAlert size={120} style={{ color: "gray" }} />
+        <p className="text-gray-500  text-lg sm:text-4xl">
+          Sorry, couldn't find that here
+        </p>
       </div>
     );
   }
@@ -228,15 +231,17 @@ const Card = ({ search, trendFilter }) => {
             <div
               key={index}
               className="
-     w-full
-     cursor-pointer
-     bg-white rounded-2xl
-     border-2 border-gray-300
-     flex flex-col justify-between
-     hover:shadow-md hover:-translate-y-0.5
-     transition-all duration-200 p-4 sm:p-6 lg:p-7 gap-1
-     min-h-[320px]
-   "
+                w-full
+                cursor-pointer
+                bg-white 
+                rounded-2xl
+                border-2 border-gray-300 
+                flex flex-col justify-between
+                hover:shadow-md hover:-translate-y-0.5
+                transition-all duration-200 p-4 sm:p-6 lg:p-7 gap-1
+                min-h-[320px]
+                text-black 
+              "
             >
               <div>
                 <div className="flex justify-start items-center">
@@ -245,8 +250,8 @@ const Card = ({ search, trendFilter }) => {
                   </p>
                 </div>
 
-                <p className="text-[10px] sm:text-xs text-gray-600">
-                  <span className="font-semibold text-black">Variety:</span>{" "}
+                <p className="text-[10px] sm:text-xs text-gray-600 ">
+                  <span className="font-semibold text-black ">Variety:</span>{" "}
                   {card.variety}
                 </p>
               </div>
@@ -257,59 +262,59 @@ const Card = ({ search, trendFilter }) => {
                   previousModalPrice={card.previousModalPrice}
                   trend={card.trend}
                 />
-                <p className="text-[10px] text-gray-500">per quintal</p>
-                <p className="text-sm md:text-base text-gray-600">
+                <p className="text-[10px] text-gray-500 ">per quintal</p>
+                <p className="text-sm md:text-base text-gray-600 ">
                   ≈ ₹{(card.modal_price / 100).toFixed(2)} / kg
                 </p>
               </div>
 
-              <div className="text-[11px] text-gray-600">
+              <div className="text-[11px] text-gray-600 ">
                 <p className="uppercase tracking-wide text-[9px] text-gray-400 mb-1">
                   Today's Range
                 </p>
-                <p className="font-medium text-gray-700">
+                <p className="font-medium text-gray-700 ">
                   {intl.format(card.min_price)} – {intl.format(card.max_price)}
                 </p>
               </div>
 
               <div>
                 {card.trend === "up" && (
-                  <span className="flex items-center py-0.5 text-[11px] px-3 rounded-full w-fit bg-green-50 text-green-700">
+                  <span className="flex items-center py-0.5 text-[11px] px-3 rounded-full w-fit bg-green-50  text-green-700 ">
                     ↑ Increase
                   </span>
                 )}
 
                 {card.trend === "down" && (
-                  <span className="flex items-center py-0.5 text-[11px] px-3 rounded-full w-fit bg-red-50 text-red-700">
+                  <span className="flex items-center py-0.5 text-[11px] px-3 rounded-full w-fit bg-red-50  text-red-700 ">
                     ↓ Decrease
                   </span>
                 )}
 
                 {card.trend === "same" && (
-                  <span className="flex items-center py-0.5 text-[11px] px-3 rounded-full w-fit bg-gray-100 text-gray-600">
+                  <span className="flex items-center py-0.5 text-[11px] px-3 rounded-full w-fit bg-gray-100  text-gray-600 ">
                     — Stable
                   </span>
                 )}
 
                 {card.trend === "new" && (
-                  <span className="flex items-center py-0.5 text-[11px] px-3 rounded-full w-fit bg-blue-50 text-blue-700">
+                  <span className="flex items-center py-0.5 text-[11px] px-3 rounded-full w-fit bg-blue-50  text-blue-700 ">
                     New
                   </span>
                 )}
               </div>
 
-              <div className="text-[11px] sm:text-xs text-gray-700">
+              <div className="text-[11px] sm:text-xs text-gray-700 ">
                 <p className="flex items-center gap-2">
-                  <Store className="text-gray-500" size={13} />
+                  <Store className="text-gray-500 " size={13} />
                   {card.market}
                 </p>
-                <p className="flex items-center gap-2 text-gray-600">
-                  <MapPin className="text-red-600" size={13} />
+                <p className="flex items-center gap-2 text-gray-600 ">
+                  <MapPin className="text-red-600 " size={13} />
                   {card.district}, {card.state}
                 </p>
               </div>
 
-              <div className="flex justify-between text-[11px] text-gray-500 pt-2 border-t">
+              <div className="flex justify-between text-[11px] text-gray-500  pt-2 border-t border-gray-300 ">
                 <p className="flex items-center gap-1">{card.grade}</p>
                 <p className="flex items-center gap-1">{card.arrival_date}</p>
               </div>

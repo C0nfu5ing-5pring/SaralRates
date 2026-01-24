@@ -17,17 +17,23 @@ const Sidebar = () => {
           p-3
           lg:py-7 lg:px-5
           justify-center
+          transition-colors duration-300
         "
       >
         <button
           onClick={() => setSelected("Filter")}
           aria-selected={selected === "Filter"}
-          className="border border-gray-300 hover:border-black hover:shadow-md active:scale-95 aria-selected:bg-black aria-selected:text-white bg-white hover:bg-black hover:text-white transition-all cursor-pointer 
-          whitespace-nowrap 
-          w-auto lg:w-full
-          py-2 px-3 lg:py-3 lg:px-6 
-          rounded-xl 
-          text-sm sm:text-base lg:text-xl"
+          className="
+            border border-gray-300 
+            hover:bg-black hover:text-white hover:border-black active:scale-95 hover:shadow-md 
+            transition-all cursor-pointer
+            whitespace-nowrap
+            w-auto lg:w-full
+            py-2 px-3 lg:py-3 lg:px-6
+            rounded-xl
+            text-sm sm:text-base lg:text-xl
+            text-black 
+          "
         >
           Filter
         </button>
@@ -35,12 +41,17 @@ const Sidebar = () => {
         <button
           onClick={() => setSelected("Favourites")}
           aria-selected={selected === "Favourites"}
-          className="border border-gray-300 hover:border-black hover:shadow-md active:scale-95 aria-selected:bg-black aria-selected:text-white bg-white hover:bg-black hover:text-white transition-all cursor-pointer 
-          whitespace-nowrap 
-          w-auto lg:w-full
-          py-2 px-3 lg:py-3 lg:px-6 
-          rounded-xl 
-          text-sm sm:text-base lg:text-xl"
+          className="
+            border border-gray-300 
+            hover:bg-black hover:text-white hover:border-black active:scale-95 hover:shadow-md 
+            transition-all cursor-pointer
+            whitespace-nowrap
+            w-auto lg:w-full
+            py-2 px-3 lg:py-3 lg:px-6
+            rounded-2xl
+            text-sm sm:text-base lg:text-xl
+            text-black 
+          "
         >
           Favourites
         </button>
@@ -48,12 +59,17 @@ const Sidebar = () => {
         <button
           onClick={() => setSelected("Recently Viewed")}
           aria-selected={selected === "Recently Viewed"}
-          className="border border-gray-300 hover:border-black hover:shadow-md active:scale-95 aria-selected:bg-black aria-selected:text-white bg-white hover:bg-black hover:text-white transition-all cursor-pointer 
-          whitespace-nowrap 
-          w-auto lg:w-full
-          py-2 px-3 lg:py-3 lg:px-6 
-          rounded-xl 
-          text-sm sm:text-base lg:text-xl"
+          className="
+            border border-gray-300 
+            hover:bg-black hover:text-white hover:border-black active:scale-95 hover:shadow-md 
+            transition-all cursor-pointer
+            whitespace-nowrap
+            w-auto lg:w-full
+            py-2 px-3 lg:py-3 lg:px-6
+            rounded-xl
+            text-sm sm:text-base lg:text-xl
+            text-black 
+          "
         >
           Recently Viewed
         </button>
