@@ -1,4 +1,4 @@
-import { Store, MapPin, Info, TriangleAlert } from "lucide-react";
+import { Store, MapPin, Info, TriangleAlert, Bookmark } from "lucide-react";
 import axios from "axios";
 import { useEffect, useState, useMemo } from "react";
 import {
@@ -86,9 +86,12 @@ function PriceWithTooltip({ modalPrice, previousModalPrice }) {
   );
 }
 
-const Card = ({ search, trendFilter }) => {
+const Card = ({ search, trendFilter, view }) => {
   const [cardArray, setCardArray] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [favourites, setFavourites] = useState(() => {
+    return JSON.parse(localStorage.getItem("favourites") || "[]");
+  });
 
   useEffect(() => {
     const today = new Date().toISOString().split("T")[0];
@@ -196,10 +199,39 @@ const Card = ({ search, trendFilter }) => {
     });
   }, [enriched, search, trendFilter]);
 
+  // Define isFavourite before usage
+  const isFavourite = (item) => {
+    const key = `${item.commodity}|${item.market}|${item.district}`;
+    return favourites.includes(key);
+  };
+
+  // Define toggleFavourite before usage
+  const toggleFavourite = (item) => {
+    const key = `${item.commodity}|${item.market}|${item.district}`;
+
+    let updated;
+    if (favourites.includes(key)) {
+      updated = favourites.filter((f) => f !== key);
+    } else {
+      updated = [...favourites, key];
+    }
+
+    setFavourites(updated);
+    localStorage.setItem("favourites", JSON.stringify(updated));
+  };
+
+  // Now finalList can safely use isFavourite
+  const finalList = useMemo(() => {
+    if (view === "favourites") {
+      return filtered.filter((card) => isFavourite(card));
+    }
+    return filtered;
+  }, [filtered, view, favourites]);
+
   if (loading) {
     return (
       <div className="flex flex-col justify-center p-10 h-[80vh] items-center bg-white  transition-colors duration-300">
-        <PuffLoader color="#000000" size={120} />
+        <PuffLoader color="gray" size={120} />
 
         <p className="text-gray-500  text-lg sm:text-2xl animate-pulse">
           Fetching mandi prices. Please wait.
@@ -208,12 +240,14 @@ const Card = ({ search, trendFilter }) => {
     );
   }
 
-  if (!filtered.length) {
+  if (!finalList.length) {
     return (
       <div className="flex flex-col justify-center p-10 h-[80vh] items-center bg-white  transition-colors duration-300">
         <TriangleAlert size={120} style={{ color: "gray" }} />
-        <p className="text-gray-500  text-lg sm:text-4xl">
-          Sorry, couldn't find that here
+        <p className="text-gray-500 text-lg sm:text-4xl">
+          {view === "favourites"
+            ? "No favourites added yet"
+            : "Sorry, couldn't find that here"}
         </p>
       </div>
     );
@@ -223,10 +257,10 @@ const Card = ({ search, trendFilter }) => {
     <>
       <VirtuosoGrid
         className="h-[68vh] lg:h-[80vh] w-full"
-        totalCount={filtered.length}
+        totalCount={finalList.length}
         listClassName="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 w-full overflow-y-scroll [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
         itemContent={(index) => {
-          const card = filtered[index];
+          const card = finalList[index];
           return (
             <div
               key={index}
@@ -239,18 +273,26 @@ const Card = ({ search, trendFilter }) => {
                 flex flex-col justify-between
                 hover:shadow-md hover:-translate-y-0.5
                 transition-all duration-200 p-4 sm:p-6 lg:p-7 gap-1
-                min-h-[320px]
+                min-h-80
                 text-black 
               "
             >
-              <div>
-                <div className="flex justify-start items-center">
-                  <p className="text-base md:text-lg lg:text-xl font-semibold whitespace-pre-wrap flex items-center">
+              <div className="relative">
+                <div className="flex justify-between items-start gap-3">
+                  <p className="text-base md:text-lg lg:text-lg font-semibold leading-tight line-clamp-2 pr-1">
                     {card.commodity}
                   </p>
+
+                  <button onClick={() => toggleFavourite(card)}>
+                    <Bookmark
+                      className={`shrink-0 ${
+                        isFavourite(card) ? "fill-black" : "stroke-black"
+                      }`}
+                    />
+                  </button>
                 </div>
 
-                <p className="text-[10px] sm:text-xs text-gray-600 ">
+                <p className="text-[10px] sm:text-xs text-gray-600 w-fit">
                   <span className="font-semibold text-black ">Variety:</span>{" "}
                   {card.variety}
                 </p>
@@ -273,34 +315,8 @@ const Card = ({ search, trendFilter }) => {
                   Today's Range
                 </p>
                 <p className="font-medium text-gray-700 ">
-                  {intl.format(card.min_price)} – {intl.format(card.max_price)}
+                  {intl.format(card.min_price)} - {intl.format(card.max_price)}
                 </p>
-              </div>
-
-              <div>
-                {card.trend === "up" && (
-                  <span className="flex items-center py-0.5 text-[11px] px-3 rounded-full w-fit bg-green-50  text-green-700 ">
-                    ↑ Increase
-                  </span>
-                )}
-
-                {card.trend === "down" && (
-                  <span className="flex items-center py-0.5 text-[11px] px-3 rounded-full w-fit bg-red-50  text-red-700 ">
-                    ↓ Decrease
-                  </span>
-                )}
-
-                {card.trend === "same" && (
-                  <span className="flex items-center py-0.5 text-[11px] px-3 rounded-full w-fit bg-gray-100  text-gray-600 ">
-                    — Stable
-                  </span>
-                )}
-
-                {card.trend === "new" && (
-                  <span className="flex items-center py-0.5 text-[11px] px-3 rounded-full w-fit bg-blue-50  text-blue-700 ">
-                    New
-                  </span>
-                )}
               </div>
 
               <div className="text-[11px] sm:text-xs text-gray-700 ">
