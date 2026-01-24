@@ -31,7 +31,7 @@ const Dashboard = () => {
             </div>
           </div>
         </div>
-        <div className="mx-auto lg:w-[80%] border-gray-300 h-[68vh] p-3 lg:h-[83vh] mt-5 lg:mt-0 border-2 rounded-3xl px-5 overflow-hidden bg-white shadow-sm">
+        <div className="mx-auto lg:w-[80%] border-gray-300 h-[68vh] p-3 lg:h-[83vh] mt-5 lg:mt-0 border-2 rounded-3xl px-5 overflow-hidden bg-white shadow-xl">
           <Card
             search={search}
             trendFilter={trendFilter}

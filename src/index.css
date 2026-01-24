@@ -1,1 +1,20 @@
 @import "tailwindcss";
+
+@font-face {
+  font-family: nature-med;
+  src: url("/src/fonts/ZTNature-Medium.ttf");
+}
+
+@font-face {
+  font-family: nature-thin;
+  src: url("/src/fonts/ZTNature-Thin.ttf");
+}
+
+@font-face {
+  font-family: nature-bold;
+  src: url("/src/fonts/ZTNature-Black.ttf");
+}
+
+* {
+  font-family: nature-med;
+}

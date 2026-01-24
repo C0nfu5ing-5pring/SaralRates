@@ -3,7 +3,7 @@ const Footer = () => {
 
   return (
     <footer className="w-full mt-5 px-4 sm:px-6 lg:px-20 py-6">
-      <div className="border-2 border-gray-300 rounded-[3rem] p-6 sm:p-10 flex flex-col lg:flex-row items-center justify-between gap-6">
+      <div className="border-2 shadow-xl border-gray-300 rounded-[3rem] p-6 sm:p-10 flex flex-col lg:flex-row items-center justify-between gap-6">
         <div className="w-full lg:w-[45%] flex justify-center lg:justify-start">
           <h1 className="text-5xl sm:text-7xl lg:text-8xl font-medium">
             Saral Rates
