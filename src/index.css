@@ -15,6 +15,15 @@
   src: url("/src/fonts/ZTNature-Black.ttf");
 }
 
+@font-face {
+  font-family: hindi;
+  src: url(/src/fonts/DevLys\ 350\ Wide\ Normal.ttf);
+}
+
 * {
   font-family: nature-med;
+}
+
+.logo {
+  font-family: hindi;
 }

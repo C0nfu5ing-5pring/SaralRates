@@ -6,7 +6,8 @@ const Footer = () => {
       <div className="border-2 shadow-xl border-gray-300 rounded-[3rem] p-6 sm:p-10 flex flex-col lg:flex-row items-center justify-between gap-6">
         <div className="w-full lg:w-[45%] flex justify-center lg:justify-start">
           <h1 className="text-5xl sm:text-7xl lg:text-8xl font-medium">
-            Saral Rates
+            <span className="logo text-6xl sm:text-8xl lg:text-9xl">ljy</span>{" "}
+            Rates
           </h1>
         </div>
         <div className="border-2 border-gray-300 rounded-4xl w-full lg:w-[55%] p-6 sm:p-8 flex flex-col gap-6">

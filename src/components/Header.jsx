@@ -4,7 +4,8 @@ const Header = ({ search, setSearch }) => {
       <div className="grid grid-cols-1 lg:grid-cols-3 items-center gap-4">
         <div className="flex justify-between items-center">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold">
-            Saral Rates
+            <span className="logo text-5xl sm:text-6xl lg:text-7xl">ljy</span>{" "}
+            Rates
           </h1>
 
           <a
