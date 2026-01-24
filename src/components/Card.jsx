@@ -110,7 +110,7 @@ const Card = ({ search, trendFilter }) => {
             format: "json",
             limit: 10000,
           },
-        }
+        },
       )
       .then((res) => {
         const records = Array.isArray(res.data?.records)
@@ -135,7 +135,7 @@ const Card = ({ search, trendFilter }) => {
             modal_price,
             min_price,
             max_price,
-          })
+          }),
         );
 
         localStorage.setItem("lastPrices", JSON.stringify(previousPriceData));
@@ -156,7 +156,7 @@ const Card = ({ search, trendFilter }) => {
       rawData.map((product) => [
         `${product.commodity}|${product.market}|${product.district}`,
         product.modal_price,
-      ])
+      ]),
     );
   }, []);
 
@@ -219,31 +219,33 @@ const Card = ({ search, trendFilter }) => {
   return (
     <>
       <VirtuosoGrid
-        style={{ height: "90vh", width: "100%" }}
+        className="h-[68vh] lg:h-[80vh] w-full"
         totalCount={filtered.length}
-        listClassName="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 w-full overflow-y-scroll [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+        listClassName="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 w-full overflow-y-scroll [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
         itemContent={(index) => {
           const card = filtered[index];
           return (
             <div
               key={index}
-              className="w-full max-w-sm cursor-pointer
-  bg-white rounded-2xl
-  border-2 border-gray-300
-  p-5
-  flex flex-col gap-4
-  hover:shadow-md hover:-translate-y-0.5
-  mt-5
-  transition-all duration-200 sm:p-6 lg:p-7 sm:gap-4 lg:gap-5"
+              className="
+     w-full
+     cursor-pointer
+     bg-white rounded-2xl
+     border-2 border-gray-300
+     flex flex-col justify-between
+     hover:shadow-md hover:-translate-y-0.5
+     transition-all duration-200 p-4 sm:p-6 lg:p-7 gap-1
+     min-h-[320px]
+   "
             >
               <div>
                 <div className="flex justify-start items-center">
-                  <p className="text-lg md:text-xl lg:text-2xl font-semibold whitespace-pre-wrap flex items-center gap-2">
+                  <p className="text-base md:text-lg lg:text-xl font-semibold whitespace-pre-wrap flex items-center">
                     {card.commodity}
                   </p>
                 </div>
 
-                <p className="text-xs sm:text-sm text-gray-600">
+                <p className="text-[10px] sm:text-xs text-gray-600">
                   <span className="font-semibold text-black">Variety:</span>{" "}
                   {card.variety}
                 </p>
@@ -255,14 +257,14 @@ const Card = ({ search, trendFilter }) => {
                   previousModalPrice={card.previousModalPrice}
                   trend={card.trend}
                 />
-                <p className="text-xs text-gray-500">per quintal</p>
-                <p className="text-base  md:text-lg text-gray-600">
+                <p className="text-[10px] text-gray-500">per quintal</p>
+                <p className="text-sm md:text-base text-gray-600">
                   ≈ ₹{(card.modal_price / 100).toFixed(2)} / kg
                 </p>
               </div>
 
-              <div className="text-xs text-gray-600">
-                <p className="uppercase tracking-wide text-[10px] text-gray-400 mb-1">
+              <div className="text-[11px] text-gray-600">
+                <p className="uppercase tracking-wide text-[9px] text-gray-400 mb-1">
                   Today's Range
                 </p>
                 <p className="font-medium text-gray-700">
@@ -272,42 +274,42 @@ const Card = ({ search, trendFilter }) => {
 
               <div>
                 {card.trend === "up" && (
-                  <span className="flex items-center py-0.5 text-xs px-3 rounded-full w-fit bg-green-50  text-green-700">
+                  <span className="flex items-center py-0.5 text-[11px] px-3 rounded-full w-fit bg-green-50 text-green-700">
                     ↑ Increase
                   </span>
                 )}
 
                 {card.trend === "down" && (
-                  <span className="flex items-center py-0.5 text-xs px-3 rounded-full w-fit bg-red-50  text-red-700">
+                  <span className="flex items-center py-0.5 text-[11px] px-3 rounded-full w-fit bg-red-50 text-red-700">
                     ↓ Decrease
                   </span>
                 )}
 
                 {card.trend === "same" && (
-                  <span className="flex items-center py-0.5 text-xs px-3 rounded-full w-fit bg-gray-100  text-gray-600">
+                  <span className="flex items-center py-0.5 text-[11px] px-3 rounded-full w-fit bg-gray-100 text-gray-600">
                     — Stable
                   </span>
                 )}
 
                 {card.trend === "new" && (
-                  <span className="flex items-center py-0.5 text-xs px-3 rounded-full w-fit bg-blue-50  text-blue-700">
+                  <span className="flex items-center py-0.5 text-[11px] px-3 rounded-full w-fit bg-blue-50 text-blue-700">
                     New
                   </span>
                 )}
               </div>
 
-              <div className="text-xs sm:text-sm text-gray-700">
+              <div className="text-[11px] sm:text-xs text-gray-700">
                 <p className="flex items-center gap-2">
-                  <Store className="text-gray-500" size={14} />
+                  <Store className="text-gray-500" size={13} />
                   {card.market}
                 </p>
                 <p className="flex items-center gap-2 text-gray-600">
-                  <MapPin className="text-red-600" size={14} />
+                  <MapPin className="text-red-600" size={13} />
                   {card.district}, {card.state}
                 </p>
               </div>
 
-              <div className="flex justify-between text-xs text-gray-500 pt-2 border-t">
+              <div className="flex justify-between text-[11px] text-gray-500 pt-2 border-t">
                 <p className="flex items-center gap-1">{card.grade}</p>
                 <p className="flex items-center gap-1">{card.arrival_date}</p>
               </div>
