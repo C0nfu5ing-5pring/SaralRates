@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Card from "../components/Card";
 import Sidebar from "../components/Sidebar";
+import Footer from "../components/Footer";
 
 const Dashboard = () => {
   const [search, setSearch] = useState("");
@@ -21,7 +22,7 @@ const Dashboard = () => {
       <div className="w-full px-4 sm:px-6 lg:px-20 lg:flex gap-6">
         <div className="w-full lg:w-[20%] lg:h-[84vh]">
           <div className="flex justify-center lg:flex-col lg:gap-5">
-            <div className="border-gray-300 border-2 w-full rounded-3xl bg-white shadow-sm">
+            <div className="border-gray-300 border-2 w-full rounded-3xl bg-white shadow-md">
               <Sidebar
                 view={view}
                 setView={setView}
@@ -39,6 +40,7 @@ const Dashboard = () => {
           />
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
