@@ -86,7 +86,7 @@ function PriceWithTooltip({ modalPrice, previousModalPrice }) {
   );
 }
 
-const Card = ({ search, trendFilter, view }) => {
+const Card = ({ search, view, hasPriceHistory }) => {
   const [cardArray, setCardArray] = useState([]);
   const [loading, setLoading] = useState(true);
   const [favourites, setFavourites] = useState(() => {
@@ -155,7 +155,6 @@ const Card = ({ search, trendFilter, view }) => {
 
   const lastPriceMap = useMemo(() => {
     const rawData = JSON.parse(localStorage.getItem("lastPrices") || "[]");
-
     return new Map(
       rawData.map((product) => [
         `${product.commodity}|${product.market}|${product.district}`,
@@ -193,47 +192,48 @@ const Card = ({ search, trendFilter, view }) => {
         c.district?.toLowerCase().includes(userInput) ||
         c.state?.toLowerCase().includes(userInput);
 
-      const matchesTrend = trendFilter === "all" || c.trend === trendFilter;
-
-      return matchesSearch && matchesTrend;
+      return matchesSearch;
     });
-  }, [enriched, search, trendFilter]);
+  }, [enriched, search]);
 
-  // Define isFavourite before usage
   const isFavourite = (item) => {
     const key = `${item.commodity}|${item.market}|${item.district}`;
     return favourites.includes(key);
   };
 
-  // Define toggleFavourite before usage
   const toggleFavourite = (item) => {
     const key = `${item.commodity}|${item.market}|${item.district}`;
-
     let updated;
     if (favourites.includes(key)) {
       updated = favourites.filter((f) => f !== key);
     } else {
       updated = [...favourites, key];
     }
-
     setFavourites(updated);
     localStorage.setItem("favourites", JSON.stringify(updated));
   };
 
-  // Now finalList can safely use isFavourite
   const finalList = useMemo(() => {
-    if (view === "favourites") {
-      return filtered.filter((card) => isFavourite(card));
+    switch (view) {
+      case "favourites":
+        return filtered.filter((card) => isFavourite(card));
+      case "increase":
+        if (!hasPriceHistory) return [];
+        return filtered.filter((card) => card.trend === "up");
+      case "decrease":
+        if (!hasPriceHistory) return [];
+        return filtered.filter((card) => card.trend === "down");
+      case "all":
+      default:
+        return filtered;
     }
-    return filtered;
-  }, [filtered, view, favourites]);
+  }, [filtered, view, favourites, hasPriceHistory]);
 
   if (loading) {
     return (
-      <div className="flex flex-col justify-center p-10 h-[80vh] items-center bg-white  transition-colors duration-300">
+      <div className="flex flex-col justify-center p-10 h-[80vh] items-center bg-white transition-colors duration-300">
         <PuffLoader color="gray" size={120} />
-
-        <p className="text-gray-500  text-lg sm:text-2xl animate-pulse">
+        <p className="text-gray-500 text-lg sm:text-2xl animate-pulse">
           Fetching mandi prices. Please wait.
         </p>
       </div>
@@ -242,12 +242,14 @@ const Card = ({ search, trendFilter, view }) => {
 
   if (!finalList.length) {
     return (
-      <div className="flex flex-col justify-center p-10 h-[80vh] items-center bg-white  transition-colors duration-300">
+      <div className="flex flex-col justify-center p-10 h-[80vh] items-center bg-white transition-colors duration-300">
         <TriangleAlert size={120} style={{ color: "gray" }} />
-        <p className="text-gray-500 text-lg sm:text-4xl">
+        <p className="text-gray-500 text-lg sm:text-4xl text-center">
           {view === "favourites"
             ? "No favourites added yet"
-            : "Sorry, couldn't find that here"}
+            : hasPriceHistory
+              ? "No matching records"
+              : "Price history not available yet"}
         </p>
       </div>
     );
@@ -330,7 +332,7 @@ const Card = ({ search, trendFilter, view }) => {
                 </p>
               </div>
 
-              <div className="flex justify-between text-[11px] text-gray-500  pt-2 border-t border-gray-300 ">
+              <div className="flex justify-between text-[11px] text-gray-500 pt-2 border-t border-gray-300 ">
                 <p className="flex items-center gap-1">{card.grade}</p>
                 <p className="flex items-center gap-1">{card.arrival_date}</p>
               </div>
