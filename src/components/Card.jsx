@@ -1,4 +1,11 @@
-import { Store, MapPin, Info, TriangleAlert, Bookmark } from "lucide-react";
+import {
+  Store,
+  MapPin,
+  Info,
+  TriangleAlert,
+  Bookmark,
+  Share,
+} from "lucide-react";
 import axios from "axios";
 import { useEffect, useState, useMemo } from "react";
 import {
@@ -8,6 +15,7 @@ import {
   shift,
   autoUpdate,
 } from "@floating-ui/react";
+import html2canvas from "html2canvas";
 import { VirtuosoGrid } from "react-virtuoso";
 import { PuffLoader } from "react-spinners";
 
@@ -88,20 +96,36 @@ function PriceWithTooltip({ modalPrice, previousModalPrice }) {
 
 const Card = ({ search, view, hasPriceHistory }) => {
   const [cardArray, setCardArray] = useState([]);
+  const [yesterdayArray, setYesterdayArray] = useState([]);
   const [loading, setLoading] = useState(true);
   const [favourites, setFavourites] = useState(() => {
     return JSON.parse(localStorage.getItem("favourites") || "[]");
   });
 
+  const getToday = () => new Date().toISOString().split("T")[0];
+
+  const makeKey = (r) => `${r.commodity}|${r.market}|${r.district}`;
+
   useEffect(() => {
-    const today = new Date().toISOString().split("T")[0];
+    const today = getToday();
     const lastFetchDate = localStorage.getItem("lastFetchDate");
 
-    if (lastFetchDate === today) {
-      const cache = JSON.parse(localStorage.getItem("cachedRecords") || "[]");
-      setCardArray(cache);
+    const cachedToday = JSON.parse(
+      localStorage.getItem("cachedRecords") || "[]",
+    );
+    const cachedYesterday = JSON.parse(
+      localStorage.getItem("yesterdayRecords") || "[]",
+    );
+
+    if (lastFetchDate === today && cachedToday.length) {
+      setCardArray(cachedToday);
+      setYesterdayArray(cachedYesterday);
       setLoading(false);
       return;
+    }
+
+    if (cachedToday.length) {
+      localStorage.setItem("yesterdayRecords", JSON.stringify(cachedToday));
     }
 
     axios
@@ -121,28 +145,11 @@ const Card = ({ search, view, hasPriceHistory }) => {
           ? res.data.records
           : [];
         setCardArray(records);
-
-        localStorage.setItem("cachedRecords", JSON.stringify(records));
-
-        const previousPriceData = res.data.records.map(
-          ({
-            commodity,
-            market,
-            district,
-            modal_price,
-            min_price,
-            max_price,
-          }) => ({
-            commodity,
-            market,
-            district,
-            modal_price,
-            min_price,
-            max_price,
-          }),
+        setYesterdayArray(
+          JSON.parse(localStorage.getItem("yesterdayRecords") || "[]"),
         );
 
-        localStorage.setItem("lastPrices", JSON.stringify(previousPriceData));
+        localStorage.setItem("cachedRecords", JSON.stringify(records));
         localStorage.setItem("lastFetchDate", today);
       })
       .catch((err) => {
@@ -255,43 +262,117 @@ const Card = ({ search, view, hasPriceHistory }) => {
     );
   }
 
+  console.log("TOTAL:", finalList.length);
+
+  const shareCardAsImage = async (element) => {
+    if (!element) return;
+
+    const canvas = await html2canvas(element, {
+      backgroundColor: "#ffffff",
+      scale: 2,
+      scrollY: 0,
+      useCORS: true,
+      ignoreElements: (el) => el.tagName === "svg",
+      onclone: (doc) => {
+        const card = doc.querySelector(".price-card");
+        if (!card) return;
+
+        card.style.overflow = "visible";
+        card.style.height = "auto";
+        card.style.minHeight = "unset";
+        card.style.maxHeight = "unset";
+        card.style.paddingTop = "24px";
+
+        const titles = card.querySelectorAll(".line-clamp-2");
+        titles.forEach((el) => {
+          el.style.display = "block";
+          el.style.overflow = "visible";
+          el.style.WebkitLineClamp = "unset";
+          el.style.maxHeight = "none";
+        });
+
+        const els = doc.querySelectorAll("*");
+        els.forEach((el) => {
+          const style = doc.defaultView.getComputedStyle(el);
+
+          if (style.color.includes("oklch")) el.style.color = "#000";
+          if (style.backgroundColor.includes("oklch"))
+            el.style.backgroundColor = "#fff";
+          if (style.borderColor.includes("oklch"))
+            el.style.borderColor = "#ddd";
+        });
+      },
+    });
+
+    const image = canvas.toDataURL("image/png");
+
+    const blob = await (await fetch(image)).blob();
+    const file = new File([blob], "saral-rate.png", { type: "image/png" });
+
+    if (navigator.share) {
+      await navigator.share({
+        files: [file],
+        title: "Saral Rates",
+      });
+    } else {
+      window.open(
+        `https://wa.me/?text=${encodeURIComponent(
+          "Check this price from Saral Rates",
+        )}`,
+        "_blank",
+      );
+    }
+  };
+
   return (
     <>
       <VirtuosoGrid
         className="h-[68vh] lg:h-[80vh] w-full"
         totalCount={finalList.length}
-        listClassName="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 w-full overflow-y-scroll [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+        listClassName="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 w-full"
         itemContent={(index) => {
           const card = finalList[index];
           return (
             <div
               key={index}
               className="
+              price-card
                 w-full
                 cursor-pointer
                 bg-white 
                 rounded-2xl
                 border-2 border-gray-300 
-                flex flex-col justify-between
-                hover:shadow-md hover:-translate-y-0.5
-                transition-all duration-200 p-4 sm:p-6 lg:p-7 gap-1
-                min-h-80
+                flex flex-col gap-2
+                lg:justify-between
+                hover:shadow-md
+                transition-all duration-200 p-3 sm:p-6 lg:p-7 lg:gap-1
+                min-h-60
                 text-black 
               "
             >
               <div className="relative">
-                <div className="flex justify-between items-start gap-3">
+                <div className="flex justify-between items-start gap-1 lg:gap-3">
                   <p className="text-base md:text-lg lg:text-lg font-semibold leading-tight line-clamp-2 pr-1">
                     {card.commodity}
                   </p>
 
-                  <button onClick={() => toggleFavourite(card)}>
-                    <Bookmark
-                      className={`shrink-0 ${
-                        isFavourite(card) ? "fill-black" : "stroke-black"
-                      }`}
-                    />
-                  </button>
+                  <div className="flex flex-col gap-1 lg:gap-2 absolute right-0">
+                    <button onClick={() => toggleFavourite(card)}>
+                      <Bookmark
+                        className={`shrink-0 ${
+                          isFavourite(card) ? "fill-black" : "stroke-black"
+                        }`}
+                      />
+                    </button>
+
+                    <button
+                      onClick={(e) =>
+                        shareCardAsImage(e.currentTarget.closest(".price-card"))
+                      }
+                    >
+                      <Share />
+                    </button>
+                  </div>
                 </div>
 
                 <p className="text-[10px] sm:text-xs text-gray-600 w-fit">
@@ -313,7 +394,7 @@ const Card = ({ search, view, hasPriceHistory }) => {
               </div>
 
               <div className="text-[11px] text-gray-600 ">
-                <p className="uppercase tracking-wide text-[9px] text-gray-400 mb-1">
+                <p className="uppercase tracking-wide text-[9px] text-gray-400 lg:mb-1">
                   Today's Range
                 </p>
                 <p className="font-medium text-gray-700 ">
@@ -322,17 +403,17 @@ const Card = ({ search, view, hasPriceHistory }) => {
               </div>
 
               <div className="text-[11px] sm:text-xs text-gray-700 ">
-                <p className="flex items-center gap-2">
+                <p className="flex items-center gap-0.5 lg:gap-2">
                   <Store className="text-gray-500 " size={13} />
                   {card.market}
                 </p>
-                <p className="flex items-center gap-2 text-gray-600 ">
+                <p className="flex items-center gap-0.5 lg:gap-2 text-gray-600 ">
                   <MapPin className="text-red-600 " size={13} />
                   {card.district}, {card.state}
                 </p>
               </div>
 
-              <div className="flex justify-between text-[11px] text-gray-500 pt-2 border-t border-gray-300 ">
+              <div className="flex justify-between text-[11px] text-gray-500 pt-0.5 lg:pt-2 border-t border-gray-300 ">
                 <p className="flex items-center gap-1">{card.grade}</p>
                 <p className="flex items-center gap-1">{card.arrival_date}</p>
               </div>
