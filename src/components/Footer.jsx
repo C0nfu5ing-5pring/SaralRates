@@ -18,7 +18,7 @@ const Footer = () => {
                 based on quality, demand, and market conditions.
               </p>
 
-              <p>Version 1.0.1 · Beta</p>
+              <p>Version 1.0.2 · Beta</p>
             </div>
 
             <div className="w-full sm:w-[50%] flex flex-col gap-6 text-sm sm:text-base">
