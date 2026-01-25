@@ -18,6 +18,7 @@ import {
 import html2canvas from "html2canvas";
 import { VirtuosoGrid } from "react-virtuoso";
 import { PuffLoader } from "react-spinners";
+import { toastWithSound } from "../utils/toast.jsx";
 
 const intl = new Intl.NumberFormat("en-IN", {
   style: "currency",
@@ -211,10 +212,13 @@ const Card = ({ search, view, hasPriceHistory }) => {
   const toggleFavourite = (item) => {
     const key = `${item.commodity}|${item.market}|${item.district}`;
     let updated;
+
     if (favourites.includes(key)) {
       updated = favourites.filter((f) => f !== key);
+      toastWithSound(`${item.commodity} removed from favourites`, "info");
     } else {
       updated = [...favourites, key];
+      toastWithSound(`${item.commodity} added to favourites`, "success");
     }
     setFavourites(updated);
     localStorage.setItem("favourites", JSON.stringify(updated));
@@ -261,8 +265,6 @@ const Card = ({ search, view, hasPriceHistory }) => {
       </div>
     );
   }
-
-  console.log("TOTAL:", finalList.length);
 
   const shareCardAsImage = async (element) => {
     if (!element) return;
@@ -338,7 +340,6 @@ const Card = ({ search, view, hasPriceHistory }) => {
               className="
               price-card
                 w-full
-                cursor-pointer
                 bg-white 
                 rounded-2xl
                 border-2 border-gray-300 
@@ -346,7 +347,7 @@ const Card = ({ search, view, hasPriceHistory }) => {
                 lg:justify-between
                 hover:shadow-md
                 transition-all duration-200 p-3 sm:p-6 lg:p-7 lg:gap-1
-                min-h-60
+                 min-h-65
                 text-black 
               "
             >
@@ -359,7 +360,7 @@ const Card = ({ search, view, hasPriceHistory }) => {
                   <div className="flex flex-col gap-1 lg:gap-2 absolute right-0">
                     <button onClick={() => toggleFavourite(card)}>
                       <Bookmark
-                        className={`shrink-0 ${
+                        className={`shrink-0 cursor-pointer active:scale-80 transition-all ${
                           isFavourite(card) ? "fill-black" : "stroke-black"
                         }`}
                       />
@@ -370,7 +371,7 @@ const Card = ({ search, view, hasPriceHistory }) => {
                         shareCardAsImage(e.currentTarget.closest(".price-card"))
                       }
                     >
-                      <Share />
+                      <Share className="cursor-pointer active:scale-80 transition-all z-50" />
                     </button>
                   </div>
                 </div>
