@@ -15,7 +15,7 @@ export const toastWithSound = (msg, type = "default") => {
 
     toast(<CustomToast msg={msg} type={type} />, {
       position: "top-right",
-      autoClose: 2001000000,
+      autoClose: 2000,
       hideProgressBar: true,
       closeButton: false,
       draggable: true,
@@ -31,7 +31,7 @@ export const toastWithSound = (msg, type = "default") => {
 
     toast(<CustomToast msg={msg} type="info" />, {
       position: "top-right",
-      autoClose: 2001000000,
+      autoClose: 2000,
       hideProgressBar: true,
       closeButton: false,
       draggable: true,
