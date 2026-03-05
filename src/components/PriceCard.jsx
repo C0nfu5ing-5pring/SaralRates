@@ -10,9 +10,9 @@ const intl = new Intl.NumberFormat("en-IN", {
 
 export default function PriceCard({
   card,
-  isFavourite,
   toggleFavourite,
   onShare,
+  isFavourite,
 }) {
   const [isFlipped, setIsFlipped] = useState(false);
   const cardRef = useRef(null);
@@ -42,7 +42,7 @@ export default function PriceCard({
           <span className="font-black text-base">
             {intl.format(card.modal_price / 100)}
           </span>{" "}
-          <span className="font-light ">per kilogram</span>
+          <span className="font-light">per kilogram</span>
         </p>
 
         <p className="text-xs">
@@ -73,7 +73,12 @@ export default function PriceCard({
             toggleFavourite(card);
           }}
         >
-          <Bookmark className={isFavourite(card) ? "fill-black" : ""} />
+          <Bookmark
+            size={24}
+            className={`transition-all duration-200 cursor-pointer active:scale-90 ${
+              isFavourite ? "text-black fill-current" : "text-black fill-none"
+            }`}
+          />
         </button>
 
         <button
@@ -82,7 +87,10 @@ export default function PriceCard({
             onShare(cardRef.current);
           }}
         >
-          <Share />
+          <Share
+            size={24}
+            className="cursor-pointer active:scale-90 transition-all"
+          />
         </button>
       </div>
     </motion.div>

@@ -2,7 +2,7 @@ import { VirtuosoGrid } from "react-virtuoso";
 import PriceCard from "./PriceCard";
 import html2canvas from "html2canvas";
 
-export default function CardGrid({ list, isFavourite, toggleFavourite }) {
+export default function CardGrid({ list, favourites, toggleFavourite }) {
   const shareCardAsImage = async (element) => {
     if (!element) return;
 
@@ -11,18 +11,14 @@ export default function CardGrid({ list, isFavourite, toggleFavourite }) {
       scale: 2,
       onclone: (doc) => {
         const card = doc.querySelector(".price-card");
-
         if (card) {
           card.style.transform = "none";
           card.style.transformStyle = "flat";
           const back = card.querySelector(".card-back");
           if (back) back.style.display = "none";
         }
-
-        const els = doc.querySelectorAll("*");
-        els.forEach((el) => {
+        doc.querySelectorAll("*").forEach((el) => {
           const style = doc.defaultView.getComputedStyle(el);
-
           if (style.color.includes("oklch")) el.style.color = "#000";
           if (style.backgroundColor.includes("oklch"))
             el.style.backgroundColor = "#fff";
@@ -35,7 +31,6 @@ export default function CardGrid({ list, isFavourite, toggleFavourite }) {
     const blob = await new Promise((resolve) =>
       canvas.toBlob(resolve, "image/png"),
     );
-
     const file = new File([blob], "saral-rate.png", { type: "image/png" });
 
     if (navigator.canShare && navigator.canShare({ files: [file] })) {
@@ -56,12 +51,17 @@ export default function CardGrid({ list, isFavourite, toggleFavourite }) {
       listClassName="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3"
       itemContent={(index) => {
         const card = list[index];
+        const fav = favourites.some(
+          (f) => f.key === `${card.commodity}|${card.market}|${card.district}`,
+        );
+
         return (
           <PriceCard
+            key={card.commodity + card.market + card.district}
             card={card}
-            isFavourite={isFavourite}
             toggleFavourite={toggleFavourite}
             onShare={shareCardAsImage}
+            isFavourite={fav}
           />
         );
       }}

@@ -12,7 +12,7 @@ export default function Card({ search, view, hasPriceHistory }) {
 
   const isFavourite = (item) => {
     const key = `${item.commodity}|${item.market}|${item.district}`;
-    return favourites.includes(key);
+    return favourites.some((f) => f.key === key);
   };
 
   if (loading) return <LoadingState />;
@@ -22,8 +22,9 @@ export default function Card({ search, view, hasPriceHistory }) {
   return (
     <CardGrid
       list={finalList}
-      isFavourite={isFavourite}
+      favourites={favourites}
       toggleFavourite={toggleFavourite}
+      isFavourite={isFavourite}
     />
   );
 }
