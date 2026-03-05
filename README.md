@@ -11,35 +11,14 @@ Saral Rates is a website for traders and farmers to check prices of different co
 
 - Reactjs
 - TailwindCSS
-- Javascript
-
-# Libraries used
-
+- Javascript`
 - floating-ui
 - react-router-dom
 - react-virtuoso
 - react-spinners
-
-# Clone the repo
-
-You can clone this repository by either writing the below given code in your terminal or by pressing the copy repository button on the github website.
-
-```bash
-    git clone https://github.com/C0nfu5ing-5pring/saralrates.git
-    cd saralrates
-```
-
-Then install dependencies:
-
-```bash
-    npm i
-```
-
-Then start development server:
-
-```bash
-    npm run dev
-```
+- html2canvas
+- react-toastify
+- lucide-react
 
 # Current Status
 
