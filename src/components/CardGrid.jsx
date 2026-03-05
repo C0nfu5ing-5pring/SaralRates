@@ -4,9 +4,49 @@ import html2canvas from "html2canvas";
 
 export default function CardGrid({ list, isFavourite, toggleFavourite }) {
   const shareCardAsImage = async (element) => {
-    const canvas = await html2canvas(element);
-    const image = canvas.toDataURL("image/png");
-    window.open(image);
+    if (!element) return;
+
+    const canvas = await html2canvas(element, {
+      backgroundColor: "#ffffff",
+      scale: 2,
+      onclone: (doc) => {
+        const card = doc.querySelector(".price-card");
+
+        if (card) {
+          card.style.transform = "none";
+          card.style.transformStyle = "flat";
+          const back = card.querySelector(".card-back");
+          if (back) back.style.display = "none";
+        }
+
+        const els = doc.querySelectorAll("*");
+        els.forEach((el) => {
+          const style = doc.defaultView.getComputedStyle(el);
+
+          if (style.color.includes("oklch")) el.style.color = "#000";
+          if (style.backgroundColor.includes("oklch"))
+            el.style.backgroundColor = "#fff";
+          if (style.borderColor.includes("oklch"))
+            el.style.borderColor = "#ddd";
+        });
+      },
+    });
+
+    const blob = await new Promise((resolve) =>
+      canvas.toBlob(resolve, "image/png"),
+    );
+
+    const file = new File([blob], "saral-rate.png", { type: "image/png" });
+
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      await navigator.share({
+        files: [file],
+        title: "Saral Rates",
+        text: "Check this mandi price",
+      });
+    } else {
+      alert("Sharing not supported on this browser.");
+    }
   };
 
   return (
@@ -21,9 +61,7 @@ export default function CardGrid({ list, isFavourite, toggleFavourite }) {
             card={card}
             isFavourite={isFavourite}
             toggleFavourite={toggleFavourite}
-            onShare={(e) =>
-              shareCardAsImage(e.currentTarget.closest(".price-card"))
-            }
+            onShare={shareCardAsImage}
           />
         );
       }}
