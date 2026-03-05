@@ -25,13 +25,14 @@ export function usePrices(search, view, hasPriceHistory) {
       return;
     }
 
+    const key = import.meta.env.API_KEY;
+
     axios
       .get(
         "https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070",
         {
           params: {
-            "api-key":
-              "579b464db66ec23bdd00000161044603d2b74a674677081bf7f413a5",
+            "api-key": key,
             format: "json",
             limit: 10000,
           },
