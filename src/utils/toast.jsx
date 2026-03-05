@@ -1,8 +1,8 @@
 import { toast } from "react-toastify";
 import CustomToast from "../components/CustomToast";
 
-const notification = new Audio("src/audio/notification.mp3");
-const addedNotification = new Audio("src/audio/added.mp3");
+const notification = new Audio("public/audio/notification.mp3");
+const addedNotification = new Audio("public/audio/added.mp3");
 
 export const toastWithSound = (msg, type = "default") => {
   const playSound = (audio) => {
