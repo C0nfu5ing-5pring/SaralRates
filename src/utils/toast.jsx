@@ -1,8 +1,10 @@
 import { toast } from "react-toastify";
 import CustomToast from "../components/CustomToast";
+import notification from "../audio/notification.mp3";
+import addedNotification from "../audio/added.mp3";
 
-const notification = new Audio("public/audio/notification.mp3");
-const addedNotification = new Audio("public/audio/added.mp3");
+const notificationSound = new Audio(notification);
+const addedNotificationSound = new Audio(addedNotification);
 
 export const toastWithSound = (msg, type = "default") => {
   const playSound = (audio) => {
@@ -11,7 +13,7 @@ export const toastWithSound = (msg, type = "default") => {
   };
 
   if (type === "success" || type === "default") {
-    playSound(notification);
+    playSound(notificationSound);
 
     toast(<CustomToast msg={msg} type={type} />, {
       position: "top-right",
@@ -27,7 +29,7 @@ export const toastWithSound = (msg, type = "default") => {
   }
 
   if (type === "info") {
-    playSound(addedNotification);
+    playSound(addedNotificationSound);
 
     toast(<CustomToast msg={msg} type="info" />, {
       position: "top-right",
