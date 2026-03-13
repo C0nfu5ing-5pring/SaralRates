@@ -15,70 +15,56 @@ export function usePrices(search, view, hasPriceHistory) {
 
   useEffect(() => {
     const cached = JSON.parse(localStorage.getItem("cachedRecords") || "[]");
+    const lastFetchedDate = localStorage.getItem("lastFetchedDate");
 
-    const cachedMap = new Map();
+    const now = new Date();
+    const todayStr = now.toISOString().split("T")[0];
+    const nineAM = new Date();
+    nineAM.setHours(9, 0, 0, 0);
 
-    cached.forEach((record) => {
-      cachedMap.set(getKey(record), record);
-    });
+    const shouldFetch =
+      !lastFetchedDate || (now >= nineAM && lastFetchedDate !== todayStr);
 
-    if (cached.length > 0) {
+    if (!shouldFetch && cached.length > 0) {
       setCardArray(cached);
       setLoading(false);
+      return;
     }
 
-    const api_key = import.meta.env.VITE_API_KEY;
-    const url = `https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=${api_key}&format=json&limit=10000`;
-    const encodedUrl = encodeURIComponent(url);
+    setLoading(true);
 
     axios
-      .get(`https://corsproxy.io/?${encodedUrl}`)
+      .get("http://localhost:5050/api/commodities")
       .then((res) => {
-        const records = res.data?.records || [];
-        if (records.length === 0) return;
+        const records = res.data?.data || [];
+        if (!records.length) return;
 
-        records.forEach((record) => {
-          const key = getKey(record);
-          const existing = cachedMap.get(key);
+        const apiMap = new Map();
+        records.forEach((record) => apiMap.set(getKey(record), record));
 
-          if (!existing) {
-            cachedMap.set(key, record);
-            return;
-          }
-
-          const newDate = new Date(record.arrival_date);
-          const oldDate = new Date(existing.arrival_date);
-
-          if (newDate > oldDate) {
-            cachedMap.set(key, record);
+        const favs = JSON.parse(localStorage.getItem("favourites") || "[]");
+        favs.forEach((fav) => {
+          if (!apiMap.has(fav.key)) {
+            const oldRecord = records.find((r) => getKey(r) === fav.key);
+            if (oldRecord) apiMap.set(fav.key, oldRecord);
           }
         });
 
-        favourites.forEach((fav) => {
-          const favKey = fav.key;
-
-          if (!cachedMap.has(favKey)) {
-            const oldRecord = cached.find((r) => getKey(r) === favKey);
-            if (oldRecord) {
-              cachedMap.set(favKey, oldRecord);
-            }
-          }
-        });
-
-        const mergedRecords = Array.from(cachedMap.values());
-
+        const mergedRecords = Array.from(apiMap.values());
         setCardArray(mergedRecords);
-
         localStorage.setItem("cachedRecords", JSON.stringify(mergedRecords));
+        localStorage.setItem("lastFetchedDate", todayStr);
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error("API fetch error:", err);
+        setCardArray(cached);
         toastWithSound(
           "Live price update failed. Showing cached data.",
           "info",
         );
       })
       .finally(() => setLoading(false));
-  }, [favourites]);
+  }, []);
 
   const lastPriceMap = useMemo(() => {
     const rawData = JSON.parse(localStorage.getItem("lastPrices") || "[]");
