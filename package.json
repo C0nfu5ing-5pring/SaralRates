@@ -7,14 +7,18 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "node server.js"
   },
   "dependencies": {
     "@floating-ui/react": "^0.27.16",
     "@tailwindcss/vite": "^4.1.18",
     "axios": "^1.13.2",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
     "html2canvas": "^1.4.1",
     "lucide-react": "^0.562.0",
+    "mongoose": "^9.2.4",
     "motion": "^12.35.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
@@ -36,5 +40,18 @@
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.18",
     "vite": "^7.2.4"
-  }
+  },
+  "description": "Saral Rates is a website for traders and farmers to check prices of different commodities published by the Indian Government daily.",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/C0nfu5ing-5pring/SaralRates.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/C0nfu5ing-5pring/SaralRates/issues"
+  },
+  "homepage": "https://github.com/C0nfu5ing-5pring/SaralRates#readme"
 }
