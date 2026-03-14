@@ -20,7 +20,7 @@ export const fetchAndStoreData = async (req, res) => {
       market: item.market,
       commodity: item.commodity,
       variety: item.variety,
-      arrival_date: new Date(item.arrival_date.split("/").reverse().join("-")),
+      arrival_date: new Date(item.arrival_date),
       min_price: Number(item.min_price),
       max_price: Number(item.max_price),
       modal_price: Number(item.modal_price),

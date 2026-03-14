@@ -59,7 +59,7 @@ export default function PriceCard({
 
         <div className="flex justify-between text-xs border-t pt-1">
           <span>{card.grade}</span>
-          <span>{card.arrival_date}</span>
+          <span>{new Date(card.arrival_date).toLocaleDateString("en-IN")}</span>
         </div>
       </div>
 
