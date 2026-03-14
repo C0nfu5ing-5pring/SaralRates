@@ -13,32 +13,29 @@ export function usePrices(search, view, hasPriceHistory) {
   const getKey = (item) =>
     `${item.commodity?.trim().toLowerCase()}|${item.market?.trim().toLowerCase()}|${item.district?.trim().toLowerCase()}`;
 
-  useEffect(() => {
+  const fetchPrices = async () => {
     const cached = JSON.parse(localStorage.getItem("cachedRecords") || "[]");
-    const lastFetchedDate = localStorage.getItem("lastFetchedDate");
+    const todayStr = new Date().toISOString().split("T")[0];
 
-    const now = new Date();
-    const todayStr = now.toISOString().split("T")[0];
-    const nineAM = new Date();
-    nineAM.setHours(9, 0, 0, 0);
+    try {
+      const res = await axios.get("http://localhost:5050/api/commodities");
+      const records = res.data?.data || [];
 
-    const shouldFetch =
-      !lastFetchedDate || (now >= nineAM && lastFetchedDate !== todayStr);
+      if (!records.length) {
+        toastWithSound(
+          "New prices not available yet. Showing cached data",
+          "info",
+        );
+        setCardArray(cached);
+        return false;
+      }
 
-    if (!shouldFetch && cached.length > 0) {
-      setCardArray(cached);
-      setLoading(false);
-      return;
-    }
+      const latestRecordDate = new Date(
+        Math.max(...records.map((r) => new Date(r.arrival_date))),
+      );
+      const latestDateStr = latestRecordDate.toISOString().split("T")[0];
 
-    setLoading(true);
-
-    axios
-      .get("http://localhost:5050/api/commodities")
-      .then((res) => {
-        const records = res.data?.data || [];
-        if (!records.length) return;
-
+      if (latestDateStr === todayStr) {
         const apiMap = new Map();
         records.forEach((record) => apiMap.set(getKey(record), record));
 
@@ -54,16 +51,57 @@ export function usePrices(search, view, hasPriceHistory) {
         setCardArray(mergedRecords);
         localStorage.setItem("cachedRecords", JSON.stringify(mergedRecords));
         localStorage.setItem("lastFetchedDate", todayStr);
-      })
-      .catch((err) => {
-        console.error("API fetch error:", err);
-        setCardArray(cached);
-        toastWithSound(
-          "Live price update failed. Showing cached data.",
-          "info",
+        return true;
+      }
+
+      toastWithSound(
+        "New prices not available yet. Showing cached data",
+        "info",
+      );
+      setCardArray(cached);
+      return false;
+    } catch (err) {
+      console.error("API fetch error:", err);
+      setCardArray(cached);
+      toastWithSound("Live price update failed. Showing cached data.", "info");
+      return false;
+    }
+  };
+
+  useEffect(() => {
+    const cached = JSON.parse(localStorage.getItem("cachedRecords") || "[]");
+    if (cached.length > 0) {
+      setCardArray(cached);
+      setLoading(false);
+    }
+
+    const now = new Date();
+    const sixAM = new Date();
+    sixAM.setHours(6, 0, 0, 0);
+
+    let intervalId = null;
+
+    const startPolling = async () => {
+      const done = await fetchPrices();
+      if (!done) {
+        intervalId = setInterval(
+          async () => {
+            const fetched = await fetchPrices();
+            if (fetched && intervalId) {
+              clearInterval(intervalId);
+            }
+          },
+          5 * 60 * 1000,
         );
-      })
-      .finally(() => setLoading(false));
+      }
+      setLoading(false);
+    };
+
+    if (now >= sixAM) startPolling();
+
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+    };
   }, []);
 
   const lastPriceMap = useMemo(() => {

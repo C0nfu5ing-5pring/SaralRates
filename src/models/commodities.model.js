@@ -57,7 +57,19 @@ const commoditiesSchema = new mongoose.Schema(
   },
 );
 
-commoditiesSchema.index({ arrival_date: 1 }, { expireAfterSeconds: 432000 });
+commoditiesSchema.index(
+  {
+    arrival_date: 1,
+    state: 1,
+    district: 1,
+    market: 1,
+    commodity: 1,
+    variety: 1,
+  },
+  {
+    unique: true,
+  },
+);
 
 const Commodity = mongoose.model("Commodity", commoditiesSchema);
 
