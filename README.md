@@ -22,7 +22,7 @@ Saral Rates is a website for traders and farmers to check prices of different co
 
 # Current Status
 
-- Version 0.1.0-alpha
+- Version 0.1.1-alpha
 - Stage: Beta
 
 # Built by
