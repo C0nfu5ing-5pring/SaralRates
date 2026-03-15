@@ -4,7 +4,7 @@ import commodityRoutes from "./src/routes/commodities.routes.js";
 import "./src/cron/updatePrices.cron.js";
 
 const PORT = 5050;
-connectToDB();
+await connectToDB();
 
 app.use("/api", commodityRoutes);
 

@@ -15,13 +15,31 @@ export function usePrices(search, view, hasPriceHistory) {
 
   const fetchPrices = async () => {
     const cached = JSON.parse(localStorage.getItem("cachedRecords") || "[]");
-    const todayStr = new Date().toISOString().split("T")[0];
+
+    const today = new Date();
+    const todayStr = today.toLocaleDateString("en-CA", {
+      timeZone: "Asia/Kolkata",
+    });
+
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 2);
+    const yesterdayStr = yesterday.toLocaleDateString("en-CA", {
+      timeZone: "Asia/Kolkata",
+    });
 
     try {
-      const res = await axios.get("http://localhost:5050/api/commodities");
-      const records = res.data?.data || [];
+      const todayRes = await axios.get(
+        `http://localhost:5050/api/commodities?date=${todayStr}`,
+      );
 
-      if (!records.length) {
+      const prevRes = await axios.get(
+        `http://localhost:5050/api/commodities?date=${yesterdayStr}`,
+      );
+
+      const todayRecords = todayRes.data?.data || [];
+      const prevRecords = prevRes.data?.data || [];
+
+      if (!todayRecords.length && !prevRecords.length) {
         toastWithSound(
           "New prices not available yet. Showing cached data",
           "info",
@@ -30,36 +48,28 @@ export function usePrices(search, view, hasPriceHistory) {
         return false;
       }
 
-      const latestRecordDate = new Date(
-        Math.max(...records.map((r) => new Date(r.arrival_date))),
+      const apiMap = new Map();
+
+      prevRecords.forEach((record) => {
+        apiMap.set(getKey(record), record);
+      });
+
+      todayRecords.forEach((record) => {
+        apiMap.set(getKey(record), record);
+      });
+
+      const mergedRecords = Array.from(apiMap.values());
+
+      /* newest records first */
+      mergedRecords.sort(
+        (a, b) => new Date(b.arrival_date) - new Date(a.arrival_date),
       );
-      const latestDateStr = latestRecordDate.toISOString().split("T")[0];
 
-      if (latestDateStr === todayStr) {
-        const apiMap = new Map();
-        records.forEach((record) => apiMap.set(getKey(record), record));
+      setCardArray(mergedRecords);
+      localStorage.setItem("cachedRecords", JSON.stringify(mergedRecords));
+      localStorage.setItem("lastFetchedDate", todayStr);
 
-        const favs = JSON.parse(localStorage.getItem("favourites") || "[]");
-        favs.forEach((fav) => {
-          if (!apiMap.has(fav.key)) {
-            const oldRecord = records.find((r) => getKey(r) === fav.key);
-            if (oldRecord) apiMap.set(fav.key, oldRecord);
-          }
-        });
-
-        const mergedRecords = Array.from(apiMap.values());
-        setCardArray(mergedRecords);
-        localStorage.setItem("cachedRecords", JSON.stringify(mergedRecords));
-        localStorage.setItem("lastFetchedDate", todayStr);
-        return true;
-      }
-
-      toastWithSound(
-        "New prices not available yet. Showing cached data",
-        "info",
-      );
-      setCardArray(cached);
-      return false;
+      return true;
     } catch (err) {
       console.error("API fetch error:", err);
       setCardArray(cached);
@@ -70,38 +80,17 @@ export function usePrices(search, view, hasPriceHistory) {
 
   useEffect(() => {
     const cached = JSON.parse(localStorage.getItem("cachedRecords") || "[]");
+
     if (cached.length > 0) {
       setCardArray(cached);
-      setLoading(false);
     }
 
-    const now = new Date();
-    const sixAM = new Date();
-    sixAM.setHours(6, 0, 0, 0);
-
-    let intervalId = null;
-
-    const startPolling = async () => {
-      const done = await fetchPrices();
-      if (!done) {
-        intervalId = setInterval(
-          async () => {
-            const fetched = await fetchPrices();
-            if (fetched && intervalId) {
-              clearInterval(intervalId);
-            }
-          },
-          5 * 60 * 1000,
-        );
-      }
+    const load = async () => {
+      await fetchPrices();
       setLoading(false);
     };
 
-    if (now >= sixAM) startPolling();
-
-    return () => {
-      if (intervalId) clearInterval(intervalId);
-    };
+    load();
   }, []);
 
   const lastPriceMap = useMemo(() => {
