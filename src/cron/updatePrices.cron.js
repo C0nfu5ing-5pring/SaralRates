@@ -2,14 +2,18 @@ import cron from "node-cron";
 import { fetchAndStoreDataForCron } from "../controllers/commodities.controller.js";
 
 let pollInterval = null;
+let isRunning = false;
 
-cron.schedule("0 6 * * *", () => {
-  console.log("Cron triggered at 3PM:", new Date().toLocaleTimeString());
+cron.schedule("0 5 * * *", () => {
+  console.log("Cron triggered at 12PM:", new Date().toLocaleTimeString());
 
   if (pollInterval) return;
 
   pollInterval = setInterval(
     async () => {
+      if (isRunning) return;
+      isRunning = true;
+
       console.log(
         "Polling API for today's data at",
         new Date().toLocaleTimeString(),
@@ -23,12 +27,12 @@ cron.schedule("0 6 * * *", () => {
           clearInterval(pollInterval);
           pollInterval = null;
         } else {
-          console.log(
-            "Today's data not posted by the govt. yet. Retrying in a minute",
-          );
+          console.log("Today's data not posted by the govt. yet. Retrying...");
         }
       } catch (err) {
         console.error("Error during polling:", err.message);
+      } finally {
+        isRunning = false;
       }
     },
     5 * 60 * 1000,
