@@ -37,7 +37,10 @@ export default function PriceWithTooltip({ modalPrice, previousModalPrice }) {
           ref={reference}
           onMouseEnter={!isTouch ? () => setOpen(true) : undefined}
           onMouseLeave={!isTouch ? () => setOpen(false) : undefined}
-          onClick={isTouch ? () => setOpen((v) => !v) : undefined}
+          onClick={(e) => {
+            e.stopPropagation();
+            if (isTouch) setOpen((v) => !v);
+          }}
         >
           <Info size={16} className="text-blue-500" />
         </button>

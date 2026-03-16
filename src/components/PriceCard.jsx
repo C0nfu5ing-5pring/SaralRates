@@ -35,7 +35,7 @@ export default function PriceCard({
 
         <PriceWithTooltip
           modalPrice={card.modal_price}
-          previousModalPrice={card.previousModalPrice}
+          previousModalPrice={card.priceHistory?.[1]?.modal_price}
         />
 
         <p className="text-xs">
@@ -64,34 +64,56 @@ export default function PriceCard({
       </div>
 
       <div
-        className="card-back absolute inset-0 flex items-center justify-center gap-4"
+        className="card-back absolute inset-0 flex flex-col px-3 py-4"
         style={{ transform: "rotateY(180deg)", backfaceVisibility: "hidden" }}
       >
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            toggleFavourite(card);
-          }}
-        >
-          <Bookmark
-            size={24}
-            className={`transition-all duration-200 cursor-pointer active:scale-90 ${
-              isFavourite ? "text-black fill-current" : "text-black fill-none"
-            }`}
-          />
-        </button>
+        <div>
+          <p className="font-semibold line-clamp-2 py-1">Previous prices</p>
+          <hr />
+        </div>
 
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            onShare(cardRef.current);
-          }}
-        >
-          <Share
-            size={24}
-            className="cursor-pointer active:scale-90 transition-all"
-          />
-        </button>
+        <div className="flex justify-between font-semibold">
+          <p>Date</p>
+          <p>Price</p>
+        </div>
+
+        {card.priceHistory.slice(0, 6).map((item, id) => {
+          return (
+            <div key={id} className="flex justify-between">
+              <div className="flex flex-col text-sm">
+                {item.date.split("T")[0]}
+              </div>
+              <div className="flex flex-col text-sm">₹{item.modal_price}</div>
+            </div>
+          );
+        })}
+        <div className="flex gap-3 fixed bottom-2">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleFavourite(card);
+            }}
+          >
+            <Bookmark
+              size={24}
+              className={`transition-all duration-200 cursor-pointer active:scale-90 ${
+                isFavourite ? "text-black fill-current" : "text-black fill-none"
+              }`}
+            />
+          </button>
+
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onShare(cardRef.current);
+            }}
+          >
+            <Share
+              size={24}
+              className="cursor-pointer active:scale-90 transition-all"
+            />
+          </button>
+        </div>
       </div>
     </motion.div>
   );
