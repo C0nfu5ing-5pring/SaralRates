@@ -76,7 +76,7 @@ export default function CardGrid({ list, favourites, toggleFavourite }) {
     <VirtuosoGrid
       className="h-[70vh] w-full"
       totalCount={list.length}
-      listClassName="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3"
+      listClassName="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 overflow-x-hidden"
       itemContent={(index) => {
         const card = list[index];
         const fav = favourites.some(
