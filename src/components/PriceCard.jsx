@@ -2,9 +2,8 @@ import { Store, MapPin, Bookmark, Share } from "lucide-react";
 import PriceWithTooltip from "./PriceWithTooltip";
 import { useState, useRef, useEffect } from "react";
 import { motion } from "motion/react";
-import bookmark from "../audio/added.mp3";
-import unbookmark from "../audio/notification.mp3";
 import CustomToast from "./CustomToast";
+import { bookmarkSound, unBookmarkSound } from "./Sound";
 import { toast } from "react-toastify";
 
 const intl = new Intl.NumberFormat("en-IN", {
@@ -20,8 +19,6 @@ export default function PriceCard({
 }) {
   const [isFlipped, setIsFlipped] = useState(false);
   const cardRef = useRef(null);
-  const bookmarkSound = new Audio(bookmark);
-  const unBookmarkSound = new Audio(unbookmark);
 
   const handleFavourite = (e) => {
     e.stopPropagation();
@@ -53,7 +50,7 @@ export default function PriceCard({
       style={{ transformStyle: "preserve-3d", perspective: 1000 }}
     >
       <div
-        className="flex flex-col gap-1"
+        className="flex flex-col gap-[2px]"
         style={{ backfaceVisibility: "hidden" }}
       >
         <p className="font-semibold line-clamp-2">{card.commodity}</p>
@@ -76,11 +73,12 @@ export default function PriceCard({
         </p>
 
         <p className="text-xs flex items-center gap-1">
-          <Store size={12} /> {card.market}
+          <Store className="hidden lg:block" size={10} /> {card.market}
         </p>
 
         <p className="text-xs flex items-center gap-1">
-          <MapPin size={12} /> {card.district}, {card.state}
+          <MapPin className="hidden lg:block" size={10} /> {card.district},{" "}
+          {card.state}
         </p>
 
         <div className="flex justify-between text-xs border-t pt-1">
@@ -106,14 +104,16 @@ export default function PriceCard({
         {card.priceHistory.slice(0, 6).map((item, id) => {
           return (
             <div key={id} className="flex justify-between">
-              <div className="flex flex-col text-sm">
+              <div className="flex flex-col text-xs lg:text-sm">
                 {item.date.split("T")[0]}
               </div>
-              <div className="flex flex-col text-sm">₹{item.modal_price}</div>
+              <div className="flex flex-col text-xs lg:text-sm">
+                ₹{item.modal_price}
+              </div>
             </div>
           );
         })}
-        <div className="flex gap-3 fixed bottom-2">
+        <div className="flex w-full justify-center gap-3 fixed bottom-2 right-[2px]">
           <button onClick={handleFavourite}>
             <Bookmark
               size={24}
