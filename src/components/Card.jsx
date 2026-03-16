@@ -1,23 +1,114 @@
-import { usePrices } from "../hooks/usePrices";
 import CardGrid from "./CardGrid";
 import LoadingState from "./LoadingState";
 import EmptyState from "./EmptyState";
+import { useEffect, useState } from "react";
 
-export default function Card({ search, view, hasPriceHistory }) {
-  const { finalList, loading, favourites, toggleFavourite } = usePrices(
-    search,
-    view,
-    hasPriceHistory,
-  );
+export default function Card({ search, view, data }) {
+  const [finalList, setFinalList] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [favourites, setFavourites] = useState([]);
+
+  useEffect(() => {
+    const savedFavourites = JSON.parse(
+      localStorage.getItem("favourites") || "[]",
+    );
+
+    const normalized = savedFavourites
+      .map((f) => {
+        if (typeof f.key === "string") return f;
+        if (f.item) {
+          const item = f.item;
+          const key = `${item.commodity}|${item.market}|${item.district}`
+            .toLowerCase()
+            .replace(/\s+/g, " ")
+            .trim();
+          return { key, item };
+        }
+        return null;
+      })
+      .filter(Boolean);
+
+    setFavourites(normalized);
+  }, []);
+
+  const toggleFavourite = (item) => {
+    const key = `${item.commodity}|${item.market}|${item.district}`
+      .toLowerCase()
+      .replace(/\s+/g, " ")
+      .trim();
+    let updatedFavourites;
+    if (favourites.some((f) => f.key === key)) {
+      updatedFavourites = favourites.filter((f) => f.key !== key);
+    } else {
+      updatedFavourites = [...favourites, { key, item }];
+    }
+    setFavourites(updatedFavourites);
+    localStorage.setItem("favourites", JSON.stringify(updatedFavourites));
+  };
+
+  useEffect(() => {
+    if (!data) {
+      return;
+    }
+
+    const filtered = data
+      .map((item) => {
+        const today = item.priceHistory[0];
+        const yesterday = item.priceHistory[1];
+
+        let trend = "same";
+        let priceChange = 0;
+
+        if (today && yesterday) {
+          priceChange = today.modal_price - yesterday.modal_price;
+
+          if (priceChange > 0) {
+            trend = "increase";
+          } else if (priceChange < 0) {
+            trend = "decrease";
+          }
+        }
+        return { ...item, trend, priceChange };
+      })
+      .filter((item) => {
+        return item.commodity.toLowerCase().includes(search.toLowerCase());
+      })
+      .filter((item) => {
+        if (view === "increase") {
+          return item.trend === "increase";
+        }
+        if (view === "decrease") {
+          return item.trend === "decrease";
+        }
+        if (view === "favourites") {
+          const key = `${item.commodity}|${item.market}|${item.district}`
+            .toLowerCase()
+            .replace(/\s+/g, " ")
+            .trim();
+          return favourites.some((f) => f.key === key);
+        }
+        return true;
+      });
+
+    setFinalList(filtered);
+    setLoading(false);
+  }, [data, search, view, favourites]);
 
   const isFavourite = (item) => {
-    const key = `${item.commodity}|${item.market}|${item.district}`;
+    const key = `${item.commodity}|${item.market}|${item.district}`
+      .toLowerCase()
+      .replace(/\s+/g, " ")
+      .trim();
     return favourites.some((f) => f.key === key);
   };
 
-  if (loading) return <LoadingState />;
-  if (!finalList.length)
-    return <EmptyState view={view} hasPriceHistory={hasPriceHistory} />;
+  if (loading) {
+    return <LoadingState />;
+  }
+
+  if (!finalList.length) {
+    return <EmptyState view={view} />;
+  }
 
   return (
     <CardGrid

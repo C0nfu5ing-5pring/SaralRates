@@ -60,7 +60,6 @@ export function usePrices(search, view, hasPriceHistory) {
 
       const mergedRecords = Array.from(apiMap.values());
 
-      /* newest records first */
       mergedRecords.sort(
         (a, b) => new Date(b.arrival_date) - new Date(a.arrival_date),
       );

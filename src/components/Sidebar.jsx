@@ -45,23 +45,20 @@ const Sidebar = ({ view, setView, hasPriceHistory }) => {
       </button>
 
       <button
-        onClick={() => hasPriceHistory && setView("increase")}
-        disabled={!hasPriceHistory}
-        title={!hasPriceHistory ? "Price history not available yet" : ""}
+        onClick={() => setView("increase")}
         className={`${baseBtnClasses} ${
           view === "increase" ? activeClasses : inactiveClasses
-        } ${!hasPriceHistory ? "opacity-50 cursor-not-allowed hover:none" : ""}`}
+        }`}
       >
         Increase
       </button>
 
       <button
-        onClick={() => hasPriceHistory && setView("decrease")}
-        disabled={!hasPriceHistory}
+        onClick={() => setView("decrease")}
         title={!hasPriceHistory ? "Price history not available yet" : ""}
         className={`${baseBtnClasses} ${
           view === "decrease" ? activeClasses : inactiveClasses
-        } ${!hasPriceHistory ? "opacity-50 cursor-not-allowed hover:none" : ""}`}
+        }`}
       >
         Decrease
       </button>
