@@ -1,8 +1,8 @@
 const Footer = () => {
-  const lastFetchDate = localStorage.getItem("lastFetchDate");
+  const lastFetchedDate = localStorage.getItem("lastFetchedDate");
 
   return (
-    <footer className="w-full mt-5 px-4 sm:px-6 lg:px-20 py-6">
+    <footer className="w-full mt-5 px-4 sm:px-6 lg:px-20 py-6 select-none">
       <div className="border-2 shadow-xl border-gray-300 rounded-[3rem] p-6 sm:p-10 flex flex-col lg:flex-row items-center justify-between gap-6">
         <div className="w-full lg:w-[45%] flex justify-center lg:justify-start">
           <h1 className="text-5xl sm:text-7xl lg:text-8xl font-medium">
@@ -18,12 +18,12 @@ const Footer = () => {
                 based on quality, demand, and market conditions.
               </p>
 
-              <p>Version 1.0.2 · Beta</p>
+              <p>Version 0.2.5 · Alpha</p>
             </div>
 
             <div className="w-full sm:w-[50%] flex flex-col gap-6 text-sm sm:text-base">
               <p>Source: data.gov.in (Govt. of India)</p>
-              <p>Last updated: Today · {lastFetchDate}</p>
+              <p>Last updated: Today · {lastFetchedDate}</p>
             </div>
           </div>
         </div>
