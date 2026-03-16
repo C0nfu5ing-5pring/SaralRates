@@ -12,6 +12,9 @@ Saral Rates is a website for traders and farmers to check prices of different co
 - Reactjs
 - TailwindCSS
 - Javascript
+- MongoDB Compass
+- mongoose
+- motion.dev
 - floating-ui
 - react-router-dom
 - react-virtuoso
