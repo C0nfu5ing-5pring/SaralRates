@@ -23,7 +23,7 @@ const Footer = () => {
 
             <div className="w-full sm:w-[50%] flex flex-col gap-6 text-sm sm:text-base">
               <p>Source: data.gov.in (Govt. of India)</p>
-              <p>Last updated: Today · {lastFetchedDate}</p>
+              <p>Last updated · {lastFetchedDate}</p>
             </div>
           </div>
         </div>
