@@ -1,7 +1,11 @@
 import { Store, MapPin, Bookmark, Share } from "lucide-react";
 import PriceWithTooltip from "./PriceWithTooltip";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "motion/react";
+import bookmark from "../audio/added.mp3";
+import unbookmark from "../audio/notification.mp3";
+import CustomToast from "./CustomToast";
+import { toast } from "react-toastify";
 
 const intl = new Intl.NumberFormat("en-IN", {
   style: "currency",
@@ -16,6 +20,35 @@ export default function PriceCard({
 }) {
   const [isFlipped, setIsFlipped] = useState(false);
   const cardRef = useRef(null);
+  const [localFav, setLocalFav] = useState(isFavourite);
+  const bookmarkSound = new Audio(bookmark);
+  const unBookmarkSound = new Audio(unbookmark);
+
+  useEffect(() => {
+    setLocalFav(isFavourite);
+  }, [isFavourite]);
+
+  const handleFavourite = (e) => {
+    e.stopPropagation();
+    const willBeFavourite = !localFav;
+    setLocalFav(willBeFavourite);
+    toggleFavourite(card);
+
+    if (willBeFavourite) {
+      bookmarkSound.play();
+      toast(
+        <CustomToast
+          msg="Item added to favourites"
+          className="bg-transparent"
+          type="success"
+        />,
+        {},
+      );
+    } else {
+      unBookmarkSound.play();
+      toast(<CustomToast msg="Item removed from favourites" type="info" />, {});
+    }
+  };
 
   return (
     <motion.div
@@ -88,16 +121,11 @@ export default function PriceCard({
           );
         })}
         <div className="flex gap-3 fixed bottom-2">
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              toggleFavourite(card);
-            }}
-          >
+          <button onClick={handleFavourite}>
             <Bookmark
               size={24}
               className={`transition-all duration-200 cursor-pointer active:scale-90 ${
-                isFavourite ? "text-black fill-current" : "text-black fill-none"
+                localFav ? "text-black fill-current" : "text-black fill-none"
               }`}
             />
           </button>
