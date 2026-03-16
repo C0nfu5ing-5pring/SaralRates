@@ -162,10 +162,29 @@ export const getCommodities = async (req, res) => {
       },
     ]);
 
+    const commoditiesWithTrend = commodities.map((commodity) => {
+      const history = commodity.priceHistory;
+      let prev = null;
+
+      const priceHistoryWithTrend = history.map((item) => {
+        let trend = "same";
+        if (!prev !== null) {
+          if (item.modal_price > prev) {
+            trend = "up";
+          } else if (item.modal_price < prev) {
+            trend = "down";
+          }
+        }
+        prev = item.modal_price;
+        return { ...item, trend };
+      });
+      return { ...commodity, priceHistory: priceHistoryWithTrend };
+    });
+
     res.status(200).json({
       success: true,
-      count: commodities.length,
-      data: commodities,
+      count: commoditiesWithTrend.length,
+      data: commoditiesWithTrend,
     });
   } catch (error) {
     console.error(error);
