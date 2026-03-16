@@ -20,19 +20,12 @@ export default function PriceCard({
 }) {
   const [isFlipped, setIsFlipped] = useState(false);
   const cardRef = useRef(null);
-  const [localFav, setLocalFav] = useState(isFavourite);
   const bookmarkSound = new Audio(bookmark);
   const unBookmarkSound = new Audio(unbookmark);
 
-  useEffect(() => {
-    setLocalFav(isFavourite);
-  }, [isFavourite]);
-
   const handleFavourite = (e) => {
     e.stopPropagation();
-    const willBeFavourite = !localFav;
-    setLocalFav(willBeFavourite);
-    toggleFavourite(card);
+    const willBeFavourite = toggleFavourite(card);
 
     if (willBeFavourite) {
       bookmarkSound.play();
@@ -125,7 +118,7 @@ export default function PriceCard({
             <Bookmark
               size={24}
               className={`transition-all duration-200 cursor-pointer active:scale-90 ${
-                localFav ? "text-black fill-current" : "text-black fill-none"
+                isFavourite ? "text-black fill-current" : "text-black fill-none"
               }`}
             />
           </button>

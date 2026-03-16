@@ -37,13 +37,19 @@ export default function Card({ search, view, data }) {
       .replace(/\s+/g, " ")
       .trim();
     let updatedFavourites;
+    let nowFavourite;
+
     if (favourites.some((f) => f.key === key)) {
       updatedFavourites = favourites.filter((f) => f.key !== key);
+      nowFavourite = false;
     } else {
       updatedFavourites = [...favourites, { key, item }];
+      nowFavourite = true;
     }
+
     setFavourites(updatedFavourites);
     localStorage.setItem("favourites", JSON.stringify(updatedFavourites));
+    return nowFavourite;
   };
 
   useEffect(() => {

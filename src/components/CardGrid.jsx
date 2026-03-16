@@ -1,46 +1,74 @@
 import { VirtuosoGrid } from "react-virtuoso";
 import PriceCard from "./PriceCard";
 import html2canvas from "html2canvas";
+import { toast } from "react-toastify";
+import CustomToast from "./CustomToast";
 
 export default function CardGrid({ list, favourites, toggleFavourite }) {
   const shareCardAsImage = async (element) => {
     if (!element) return;
 
-    const canvas = await html2canvas(element, {
-      backgroundColor: "#ffffff",
-      scale: 2,
-      onclone: (doc) => {
-        const card = doc.querySelector(".price-card");
-        if (card) {
+    try {
+      const canvas = await html2canvas(element, {
+        backgroundColor: "#ffffff",
+        scale: 2,
+        onclone: (doc) => {
+          const card = doc.querySelector(".price-card");
+          if (!card) return;
+
+          doc.querySelectorAll("button, svg").forEach((el) => {
+            el.style.display = "none";
+          });
+
+          doc.querySelectorAll("*").forEach((el) => {
+            const computed = getComputedStyle(el);
+
+            ["color", "backgroundColor", "borderColor"].forEach((prop) => {
+              if (computed[prop]?.includes("oklch")) {
+                if (prop === "backgroundColor") el.style[prop] = "#fff";
+                else el.style[prop] = "#000";
+              }
+            });
+          });
+
           card.style.transform = "none";
           card.style.transformStyle = "flat";
+
           const back = card.querySelector(".card-back");
           if (back) back.style.display = "none";
-        }
-        doc.querySelectorAll("*").forEach((el) => {
-          const style = doc.defaultView.getComputedStyle(el);
-          if (style.color.includes("oklch")) el.style.color = "#000";
-          if (style.backgroundColor.includes("oklch"))
-            el.style.backgroundColor = "#fff";
-          if (style.borderColor.includes("oklch"))
-            el.style.borderColor = "#ddd";
-        });
-      },
-    });
-
-    const blob = await new Promise((resolve) =>
-      canvas.toBlob(resolve, "image/png"),
-    );
-    const file = new File([blob], "saral-rate.png", { type: "image/png" });
-
-    if (navigator.canShare && navigator.canShare({ files: [file] })) {
-      await navigator.share({
-        files: [file],
-        title: "Saral Rates",
-        text: "Check this mandi price",
+        },
       });
-    } else {
-      alert("Sharing not supported on this browser.");
+
+      const blob = await new Promise((resolve) =>
+        canvas.toBlob(resolve, "image/png"),
+      );
+
+      if (!blob) throw new Error("Failed to generate image");
+
+      const file = new File([blob], "saral-rate.png", { type: "image/png" });
+
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({
+          files: [file],
+          title: "Saral Rates",
+          text: "Check this mandi price",
+        });
+      } else {
+        const url = URL.createObjectURL(file);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "saral-rate.png";
+        link.click();
+        URL.revokeObjectURL(url);
+      }
+    } catch (err) {
+      console.error("Error sharing card image:", err);
+      toast(
+        <CustomToast
+          msg="Couldn't share image. Something went wrong."
+          type="info"
+        />,
+      );
     }
   };
 
