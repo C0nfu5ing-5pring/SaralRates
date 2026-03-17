@@ -81,9 +81,7 @@ export default function PriceCard({
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
-            if (!isTouch) {
-              setOpenModal(true);
-            }
+            setOpenModal(true);
           }}
         />
 
@@ -97,10 +95,10 @@ export default function PriceCard({
               onClick={(e) => e.stopPropagation()}
             >
               <div className="h-full">
-                <ResponsiveContainer width="100%" height={150}>
+                <ResponsiveContainer className="w-full">
                   <LineChart
                     data={formattedData}
-                    className="text-xs"
+                    className="text-xs outline-0"
                     responsive
                   >
                     <XAxis dataKey="date" niceTicks="snap125" />
@@ -109,14 +107,19 @@ export default function PriceCard({
                       dataKey="modal_price"
                       type="monotone"
                       stroke="black"
-                      activeDot={{ r: 5 }}
+                      activeDot={{
+                        r: 5,
+                      }}
                     />
-                    <Tooltip content={<CustomTooltip />} />
+                    <Tooltip
+                      content={<CustomTooltip />}
+                      wrapperStyle={{ pointerEvents: "auto" }}
+                    />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
               <button
-                className="bg-white text-black border-2 border-black w-fit px-3 py-1 mx-auto rounded-xl active:scale-90 transition-all cursor-pointer hover:bg-black hover:text-white"
+                className="bg-white text-black border-2 text-xs lg:text-base border-black w-fit px-3 py-1 mx-auto rounded-xl active:scale-90 transition-all cursor-pointer hover:bg-black hover:text-white"
                 onClick={() => setOpenModal(false)}
               >
                 Close
@@ -129,8 +132,9 @@ export default function PriceCard({
         <p className="text-xs text-gray-600">Variety: {card.variety}</p>
 
         <PriceWithTooltip
-          modalPrice={card.modal_price}
-          previousModalPrice={card.priceHistory?.[1]?.modal_price}
+          className="text-2xl"
+          price={intl.format(card.modal_price)}
+          trend={card.priceHistory?.[1]?.trend}
         />
 
         <p className="text-xs">
