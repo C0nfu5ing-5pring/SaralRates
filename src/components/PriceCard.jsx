@@ -134,7 +134,7 @@ export default function PriceCard({
         <PriceWithTooltip
           className="text-2xl"
           price={intl.format(card.modal_price)}
-          trend={card.priceHistory?.[1]?.trend}
+          trend={card.trend}
         />
 
         <p className="text-xs">

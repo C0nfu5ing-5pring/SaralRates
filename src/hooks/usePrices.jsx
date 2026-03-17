@@ -22,7 +22,7 @@ export function usePrices(search, view, hasPriceHistory) {
     });
 
     const yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 2);
+    yesterday.setDate(yesterday.getDate() - 1);
     const yesterdayStr = yesterday.toLocaleDateString("en-CA", {
       timeZone: "Asia/Kolkata",
     });
@@ -45,30 +45,64 @@ export function usePrices(search, view, hasPriceHistory) {
           "info",
         );
         setCardArray(cached);
-        return false;
+        return;
       }
 
-      const apiMap = new Map();
-
-      prevRecords.forEach((record) => {
-        apiMap.set(getKey(record), record);
+      const prevMap = new Map();
+      prevRecords.forEach((item) => {
+        prevMap.set(getKey(item), item);
       });
 
-      todayRecords.forEach((record) => {
-        apiMap.set(getKey(record), record);
-      });
+      const mergedRecords = todayRecords.map((item) => {
+        const key = getKey(item);
+        const prev = prevMap.get(key);
 
-      const mergedRecords = Array.from(apiMap.values());
+        let trend = "new";
+        let previousModalPrice = null;
+
+        if (prev) {
+          previousModalPrice = prev.modal_price;
+
+          if (item.modal_price > prev.modal_price) trend = "up";
+          else if (item.modal_price < prev.modal_price) trend = "down";
+          else trend = "same";
+        }
+
+        return {
+          ...item,
+          trend,
+          previousModalPrice,
+        };
+      });
 
       mergedRecords.sort(
         (a, b) => new Date(b.arrival_date) - new Date(a.arrival_date),
       );
-
       setCardArray(mergedRecords);
       localStorage.setItem("cachedRecords", JSON.stringify(mergedRecords));
       localStorage.setItem("lastFetchedDate", todayStr);
 
-      return true;
+      // const apiMap = new Map();
+
+      // prevRecords.forEach((record) => {
+      //   apiMap.set(getKey(record), record);
+      // });
+
+      // todayRecords.forEach((record) => {
+      //   apiMap.set(getKey(record), record);
+      // });
+
+      // const mergedRecords = Array.from(apiMap.values());
+
+      // mergedRecords.sort(
+      //   (a, b) => new Date(b.arrival_date) - new Date(a.arrival_date),
+      // );
+
+      // setCardArray(mergedRecords);
+      // localStorage.setItem("cachedRecords", JSON.stringify(mergedRecords));
+      // localStorage.setItem("lastFetchedDate", todayStr);
+
+      // return true;
     } catch (err) {
       console.error("API fetch error:", err);
       setCardArray(cached);
@@ -102,36 +136,16 @@ export function usePrices(search, view, hasPriceHistory) {
     );
   }, []);
 
-  const enriched = useMemo(() => {
-    return cardArray.map((card) => {
-      const key = getKey(card);
-      const prev = lastPriceMap.get(key);
-      let trend = "new";
-
-      if (prev != null) {
-        if (card.modal_price > prev) trend = "up";
-        else if (card.modal_price < prev) trend = "down";
-        else trend = "same";
-      }
-
-      return {
-        ...card,
-        trend,
-        previousModalPrice: prev ?? null,
-      };
-    });
-  }, [cardArray, lastPriceMap]);
-
   const filtered = useMemo(() => {
     const q = search.toLowerCase();
-    return enriched.filter(
-      (c) =>
-        c.commodity?.toLowerCase().includes(q) ||
+
+    return cardArray.filter((c) => {
+      c.commodity?.toLowerCase().includes(q) ||
         c.market?.toLowerCase().includes(q) ||
         c.district?.toLowerCase().includes(q) ||
-        c.state?.toLowerCase().includes(q),
-    );
-  }, [enriched, search]);
+        c.state?.toLowerCase().includes(q);
+    });
+  }, [cardArray, search]);
 
   const isFavourite = (item) => {
     const key = getKey(item);
@@ -165,15 +179,12 @@ export function usePrices(search, view, hasPriceHistory) {
     switch (view) {
       case "favourites":
         return filtered.filter((c) => isFavourite(c));
-
       case "increase":
         if (!hasPriceHistory) return [];
         return filtered.filter((c) => c.trend === "up");
-
       case "decrease":
         if (!hasPriceHistory) return [];
         return filtered.filter((c) => c.trend === "down");
-
       default:
         return filtered;
     }
