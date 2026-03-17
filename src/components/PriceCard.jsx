@@ -1,10 +1,19 @@
-import { Store, MapPin, Bookmark, Share } from "lucide-react";
+import { Store, MapPin, Bookmark, Share, EllipsisVertical } from "lucide-react";
 import PriceWithTooltip from "./PriceWithTooltip";
 import { useState, useRef, useEffect } from "react";
 import { motion } from "motion/react";
 import CustomToast from "./CustomToast";
 import { bookmarkSound, unBookmarkSound } from "./Sound";
 import { toast } from "react-toastify";
+import {
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+import CustomTooltip from "./CustomTooltip";
 
 const intl = new Intl.NumberFormat("en-IN", {
   style: "currency",
@@ -40,6 +49,20 @@ export default function PriceCard({
     }
   };
 
+  const [openModal, setOpenModal] = useState(false);
+
+  const isTouch =
+    typeof window !== "undefined" &&
+    window.matchMedia("(pointer: coarse)").matches;
+
+  const formattedData = [...card.priceHistory].reverse().map((item) => ({
+    ...item,
+    date: new Date(item.date).toLocaleDateString("en-IN", {
+      day: "2-digit",
+      month: "short",
+    }),
+  }));
+
   return (
     <motion.div
       ref={cardRef}
@@ -53,6 +76,55 @@ export default function PriceCard({
         className="flex flex-col gap-[2px]"
         style={{ backfaceVisibility: "hidden" }}
       >
+        <EllipsisVertical
+          className="absolute right-1"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (!isTouch) {
+              setOpenModal(true);
+            }
+          }}
+        />
+
+        {openModal && (
+          <div
+            className="fixed inset-0 z-10"
+            onClick={() => setOpenModal(false)}
+          >
+            <div
+              className="bg-white rounded-xl py-3 w-full h-full flex flex-col gap-1"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="h-full">
+                <ResponsiveContainer width="100%" height={150}>
+                  <LineChart
+                    data={formattedData}
+                    className="text-xs"
+                    responsive
+                  >
+                    <XAxis dataKey="date" niceTicks="snap125" />
+                    <YAxis dataKey="modal_price" niceTicks="snap125" />
+                    <Line
+                      dataKey="modal_price"
+                      type="monotone"
+                      stroke="black"
+                      activeDot={{ r: 5 }}
+                    />
+                    <Tooltip content={<CustomTooltip />} />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+              <button
+                className="bg-white text-black border-2 border-black w-fit px-3 py-1 mx-auto rounded-xl active:scale-90 transition-all cursor-pointer hover:bg-black hover:text-white"
+                onClick={() => setOpenModal(false)}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        )}
+
         <p className="font-semibold line-clamp-2">{card.commodity}</p>
         <p className="text-xs text-gray-600">Variety: {card.variety}</p>
 
