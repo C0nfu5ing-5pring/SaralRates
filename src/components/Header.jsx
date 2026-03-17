@@ -1,7 +1,7 @@
 const Header = ({ search, setSearch, cycleTheme }) => {
   return (
     <header className="w-full mt-5 px-4 sm:px-6 lg:px-20 py-6 bg-[var(--bg)]  text-black transition-colors duration-300">
-      <div className="grid grid-cols-1 lg:grid-cols-3 items-center gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-3 items-baseline gap-4">
         <div className="flex justify-between items-center">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-[var(--logo)]">
             <span className="logo text-5xl sm:text-6xl lg:text-7xl">ljy</span>{" "}
