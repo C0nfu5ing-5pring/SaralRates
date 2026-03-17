@@ -15,8 +15,7 @@ const App = () => {
 
   const cycleTheme = () => {
     setTheme((prev) => {
-      if (prev === "light") return "saral";
-      if (prev === "saral") return "dark";
+      if (prev === "light") return "dark";
       return "light";
     });
   };

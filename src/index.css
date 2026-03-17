@@ -29,37 +29,44 @@
 }
 
 :root {
-  --bg: #f9fafb;
-  --card: #ffffff;
-  --border: #111;
-  --darker-border: #000;
-  --text: #111830;
-  --sidebar-hover: #fff;
-  --text-muted: #6b7280;
-  --commodity: #111827;
-  --price-modal: #111827;
-  --price-min-max: #6b7280;
-  --location: #4b5563;
-  --graph: #111;
-  --graph-axis: #111;
-  --graph-dot: #111;
-  --card-dot: #6b7280;
-  --info: #3b82f6;
-  --menu: #6b7280;
-  --sidebar-bg: #ffffff;
-  --sidebar-active: #111827;
-  --sidebar-active-text: #ffffff;
-  --sidebar-inactive: #e5e7eb;
-  --sidebar-inactive-text: #374151;
-  --view-bg: #f3f4f6;
-  --searchbar-border: #d1d5db;
-  --searchbar-text: #111827;
-  --searchbar-active-border: #2563eb;
-  --shadow: rgba(0, 0, 0, 0.1);
+  --bg: #f5f2eb;
+  --icon: #2a2520;
+  --variety-bg: #ecd088;
+  --variety-text: #2a2520;
+  --card: #fffdf7;
+  --border: #d4c9b0;
+  --darker-border: #b8aa90;
+  --text: #2a2520;
+  --text-muted: #7a7268;
+  --commodity: #1a1714;
+  --price-modal: #1a1714;
+  --price-min-max: #6b6358;
+  --location: #5a5248;
+  --graph: #9a7a3a;
+  --graph-axis: #c4bdb0;
+  --graph-dot: #b8922a;
+  --card-dot: #9a9288;
+  --info: #8a6e30;
+  --menu: #8a8278;
+  --sidebar-bg: #ede8de;
+  --sidebar-hover: #e0d9cc;
+  --sidebar-active: #b8922a;
+  --sidebar-active-text: #fffdf7;
+  --sidebar-inactive: #f0ece2;
+  --sidebar-inactive-text: #7a7268;
+  --view-bg: #fffdf7;
+  --searchbar-border: #d8d0bc;
+  --logo: #b8922a;
+  --searchbar-text: #2a2520;
+  --searchbar-active-border: #b8922a;
+  --shadow: rgba(0, 0, 0, 0.12);
 }
 
 [data-theme="dark"] {
   --bg: #0e0e0c;
+  --icon: #d6be91;
+  --variety-bg: #d6be91;
+  --variety-text: #141310;
   --card: #161513;
   --border: #d6be91;
   --darker-border: #bc9f68;
@@ -87,35 +94,4 @@
   --searchbar-text: #e7e3d8;
   --searchbar-active-border: #c2a36b;
   --shadow: rgba(0, 0, 0, 0.7);
-}
-
-[data-theme="saral"] {
-  --bg: #f5d19c;
-  --card: #f5d19c;
-  --border: #c28b4a;
-  --darker-border: #a87434;
-  --text: #3b2f1c;
-  --text-muted: #7a5c2e;
-  --commodity: #3b2f1c;
-  --price-modal: #3b2f1c;
-  --price-min-max: #7a5c2e;
-  --location: #6a4f28;
-  --sidebar-hover: #fff;
-  --logo: #a87434;
-  --graph: #c27c2c;
-  --graph-axis: #3b2f1c;
-  --graph-dot: #a66b2f;
-  --card-dot: #7a5c2e;
-  --info: #8b5e34;
-  --menu: #7a5c2e;
-  --sidebar-bg: #d9a15b;
-  --sidebar-active: #3b2f1c;
-  --sidebar-active-text: #f5d19c;
-  --sidebar-inactive: #d9a15b;
-  --sidebar-inactive-text: #3b2f1c;
-  --view-bg: #f5d19c;
-  --searchbar-border: #b98243;
-  --searchbar-text: #3b2f1c;
-  --searchbar-active-border: #8b5e34;
-  --shadow: rgba(59, 47, 28, 0.25);
 }
