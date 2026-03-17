@@ -27,3 +27,95 @@
 .logo {
   font-family: hindi;
 }
+
+:root {
+  --bg: #f9fafb;
+  --card: #ffffff;
+  --border: #111;
+  --darker-border: #000;
+  --text: #111830;
+  --sidebar-hover: #fff;
+  --text-muted: #6b7280;
+  --commodity: #111827;
+  --price-modal: #111827;
+  --price-min-max: #6b7280;
+  --location: #4b5563;
+  --graph: #111;
+  --graph-axis: #111;
+  --graph-dot: #111;
+  --card-dot: #6b7280;
+  --info: #3b82f6;
+  --menu: #6b7280;
+  --sidebar-bg: #ffffff;
+  --sidebar-active: #111827;
+  --sidebar-active-text: #ffffff;
+  --sidebar-inactive: #e5e7eb;
+  --sidebar-inactive-text: #374151;
+  --view-bg: #f3f4f6;
+  --searchbar-border: #d1d5db;
+  --searchbar-text: #111827;
+  --searchbar-active-border: #2563eb;
+  --shadow: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+  --bg: #0e0e0c;
+  --card: #161513;
+  --border: #d6be91;
+  --darker-border: #bc9f68;
+  --text: #e7e3d8;
+  --text-muted: #a8a29a;
+  --commodity: #f3efe6;
+  --price-modal: #f3efe6;
+  --price-min-max: #b0a99f;
+  --location: #c2b8a3;
+  --graph: #c2a36b;
+  --graph-axis: #6b665c;
+  --graph-dot: #d6b97f;
+  --card-dot: #9c968c;
+  --info: #b89b62;
+  --menu: #9c968c;
+  --sidebar-bg: #12110f;
+  --sidebar-hover: #1f1d19;
+  --sidebar-active: #c2a36b;
+  --sidebar-active-text: #0e0e0c;
+  --sidebar-inactive: #181714;
+  --sidebar-inactive-text: #b0a99f;
+  --view-bg: #141310;
+  --searchbar-border: #2a2926;
+  --logo: #c2a36b;
+  --searchbar-text: #e7e3d8;
+  --searchbar-active-border: #c2a36b;
+  --shadow: rgba(0, 0, 0, 0.7);
+}
+
+[data-theme="saral"] {
+  --bg: #f5d19c;
+  --card: #f5d19c;
+  --border: #c28b4a;
+  --darker-border: #a87434;
+  --text: #3b2f1c;
+  --text-muted: #7a5c2e;
+  --commodity: #3b2f1c;
+  --price-modal: #3b2f1c;
+  --price-min-max: #7a5c2e;
+  --location: #6a4f28;
+  --sidebar-hover: #fff;
+  --logo: #a87434;
+  --graph: #c27c2c;
+  --graph-axis: #3b2f1c;
+  --graph-dot: #a66b2f;
+  --card-dot: #7a5c2e;
+  --info: #8b5e34;
+  --menu: #7a5c2e;
+  --sidebar-bg: #d9a15b;
+  --sidebar-active: #3b2f1c;
+  --sidebar-active-text: #f5d19c;
+  --sidebar-inactive: #d9a15b;
+  --sidebar-inactive-text: #3b2f1c;
+  --view-bg: #f5d19c;
+  --searchbar-border: #b98243;
+  --searchbar-text: #3b2f1c;
+  --searchbar-active-border: #8b5e34;
+  --shadow: rgba(59, 47, 28, 0.25);
+}

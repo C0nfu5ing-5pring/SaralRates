@@ -34,16 +34,16 @@ export default function PriceWithTooltip({ price, trend }) {
         }}
       >
         <span className="font-black text-base">{price}</span>
-        {trend && <Info size={16} className="text-blue-500" />}
+        {trend && <Info size={16} className="text-[var(--info)]" />}
       </span>
 
       {open && trend && (
         <div
           ref={floating}
           style={{ position: strategy, top: y ?? 0, left: x ?? 0 }}
-          className="z-50 rounded-xl bg-gray-900 px-3 py-2 text-xs text-white shadow-2xl whitespace-nowrap"
+          className="z-50 rounded-xl bg-[var(--bg)] px-3 py-2 text-xs text-[var(--text)] shadow-2xl shadow-[var(--shadow)] border-[var(--darker-border)] border-2 whitespace-nowrap"
         >
-          <p className="text-gray-400">Trend</p>
+          <p>Trend:</p>
           <p className="font-semibold">{trend}</p>
         </div>
       )}

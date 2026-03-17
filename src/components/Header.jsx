@@ -1,20 +1,19 @@
-const Header = ({ search, setSearch }) => {
+const Header = ({ search, setSearch, cycleTheme }) => {
   return (
-    <header className="w-full mt-5 px-4 sm:px-6 lg:px-20 py-6 bg-white  text-black transition-colors duration-300">
+    <header className="w-full mt-5 px-4 sm:px-6 lg:px-20 py-6 bg-[var(--bg)]  text-black transition-colors duration-300">
       <div className="grid grid-cols-1 lg:grid-cols-3 items-center gap-4">
         <div className="flex justify-between items-center">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-[var(--logo)]">
             <span className="logo text-5xl sm:text-6xl lg:text-7xl">ljy</span>{" "}
             Rates
           </h1>
 
-          <a
-            href="https://www.github.com/C0nfu5ing-5pring/SaralRates"
-            target="_blank"
-            className="lg:hidden text-sm border border-gray-300  px-3 py-1 rounded-xl bg-white  text-black transition-colors duration-300"
+          <button
+            onClick={cycleTheme}
+            className="lg:hidden text-sm border border-[var(--darker-border)]  px-3 py-1 rounded-xl bg-[var(--bg)]  text-[var(--text)] transition-colors duration-300 hover:bg-[var(--logo)] hover:text-[var(--sidebar-active)]"
           >
-            Source Code
-          </a>
+            Change theme
+          </button>
         </div>
 
         <div className="w-full">
@@ -27,25 +26,24 @@ const Header = ({ search, setSearch }) => {
               w-full
               py-3 px-6
               rounded-xl
-              border border-gray-300 
-              bg-white 
-              text-black
+              border border-[var(--border)] 
+              bg-[var(--bg)]
+              text-[var(--text)]
               text-sm sm:text-base
-              placeholder-gray-400 
-              focus:outline-none focus:ring-1 focus:ring-black 
+              placeholder-[var(--muted-text)]
+              focus:outline-none focus:ring-1 focus:ring-[var(--darker-border)]
               transition
             "
           />
         </div>
 
         <div className="hidden lg:flex justify-end gap-4">
-          <a
-            href="https://www.github.com/C0nfu5ing-5pring/SaralRates"
-            target="_blank"
-            className="border border-gray-300 cursor-pointer bg-white  hover:bg-black hover:text-white transition-all active:scale-95 px-4 py-2 rounded-2xl text-black"
+          <button
+            onClick={cycleTheme}
+            className="border border-[var(--border)] cursor-pointer bg-[var(--bg)]  hover:bg-[var(--card)] hover:text-[var(--text)] transition-all active:scale-95 px-4 py-2 rounded-2xl text-[var(--text)]"
           >
-            Source Code
-          </a>
+            Change theme
+          </button>
         </div>
       </div>
     </header>

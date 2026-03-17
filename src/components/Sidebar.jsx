@@ -1,18 +1,20 @@
 const Sidebar = ({ view, setView, hasPriceHistory }) => {
   const baseBtnClasses = `
-    border border-gray-300
+    border border-[var(--darker-border)]
     active:scale-95 hover:shadow-md
+    shadow-[var(--shadow)]
     transition-all cursor-pointer
     whitespace-nowrap
     w-auto lg:w-full
     py-2 px-3 lg:py-3 lg:px-6
     rounded-2xl
-    text-xs md:text-base lg:text-xl
+    text-xs md:text-base lg:text-xl text-[var(--text)]
   `;
 
-  const activeClasses = "bg-black text-white border-black";
+  const activeClasses =
+    "bg-[var(--sidebar-active)] text-white border-[var(--border-darker)]";
   const inactiveClasses =
-    "bg-white text-black hover:bg-black hover:text-white hover:border-black";
+    "bg-[var(--bg)] text-[var(--text)] hover:bg-[var(--sidebar-active)] hover:text-[var(--sidebar-hover)] hover:border-[var(--darker-border)]";
 
   return (
     <div

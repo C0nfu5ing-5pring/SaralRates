@@ -12,7 +12,10 @@ createRoot(document.getElementById("root")).render(
       hideProgressBar
       closeOnClick
       pauseOnHover
-      theme="light"
+      toastStyle={{
+        background: "transparent",
+        boxShadow: "none",
+      }}
     />
     <App />
   </BrowserRouter>,

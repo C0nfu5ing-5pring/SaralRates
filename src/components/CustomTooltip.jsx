@@ -4,7 +4,7 @@ const CustomTooltip = ({ active, payload }) => {
   const dataPoint = payload[0].payload;
 
   return (
-    <div className="bg-white p-2 rounded-xl shadow-lg border border-gray-300 text-[10px] md:text-xs z-10">
+    <div className="bg-[var(--bg)] p-2 rounded-xl shadow-lg shadow-[var(--shadow)] border text-[var(--text)] border-[var(--border)] text-[10px] md:text-xs z-10">
       <p>
         <strong>Date:</strong> {dataPoint.date}
       </p>
