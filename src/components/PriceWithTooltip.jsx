@@ -8,12 +8,7 @@ import {
   autoUpdate,
 } from "@floating-ui/react";
 
-const intl = new Intl.NumberFormat("en-IN", {
-  style: "currency",
-  currency: "INR",
-});
-
-export default function PriceWithTooltip({ modalPrice, previousModalPrice }) {
+export default function PriceWithTooltip({ price, trend }) {
   const [open, setOpen] = useState(false);
 
   const isTouch =
@@ -21,41 +16,37 @@ export default function PriceWithTooltip({ modalPrice, previousModalPrice }) {
     window.matchMedia("(pointer: coarse)").matches;
 
   const { x, y, reference, floating, strategy } = useFloating({
-    placement: "top",
-    middleware: [offset(8), flip(), shift({ padding: 8 })],
+    placement: "right",
+    middleware: [offset(6), flip(), shift({ padding: 8 })],
     whileElementsMounted: autoUpdate,
   });
 
   return (
-    <div className="flex items-center gap-2 relative">
-      <p className="font-semibold text-lg md:text-xl lg:text-2xl">
-        {intl.format(modalPrice)}
-      </p>
+    <span className="inline-flex items-center gap-1 relative">
+      <span
+        ref={reference}
+        className="flex items-center gap-1 cursor-pointer"
+        onMouseEnter={() => !isTouch && setOpen(true)}
+        onMouseLeave={() => !isTouch && setOpen(false)}
+        onClick={(e) => {
+          e.stopPropagation();
+          if (isTouch) setOpen((v) => !v);
+        }}
+      >
+        <span className="font-black text-base">{price}</span>
+        {trend && <Info size={16} className="text-blue-500" />}
+      </span>
 
-      {previousModalPrice != null && (
-        <button
-          ref={reference}
-          onMouseEnter={!isTouch ? () => setOpen(true) : undefined}
-          onMouseLeave={!isTouch ? () => setOpen(false) : undefined}
-          onClick={(e) => {
-            e.stopPropagation();
-            if (isTouch) setOpen((v) => !v);
-          }}
-        >
-          <Info size={16} className="text-blue-500" />
-        </button>
-      )}
-
-      {open && previousModalPrice != null && (
+      {open && trend && (
         <div
           ref={floating}
           style={{ position: strategy, top: y ?? 0, left: x ?? 0 }}
-          className="z-50 rounded-xl bg-gray-900 px-3 py-2 text-xs text-white shadow-2xl"
+          className="z-50 rounded-xl bg-gray-900 px-3 py-2 text-xs text-white shadow-2xl whitespace-nowrap"
         >
-          <p className="text-gray-400">Previous price</p>
-          <p className="font-semibold">{intl.format(previousModalPrice)}</p>
+          <p className="text-gray-400">Trend</p>
+          <p className="font-semibold">{trend}</p>
         </div>
       )}
-    </div>
+    </span>
   );
 }
