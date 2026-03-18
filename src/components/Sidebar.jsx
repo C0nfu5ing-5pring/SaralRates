@@ -73,7 +73,7 @@ const Sidebar = ({ view, setView, hasPriceHistory }) => {
         <hr className="border-[var(--variety-bg)] w-full" />
         <div className="flex justify-start gap-3">
           <div className="border-[var(--variety-bg)] text-xs md:text-sm cursor-pointer border hover:border-2 transition-all px-3 py-1 rounded-lg">
-            v0.5.0
+            v0.5.1
           </div>
           <div className="border-[var(--variety-bg)] text-xs md:text-sm cursor-pointer border hover:border-2 transition-all px-3 py-1 rounded-lg">
             Alpha
