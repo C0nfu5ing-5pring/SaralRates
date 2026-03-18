@@ -57,18 +57,23 @@ export default function PriceCard({
         <div className="flex justify-between gap-1">
           <div className="flex flex-col">
             <h1
-              className="text-base md:text-lg lg:text-xl"
+              className="text-base md:text-lg lg:text-xl leading-4 sm:leading-normal"
               title={card.commodity}
             >
               {card.commodity.includes("(")
                 ? card.commodity.split("(")[0]
                 : card.commodity.split("/")[0]}
             </h1>
-            <div className="bg-[var(--variety-bg)] w-fit px-2 text-[9px] md:text-xs lg:text-xs text-[var(--variety-text)] rounded-sm">
-              <p className="line-clamp-1" title={card.variety}>
-                Variety: {card.variety}
-              </p>
-            </div>
+
+            {card.variety
+              .toLowerCase()
+              .includes(card.commodity.toLowerCase()) ? null : (
+              <div className="bg-[var(--variety-bg)] w-fit px-2 text-[9px] md:text-xs lg:text-xs text-[var(--variety-text)] rounded-sm">
+                <p className="line-clamp-1" title={card.variety}>
+                  {card.variety}
+                </p>
+              </div>
+            )}
           </div>
 
           <div className="flex gap-1">
@@ -92,14 +97,16 @@ export default function PriceCard({
 
         <div className="flex flex-col gap-1">
           <h1 className="text-[8px] md:text-[10px] lg:text-[10px] font-thin">
-            MODAL PRICE
+            COMMON PRICE
           </h1>
           <div className="flex justify-between items-baseline">
             <div className="flex flex-col md:flex-row items-baseline md:gap-2">
-              <h1 className="text-2xl md:text-3xl lg:text-3xl">
-                {intl.format(card.modal_price).split(".")[0]}
-              </h1>
-              <p className="font-thin text-[11px] md:text-xs lg:text-sm">
+              <div className="px-1 py-2">
+                <h1 className="text-2xl md:text-3xl lg:text-3xl">
+                  {intl.format(card.modal_price).split(".")[0]}
+                </h1>
+              </div>
+              <p className="font-thin leading-0 text-[11px] md:text-xs lg:text-sm">
                 ≈ {intl.format(card.modal_price / 100).split(".")[0]}/kg
               </p>
             </div>
@@ -144,7 +151,7 @@ export default function PriceCard({
               </AreaChart>
             </ResponsiveContainer>
           </div>
-          <div className="flex gap-1">
+          <div className="flex justify-center gap-1">
             {card.priceHistory
               .slice(0, 5)
               .reverse()
@@ -168,7 +175,7 @@ export default function PriceCard({
               })}
           </div>
           <hr className="text-[var(--border)] my-2" />
-          <div className="flex gap-2">
+          <div className="flex items-center gap-1">
             <MapPin className="h-[15px] w-fit" />
             <div>
               <h1 className="text-[11px] md:text-xs lg:text-sm">

@@ -4,7 +4,6 @@ const Sidebar = ({ view, setView, hasPriceHistory }) => {
     active:scale-95 hover:shadow-md
     shadow-[var(--shadow)]
     text-center
-    md:text-start
     transition-all cursor-pointer
     whitespace-nowrap lg:w-full
     py-2 px-3 lg:py-3 lg:px-6
@@ -71,14 +70,15 @@ const Sidebar = ({ view, setView, hasPriceHistory }) => {
 
       <div className="w-full hidden  lg:flex flex-col gap-2">
         <hr className="border-[var(--variety-bg)] w-full" />
-        <div className="flex justify-start gap-3">
-          <div className="border-[var(--variety-bg)] text-xs md:text-sm cursor-pointer border hover:border-2 transition-all px-3 py-1 rounded-lg">
+        <div className="flex justify-center gap-3">
+          <div className="text-xs md:text-sm cursor-pointer px-3 py-1 rounded-lg bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 tracking-wide">
             v0.5.1
           </div>
-          <div className="border-[var(--variety-bg)] text-xs md:text-sm cursor-pointer border hover:border-2 transition-all px-3 py-1 rounded-lg">
+          <div className="text-xs md:text-sm cursor-pointer px-3 py-1 rounded-lg bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 tracking-wide">
             Alpha
           </div>
-          <div className="border-[var(--variety-bg)] text-xs md:text-sm cursor-pointer border hover:border-2 transition-all px-3 py-1 rounded-lg">
+          <div className="text-xs md:text-sm cursor-pointer px-3 py-1 rounded-lg bg-green-500/10 border border-green-500/30 text-green-400 tracking-wide flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" />
             Live
           </div>
         </div>
@@ -95,10 +95,9 @@ const Sidebar = ({ view, setView, hasPriceHistory }) => {
               {lastFetchedDate}
             </p>
           </div>
-          <div className="flex justify-between mt-2">
-            <p className="text-xs">
-              Indicative prices only. Real prices may vary from place to place
-            </p>
+          <div className="flex flex-col mt-2">
+            <p className="text-xs">Indicative prices only.</p>
+            <p className="text-xs">Real prices may vary from place to place.</p>
           </div>
         </div>
       </div>
