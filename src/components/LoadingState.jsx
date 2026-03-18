@@ -4,7 +4,9 @@ export default function LoadingState() {
   return (
     <div className="flex flex-col justify-center h-[80vh] items-center">
       <PuffLoader color="gray" size={120} />
-      <p className="text-gray-500 animate-pulse">Fetching mandi prices...</p>
+      <p className="text-[var(--text)] animate-pulse">
+        Fetching mandi prices...
+      </p>
     </div>
   );
 }
