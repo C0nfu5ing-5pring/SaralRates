@@ -8,7 +8,6 @@ const Dashboard = ({ cycleTheme }) => {
   const [search, setSearch] = useState("");
   const [view, setView] = useState("all");
   const [commodities, setCommodities] = useState([]);
-  const [processedData, setProcessedData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,39 +22,20 @@ const Dashboard = ({ cycleTheme }) => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    const dataWithTrend = commodities.map((item) => {
-      const today = item.priceHistory[0];
-      const yesterday = item.priceHistory[1];
-
-      let trend = "same";
-      if (today && yesterday) {
-        if (today.modal_price > yesterday.modal_price) {
-          trend = "increase";
-        } else if (today.modal_price < yesterday.modal_price) {
-          trend = "decrease";
-        }
-      }
-
-      return { ...item, trend };
-    });
-    setProcessedData(dataWithTrend);
-  }, [commodities]);
-
   return (
     <div className="flex flex-col bg-[var(--bg)] text-[var(--text)] transition-colors duration-300">
       <Header cycleTheme={cycleTheme} search={search} setSearch={setSearch} />
 
       <div className="w-full px-4 sm:px-6 lg:px-20 lg:flex gap-6">
         <div className="w-full lg:w-[20%] lg:h-[84vh]">
-          <div className="flex justify-center lg:flex-col lg:gap-5">
+          <div className="flex flex-col gap-3 justify-center lg:flex-col lg:gap-5">
             <div className="border-[var(--border)] border-2 w-full rounded-3xl bg-[var(--view-bg)] shadow-md shadow-[var(--shadow)]">
               <Sidebar view={view} setView={setView} />
             </div>
           </div>
         </div>
         <div className="mx-auto lg:w-[80%] border-[var(--border)] h-[68vh] p-3 lg:h-[83vh] bg-[var(--view-bg)] mt-5 lg:mt-0 border-2 rounded-3xl px-5 overflow-hidden shadow-xl shadow-[var(--shadow)]">
-          <Card data={processedData} search={search} view={view} />
+          <Card data={commodities} search={search} view={view} />
         </div>
       </div>
       <Footer />

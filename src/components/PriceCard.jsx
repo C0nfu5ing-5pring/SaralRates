@@ -52,9 +52,9 @@ export default function PriceCard({
     <>
       <div
         ref={cardRef}
-        className="flex bg-[var(--bg)] price-card rounded-xl border-[var(--border)] border-1 p-4 flex-col gap-2 md:gap-3 lg:gap-5 h-[320px] md:h-[340px] lg:h-[360px]"
+        className="flex bg-[var(--bg)] price-card rounded-xl border-[var(--border)] border-1 p-4 flex-col gap-2 md:gap-3 lg:gap-5 h-[330px] md:h-[335px] lg:h-[340px]"
       >
-        <div className="flex justify-between gap-1 ">
+        <div className="flex justify-between gap-1">
           <div className="flex flex-col">
             <h1
               className="text-base md:text-lg lg:text-xl"
@@ -65,7 +65,9 @@ export default function PriceCard({
                 : card.commodity.split("/")[0]}
             </h1>
             <div className="bg-[var(--variety-bg)] w-fit px-2 text-[9px] md:text-xs lg:text-xs text-[var(--variety-text)] rounded-sm">
-              <p>Variety: {card.variety}</p>
+              <p className="line-clamp-1" title={card.variety}>
+                Variety: {card.variety}
+              </p>
             </div>
           </div>
 
@@ -93,7 +95,7 @@ export default function PriceCard({
             MODAL PRICE
           </h1>
           <div className="flex justify-between items-baseline">
-            <div className="flex items-baseline gap-2">
+            <div className="flex flex-col md:flex-row items-baseline md:gap-2">
               <h1 className="text-2xl md:text-3xl lg:text-3xl">
                 {intl.format(card.modal_price).split(".")[0]}
               </h1>
@@ -113,7 +115,7 @@ export default function PriceCard({
                     <stop
                       offset="0%"
                       stopColor="var(--graph)"
-                      stopOpacity={0.4}
+                      stopOpacity={0.8}
                     />
                     <stop
                       offset="100%"
@@ -144,7 +146,7 @@ export default function PriceCard({
           </div>
           <div className="flex gap-1">
             {card.priceHistory
-              .slice(0, 6)
+              .slice(0, 5)
               .reverse()
               .map((item, id) => {
                 return (
@@ -171,10 +173,7 @@ export default function PriceCard({
             <div>
               <h1 className="text-[11px] md:text-xs lg:text-sm">
                 {card.market.split("(")[0]}
-                {card.market.split(")")[1]}
-              </h1>
-              <h1 className="text-[10px] md:text-[11px] lg:text-xs">
-                {card.district}
+                {card.market.split(")")[1]}, {card.district}
               </h1>
             </div>
           </div>
