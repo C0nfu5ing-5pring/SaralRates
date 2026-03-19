@@ -7,7 +7,7 @@ const Footer = () => {
           <div className="w-full flex lg:hidden flex-col gap-2">
             <div className="flex justify-start gap-3">
               <div className="text-xs md:text-sm cursor-pointer px-3 py-1 rounded-lg bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 tracking-wide">
-                v0.5.3
+                v0.6.0
               </div>
               <div className="text-xs md:text-sm cursor-pointer px-3 py-1 rounded-lg bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 tracking-wide">
                 Alpha
