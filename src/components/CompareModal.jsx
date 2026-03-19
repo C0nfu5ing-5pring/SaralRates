@@ -173,7 +173,7 @@ export default function CompareModal({ items, onClose }) {
                         })}
                       </span>
                       <span className={`text-[10px] text-[var(--logo)]`}>
-                        ₹{(item.modal_price / 100).toFixed(1)}k
+                        ₹{(item.modal_price / 1000).toFixed(1)}k
                       </span>
                     </div>
                   ))}
