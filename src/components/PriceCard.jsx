@@ -1,6 +1,6 @@
 import { MapPin, Bookmark, Share } from "lucide-react";
 import PriceWithTooltip from "./PriceWithTooltip";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import CustomToast from "./CustomToast";
 import { bookmarkSound, unBookmarkSound } from "./Sound";
 import { toast } from "react-toastify";
@@ -61,8 +61,21 @@ export default function PriceCard({
   };
 
   const handleTouchEnd = () => {
-    clearTimeout();
+    clearTimeout(longPressTimer.current);
   };
+
+  const chartContainerRef = useRef(null);
+  const [chartSize, setChartSize] = useState({ width: 0, height: 0 });
+
+  useEffect(() => {
+    if (!chartContainerRef.current) return;
+    const observer = new ResizeObserver((entries) => {
+      const { width, height } = entries[0].contentRect;
+      setChartSize({ width, height });
+    });
+    observer.observe(chartContainerRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>
@@ -137,9 +150,13 @@ export default function PriceCard({
         </div>
 
         <div className="flex flex-col">
-          <div className="h-[70px] ">
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={formattedData}>
+          <div className="h-[70px]" ref={chartContainerRef}>
+            {chartSize.width > 0 && chartSize.height > 0 && (
+              <AreaChart
+                width={chartSize.width}
+                height={chartSize.height}
+                data={formattedData}
+              >
                 <defs>
                   <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
                     <stop
@@ -160,10 +177,7 @@ export default function PriceCard({
                   stroke="var(--graph)"
                   dot={{}}
                   fill="url(#colorPrice)"
-                  activeDot={{
-                    r: 5,
-                    fill: "var(--graph-dot)",
-                  }}
+                  activeDot={{ r: 5, fill: "var(--graph-dot)" }}
                 />
                 <XAxis dataKey="date" hide stroke="var(--axis)" />
                 <YAxis dataKey="modal_price" hide stroke="var(--axis)" />
@@ -172,8 +186,9 @@ export default function PriceCard({
                   wrapperStyle={{ pointerEvents: "auto" }}
                 />
               </AreaChart>
-            </ResponsiveContainer>
+            )}
           </div>
+
           <div className="flex justify-center gap-1">
             {card.priceHistory
               .slice(0, 5)
