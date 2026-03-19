@@ -4,7 +4,13 @@ import html2canvas from "html2canvas";
 import { toast } from "react-toastify";
 import CustomToast from "./CustomToast";
 
-export default function CardGrid({ list, favourites, toggleFavourite }) {
+export default function CardGrid({
+  list,
+  favourites,
+  toggleFavourite,
+  compareList,
+  toggleCompare,
+}) {
   const shareCardAsImage = async (element) => {
     if (!element) return;
 
@@ -82,6 +88,9 @@ export default function CardGrid({ list, favourites, toggleFavourite }) {
         const fav = favourites.some(
           (f) => f.key === `${card.commodity}|${card.market}|${card.district}`,
         );
+        const isComparing = compareList?.some(
+          (c) => c.commodity === card.commodity && c.market === card.market,
+        );
 
         return (
           <PriceCard
@@ -90,6 +99,8 @@ export default function CardGrid({ list, favourites, toggleFavourite }) {
             toggleFavourite={toggleFavourite}
             onShare={shareCardAsImage}
             isFavourite={fav}
+            isComparing={isComparing}
+            onCompare={() => toggleCompare(card)}
           />
         );
       }}

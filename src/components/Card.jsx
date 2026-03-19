@@ -2,11 +2,15 @@ import CardGrid from "./CardGrid";
 import LoadingState from "./LoadingState";
 import EmptyState from "./EmptyState";
 import { useEffect, useState } from "react";
+import CompareBar from "./CompareBar";
+import CompareModal from "./CompareModal";
 
 export default function Card({ search, view, data }) {
   const [finalList, setFinalList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [favourites, setFavourites] = useState([]);
+  const [compareList, setCompareList] = useState([]);
+  const [showCompareModal, setShowCompareModal] = useState(false);
 
   useEffect(() => {
     const savedFavourites = JSON.parse(
@@ -116,12 +120,44 @@ export default function Card({ search, view, data }) {
     return <EmptyState view={view} />;
   }
 
+  const toggleCompare = (item) => {
+    setCompareList((prev) => {
+      const exists = prev.find(
+        (c) => c.commodity === item.commodity && c.market === item.market,
+      );
+      if (exists) {
+        return prev.filter((c) => c !== exists);
+      }
+      if (prev.length === 1) {
+        setShowCompareModal(true);
+        return [...prev, item];
+      }
+      return [item];
+    });
+  };
+
   return (
-    <CardGrid
-      list={finalList}
-      favourites={favourites}
-      toggleFavourite={toggleFavourite}
-      isFavourite={isFavourite}
-    />
+    <>
+      {showCompareModal && compareList.length === 2 && (
+        <CompareModal
+          items={compareList}
+          onClose={() => {
+            setShowCompareModal(false);
+            setCompareList([]);
+          }}
+        />
+      )}
+      {compareList.length === 1 && (
+        <CompareBar item={compareList[0]} onCancel={() => setCompareList([])} />
+      )}
+      <CardGrid
+        list={finalList}
+        favourites={favourites}
+        toggleFavourite={toggleFavourite}
+        isFavourite={isFavourite}
+        compareList={compareList}
+        toggleCompare={toggleCompare}
+      />
+    </>
   );
 }

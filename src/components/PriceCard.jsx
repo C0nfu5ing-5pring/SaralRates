@@ -24,6 +24,8 @@ export default function PriceCard({
   toggleFavourite,
   onShare,
   isFavourite,
+  isComparing,
+  onCompare,
 }) {
   const handleFavourite = (e) => {
     e.stopPropagation();
@@ -48,11 +50,32 @@ export default function PriceCard({
 
   const cardRef = useRef(null);
 
+  const longPressTimer = useRef(null);
+  const handleContextMenu = (e) => {
+    e.preventDefault();
+    onCompare();
+  };
+
+  const handleTouchStart = () => {
+    longPressTimer.current = setTimeout(() => onCompare(), 200);
+  };
+
+  const handleTouchEnd = () => {
+    clearTimeout();
+  };
+
   return (
     <>
       <div
         ref={cardRef}
-        className="flex bg-[var(--bg)] price-card rounded-xl border-[var(--border)] border-1 p-4 flex-col gap-2 md:gap-3 lg:gap-5 h-[330px] md:h-[335px] lg:h-[340px]"
+        onContextMenu={handleContextMenu}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        className={`flex bg-[var(--bg)] cursor-pointer price-card rounded-xl border-[var(--border)] border-1 p-4 flex-col gap-2 md:gap-3 lg:gap-5 h-[330px] md:h-[335px] lg:h-[340px] ${
+          isComparing
+            ? "border-yellow-400/60 border-2 ring-2 ring-yellow-400/20"
+            : "border-[var(--border)]"
+        }`}
       >
         <div className="flex justify-between gap-1">
           <div className="flex flex-col">
