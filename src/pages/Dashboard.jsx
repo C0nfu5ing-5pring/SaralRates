@@ -8,6 +8,7 @@ const Dashboard = ({ cycleTheme }) => {
   const [search, setSearch] = useState("");
   const [view, setView] = useState("all");
   const [commodities, setCommodities] = useState([]);
+  const [favourites, setFavourites] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,12 +31,18 @@ const Dashboard = ({ cycleTheme }) => {
         <div className="w-full lg:w-[20%] lg:h-[84vh]">
           <div className="flex flex-col gap-3 justify-center lg:flex-col lg:gap-5">
             <div className="border-[var(--border)] border-2 w-full rounded-3xl bg-[var(--view-bg)] shadow-md shadow-[var(--shadow)]">
-              <Sidebar view={view} setView={setView} />
+              <Sidebar view={view} setView={setView} favourites={favourites} />
             </div>
           </div>
         </div>
         <div className="mx-auto lg:w-[80%] border-[var(--border)] h-[68vh] p-3 lg:h-[83vh] bg-[var(--view-bg)] mt-5 lg:mt-0 border-2 rounded-3xl px-5 overflow-hidden shadow-xl shadow-[var(--shadow)]">
-          <Card data={commodities} search={search} view={view} />
+          <Card
+            data={commodities}
+            search={search}
+            view={view}
+            favourites={favourites}
+            setFavourites={setFavourites}
+          />
         </div>
       </div>
       <Footer />

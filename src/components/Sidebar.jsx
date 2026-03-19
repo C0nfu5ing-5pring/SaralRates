@@ -1,4 +1,6 @@
-const Sidebar = ({ view, setView, hasPriceHistory }) => {
+import { useEffect } from "react";
+
+const Sidebar = ({ view, setView, hasPriceHistory, favourites }) => {
   const baseBtnClasses = `
     border border-[var(--darker-border)]
     active:scale-95 hover:shadow-md
@@ -9,6 +11,18 @@ const Sidebar = ({ view, setView, hasPriceHistory }) => {
     py-2 px-3 lg:py-3 lg:px-6
     rounded-2xl
     text-xs md:text-base lg:text-xl text-[var(--text)]
+  `;
+
+  const baseCardClasses = `
+    border border-[var(--darker-border)] hover:shadow-md
+    shadow-[var(--shadow)]
+    transition-all cursor-pointer
+    whitespace-nowrap lg:w-full
+    py-2 px-3 lg:py-3 lg:px-6
+    rounded-2xl
+    text-xs md:text-base lg:text-xl text-[var(--text)]
+    flex justify-between items-center
+    hidden lg:flex
   `;
 
   const activeClasses =
@@ -66,9 +80,29 @@ const Sidebar = ({ view, setView, hasPriceHistory }) => {
         >
           Decrease
         </button>
+
+        <hr className="border-[var(--variety-bg)] w-full hidden lg:block" />
+        <p className="hidden lg:block">LATEST FAVOURITES</p>
+        {[...favourites]
+          .reverse()
+          .slice(0, 3)
+          .map((item, id) => {
+            return (
+              <div key={id} className={`${baseCardClasses}`}>
+                <div className="flex flex-col">
+                  <h1>{item?.item?.commodity}</h1>
+                  <p className="text-sm">{item?.item?.district}</p>
+                </div>
+
+                <p className="text-xl text-[var(--icon)]">
+                  {(item?.item?.modal_price / 1000).toFixed(1)}k
+                </p>
+              </div>
+            );
+          })}
       </div>
 
-      <div className="w-full hidden  lg:flex flex-col gap-2">
+      <div className="w-full hidden lg:flex flex-col gap-2">
         <hr className="border-[var(--variety-bg)] w-full" />
         <div className="flex justify-center gap-3">
           <div className="text-xs md:text-sm cursor-pointer px-3 py-1 rounded-lg bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 tracking-wide">

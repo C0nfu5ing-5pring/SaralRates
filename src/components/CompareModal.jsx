@@ -102,7 +102,7 @@ export default function CompareModal({ items, onClose }) {
               <XAxis
                 dataKey="date"
                 tick={{ fontSize: 9 }}
-                stroke="var(--axis)"
+                stroke="var(--icon)"
               />
               <YAxis hide />
               <Tooltip

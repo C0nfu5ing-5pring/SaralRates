@@ -5,10 +5,15 @@ import { useEffect, useState } from "react";
 import CompareBar from "./CompareBar";
 import CompareModal from "./CompareModal";
 
-export default function Card({ search, view, data }) {
+export default function Card({
+  search,
+  view,
+  data,
+  favourites,
+  setFavourites,
+}) {
   const [finalList, setFinalList] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [favourites, setFavourites] = useState([]);
   const [compareList, setCompareList] = useState([]);
   const [showCompareModal, setShowCompareModal] = useState(false);
 
