@@ -81,25 +81,29 @@ const Sidebar = ({ view, setView, hasPriceHistory, favourites }) => {
           Decrease
         </button>
 
-        <hr className="border-[var(--variety-bg)] w-full hidden lg:block" />
-        <p className="hidden lg:block">LATEST FAVOURITES</p>
-        {[...favourites]
-          .reverse()
-          .slice(0, 3)
-          .map((item, id) => {
-            return (
-              <div key={id} className={`${baseCardClasses}`}>
-                <div className="flex flex-col">
-                  <h1>{item?.item?.commodity}</h1>
-                  <p className="text-sm">{item?.item?.district}</p>
-                </div>
+        {favourites.length > 0 && (
+          <>
+            <hr className="border-[var(--variety-bg)] w-full hidden lg:block" />
+            <p className="hidden lg:block">LATEST FAVOURITES</p>
+            {[...favourites]
+              .reverse()
+              .slice(0, 3)
+              .map((item, id) => {
+                return (
+                  <div key={id} className={`${baseCardClasses}`}>
+                    <div className="flex flex-col">
+                      <h1>{item?.item?.commodity}</h1>
+                      <p className="text-sm">{item?.item?.district}</p>
+                    </div>
 
-                <p className="text-xl text-[var(--icon)]">
-                  {(item?.item?.modal_price / 1000).toFixed(1)}k
-                </p>
-              </div>
-            );
-          })}
+                    <p className="text-xl text-[var(--icon)]">
+                      {(item?.item?.modal_price / 1000).toFixed(1)}k
+                    </p>
+                  </div>
+                );
+              })}
+          </>
+        )}
       </div>
 
       <div className="w-full hidden lg:flex flex-col gap-2">
