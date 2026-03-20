@@ -106,7 +106,7 @@ const Sidebar = ({ view, setView, hasPriceHistory, favourites }) => {
         <hr className="border-[var(--variety-bg)] w-full" />
         <div className="flex justify-center gap-3">
           <div className="text-xs md:text-sm cursor-pointer px-3 py-1 rounded-lg bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 tracking-wide">
-            v0.6.1
+            v0.6.2
           </div>
           <div className="text-xs md:text-sm cursor-pointer px-3 py-1 rounded-lg bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 tracking-wide">
             Alpha
@@ -119,9 +119,13 @@ const Sidebar = ({ view, setView, hasPriceHistory, favourites }) => {
         <div className="flex flex-col">
           <div className="flex justify-between">
             <h1 className="text-sm md:text-base">Source</h1>
-            <p className="text-[var(--variety-bg)]  text-xs md:text-base">
+            <a
+              href="https://www.data.gov.in/resource/current-daily-price-various-commodities-various-markets-mandi"
+              target="_blank"
+              className="text-[var(--variety-bg)]  text-xs md:text-base"
+            >
               data.gov.in
-            </p>
+            </a>
           </div>
           <div className="flex justify-between">
             <h1 className="text-sm md:text-base">Updated</h1>
