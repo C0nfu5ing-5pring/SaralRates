@@ -4,7 +4,7 @@ import { fetchAndStoreDataForCron } from "../controllers/commodities.controller.
 let pollInterval = null;
 let isRunning = false;
 
-cron.schedule("45 14 * * *", () => {
+cron.schedule("30 9 * * *", () => {
   console.log("Cron triggered at:", new Date().toLocaleTimeString());
 
   if (pollInterval) return;
@@ -35,6 +35,6 @@ cron.schedule("45 14 * * *", () => {
         isRunning = false;
       }
     },
-    1 * 60 * 1000,
+    5 * 60 * 1000,
   );
 });

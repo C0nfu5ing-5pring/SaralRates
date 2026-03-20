@@ -1,7 +1,7 @@
 import app from "./app.js";
-import connectToDB from "./src/db/db.js";
-import commodityRoutes from "./src/routes/commodities.routes.js";
-import "./src/cron/updatePrices.cron.js";
+import connectToDB from "./db/db.js";
+import commodityRoutes from "./routes/commodities.routes.js";
+import "./cron/updatePrices.cron.js";
 
 const PORT = 5050;
 await connectToDB();

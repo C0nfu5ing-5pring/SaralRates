@@ -14,7 +14,9 @@ const Dashboard = ({ cycleTheme }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch("http://localhost:5050/api/commodities");
+        const res = await fetch(
+          `${import.meta.env.VITE_API_URL}/api/commodities`,
+        );
         const json = await res.json();
         if (json.success) {
           setCommodities(json.data);

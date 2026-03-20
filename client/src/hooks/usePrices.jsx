@@ -2,6 +2,8 @@ import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { toastWithSound } from "../utils/toast.jsx";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 export function usePrices(search, view, hasPriceHistory) {
   const [cardArray, setCardArray] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -29,11 +31,11 @@ export function usePrices(search, view, hasPriceHistory) {
 
     try {
       const todayRes = await axios.get(
-        `http://localhost:5050/api/commodities?date=${todayStr}`,
+        `${API_URL}/api/commodities?date=${todayStr}`,
       );
 
       const prevRes = await axios.get(
-        `http://localhost:5050/api/commodities?date=${yesterdayStr}`,
+        `${API_URL}/api/commodities?date=${yesterdayStr}`,
       );
 
       const todayRecords = todayRes.data?.data || [];
@@ -81,28 +83,6 @@ export function usePrices(search, view, hasPriceHistory) {
       setCardArray(mergedRecords);
       localStorage.setItem("cachedRecords", JSON.stringify(mergedRecords));
       localStorage.setItem("lastFetchedDate", todayStr);
-
-      // const apiMap = new Map();
-
-      // prevRecords.forEach((record) => {
-      //   apiMap.set(getKey(record), record);
-      // });
-
-      // todayRecords.forEach((record) => {
-      //   apiMap.set(getKey(record), record);
-      // });
-
-      // const mergedRecords = Array.from(apiMap.values());
-
-      // mergedRecords.sort(
-      //   (a, b) => new Date(b.arrival_date) - new Date(a.arrival_date),
-      // );
-
-      // setCardArray(mergedRecords);
-      // localStorage.setItem("cachedRecords", JSON.stringify(mergedRecords));
-      // localStorage.setItem("lastFetchedDate", todayStr);
-
-      // return true;
     } catch (err) {
       console.error("API fetch error:", err);
       setCardArray(cached);
@@ -126,25 +106,16 @@ export function usePrices(search, view, hasPriceHistory) {
     load();
   }, []);
 
-  const lastPriceMap = useMemo(() => {
-    const rawData = JSON.parse(localStorage.getItem("lastPrices") || "[]");
-    return new Map(
-      rawData.map((product) => [
-        `${product.commodity?.trim().toLowerCase()}|${product.market?.trim().toLowerCase()}|${product.district?.trim().toLowerCase()}`,
-        product.modal_price,
-      ]),
-    );
-  }, []);
-
   const filtered = useMemo(() => {
     const q = search.toLowerCase();
 
-    return cardArray.filter((c) => {
-      c.commodity?.toLowerCase().includes(q) ||
+    return cardArray.filter(
+      (c) =>
+        c.commodity?.toLowerCase().includes(q) ||
         c.market?.toLowerCase().includes(q) ||
         c.district?.toLowerCase().includes(q) ||
-        c.state?.toLowerCase().includes(q);
-    });
+        c.state?.toLowerCase().includes(q),
+    );
   }, [cardArray, search]);
 
   const isFavourite = (item) => {
