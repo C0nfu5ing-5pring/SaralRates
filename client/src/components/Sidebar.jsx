@@ -110,10 +110,10 @@ const Sidebar = ({ view, setView, hasPriceHistory, favourites }) => {
         <hr className="border-[var(--variety-bg)] w-full" />
         <div className="flex justify-center gap-3">
           <div className="text-xs md:text-sm cursor-pointer px-3 py-1 rounded-lg bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 tracking-wide">
-            v0.6.2
+            v0.7.0
           </div>
           <div className="text-xs md:text-sm cursor-pointer px-3 py-1 rounded-lg bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 tracking-wide">
-            Alpha
+            Beta
           </div>
           <div className="text-xs md:text-sm cursor-pointer px-3 py-1 rounded-lg bg-green-500/10 border border-green-500/30 text-green-400 tracking-wide flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" />
