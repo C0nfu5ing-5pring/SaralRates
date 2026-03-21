@@ -62,7 +62,7 @@ export default function Card({
   };
 
   useEffect(() => {
-    if (!data) {
+    if (!data || data.length === 0) {
       return;
     }
 
