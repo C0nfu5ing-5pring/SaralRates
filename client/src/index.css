@@ -22,6 +22,8 @@
 
 * {
   font-family: nature-med;
+  scrollbar-width: thin;
+  scrollbar-color: var(--variety-bg) transparent;
 }
 
 .logo {
