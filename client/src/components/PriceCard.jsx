@@ -4,14 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import CustomToast from "./CustomToast";
 import { bookmarkSound, unBookmarkSound } from "./Sound";
 import { toast } from "react-toastify";
-import {
-  Area,
-  AreaChart,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { Area, AreaChart, Tooltip, XAxis, YAxis } from "recharts";
 import CustomTooltip from "./CustomTooltip";
 
 const intl = new Intl.NumberFormat("en-IN", {
@@ -57,7 +50,11 @@ export default function PriceCard({
   };
 
   const handleTouchStart = () => {
-    longPressTimer.current = setTimeout(() => onCompare(), 200);
+    longPressTimer.current = setTimeout(() => onCompare(), 100);
+  };
+
+  const handleTouchMove = () => {
+    clearTimeout(longPressTimer.current);
   };
 
   const handleTouchEnd = () => {
@@ -84,6 +81,7 @@ export default function PriceCard({
         onContextMenu={handleContextMenu}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
+        onTouchMove={handleTouchMove}
         className={`flex bg-[var(--bg)] cursor-pointer price-card rounded-xl border-[var(--border)] border-1 p-4 flex-col gap-2 md:gap-3 lg:gap-5 h-[330px] md:h-[335px] lg:h-[340px] ${
           isComparing
             ? "border-yellow-400/60 border-2 ring-2 ring-yellow-400/20"
