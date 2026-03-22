@@ -7,6 +7,9 @@ export default function LoadingState() {
       <p className="text-[var(--text)] animate-pulse">
         Fetching mandi prices...
       </p>
+      <p className="animate-pulse text-[var(--text)]">
+        This might take a while
+      </p>
     </div>
   );
 }
