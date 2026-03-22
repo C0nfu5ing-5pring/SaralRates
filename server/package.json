@@ -1,7 +1,7 @@
 {
   "name": "saralrates-server",
   "private": true,
-  "version": "1.0.0",
+  "version": "0.7.0-beta",
   "type": "module",
   "scripts": {
     "start": "node server.js",
