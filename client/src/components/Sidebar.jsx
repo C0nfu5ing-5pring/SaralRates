@@ -81,7 +81,7 @@ const Sidebar = ({ view, setView, hasPriceHistory, favourites }) => {
         {favourites.length > 0 && (
           <>
             <hr className="border-[var(--variety-bg)] w-full hidden lg:block" />
-            <p className="hidden lg:block">LATEST FAVOURITES</p>
+            <p className="hidden lg:block">LATEST BOOKMARKS</p>
             {[...favourites]
               .reverse()
               .slice(0, 3)

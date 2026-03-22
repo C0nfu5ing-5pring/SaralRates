@@ -19,7 +19,7 @@ const LaunchModal = () => {
     {
       title: "Bookmark commodities",
       img: bookmark,
-      content: "Bookmark the commodities that are most important to you.",
+      content: "Bookmark the commodities that are most important to you",
     },
     {
       title: "View your bookmarks",
@@ -42,19 +42,19 @@ const LaunchModal = () => {
       title: "See increase in prices",
       img: increase,
       content:
-        "Use the increase section to see all the commodities whose price has increase as compared to their previous price",
+        "Click on the increase section to see all the commodities whose price has increased as compared to their previous price",
     },
     {
       title: "See decrease in prices",
       img: decrease,
       content:
-        "Use the decrease section to see all the commodities whose price has decreased as compared to their previous price.",
+        "Click on the decrease section to see all the commodities whose price has decreased as compared to their previous price.",
     },
     {
       title: "Compare two commodities",
       img: compareTwo,
       content:
-        "On smaller devices to select a card, tap and hold to compare any two commodities of your choice. On devices with larger screens, right click on any two cards to select them and compare them. Now that you know everything about this website, you can get started",
+        "Right click on any two commodities on large screens to compare. On touch devices, hold the card and select any two cards to compare.",
     },
   ];
 
