@@ -8,7 +8,10 @@ import LaunchModal from "../components/LaunchModal";
 const Dashboard = ({ cycleTheme }) => {
   const [search, setSearch] = useState("");
   const [view, setView] = useState("all");
-  const [commodities, setCommodities] = useState([]);
+  const [commodities, setCommodities] = useState(() => {
+    const cached = localStorage.getItem("cachedRecords");
+    return cached ? JSON.parse(cached) : [];
+  });
   const [favourites, setFavourites] = useState([]);
 
   useEffect(() => {
@@ -20,6 +23,7 @@ const Dashboard = ({ cycleTheme }) => {
         const json = await res.json();
         if (json.success) {
           setCommodities(json.data);
+          localStorage.setItem("cachedRecords", JSON.stringify(json.data));
           localStorage.setItem(
             "lastFetchedDate",
             new Date().toLocaleDateString("en-IN"),
