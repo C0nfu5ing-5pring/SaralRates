@@ -117,7 +117,7 @@ export default function Card({
     return favourites.some((f) => f.key === key);
   };
 
-  if (loading && !data?.length) {
+  if (loading) {
     return <LoadingState />;
   }
 
