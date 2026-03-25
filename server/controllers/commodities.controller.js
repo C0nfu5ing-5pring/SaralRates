@@ -62,6 +62,7 @@ const buildBulkOps = (records) =>
           commodity: item.commodity,
           market: item.market,
           district: item.district,
+          "latest.date": { $ne: arrivalDate },
         },
         update: {
           $set: {
@@ -136,7 +137,7 @@ export const getCommodities = async (req, res) => {
     const result = commodities.map((item) => {
       let prev = null;
 
-      const priceHistory = item.history.map((h) => {
+      const priceHistory = (item.history || []).map((h) => {
         let trend = "same";
 
         if (prev !== null) {
@@ -155,10 +156,10 @@ export const getCommodities = async (req, res) => {
         state: item.state,
         variety: item.variety,
         grade: item.grade,
-        arrival_date: item.latest.date,
-        modal_price: item.latest.modal_price,
-        min_price: item.latest.min_price,
-        max_price: item.latest.max_price,
+        arrival_date: item.latest?.date || null,
+        modal_price: item.latest?.modal_price || 0,
+        min_price: item.latest?.min_price || 0,
+        max_price: item.latest?.max_price || 0,
         priceHistory,
       };
     });
