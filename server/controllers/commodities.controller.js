@@ -49,22 +49,33 @@ const buildBulkOps = (records) =>
     const [day, month, year] = item.arrival_date.split("/");
     const arrivalDate = new Date(Date.UTC(year, month - 1, day));
 
+    const historyEntry = {
+      date: arrivalDate,
+      modal_price: Number(item.modal_price) || 0,
+      min_price: Number(item.min_price) || 0,
+      max_price: Number(item.max_price) || 0,
+    };
+
     return {
       updateOne: {
         filter: {
-          state: item.state,
-          district: item.district,
-          market: item.market,
           commodity: item.commodity,
-          variety: item.variety,
-          arrival_date: arrivalDate,
+          market: item.market,
+          district: item.district,
         },
         update: {
           $set: {
+            state: item.state,
+            variety: item.variety,
             grade: item.grade || "",
-            min_price: Number(item.min_price) || 0,
-            max_price: Number(item.max_price) || 0,
-            modal_price: Number(item.modal_price) || 0,
+            latest: historyEntry,
+          },
+          $push: {
+            history: {
+              $each: [historyEntry],
+              $position: 0,
+              $slice: 5,
+            },
           },
         },
         upsert: true,
@@ -117,80 +128,45 @@ export const fetchAndStoreDataForCron = async () => {
 
 export const getCommodities = async (req, res) => {
   try {
-    const days = 5;
+    const commodities = await Commodity.find()
+      .sort({ "latest.date": -1 })
+      .limit(500)
+      .lean();
 
-    const cutoff = new Date();
-    cutoff.setDate(cutoff.getDate() - days);
-    cutoff.setUTCHours(0, 0, 0, 0);
-
-    const commodities = await Commodity.aggregate([
-      {
-        $match: { arrival_date: { $gte: cutoff } },
-      },
-      {
-        $sort: { arrival_date: -1 },
-      },
-      {
-        $group: {
-          _id: {
-            commodity: "$commodity",
-            market: "$market",
-            district: "$district",
-          },
-          latestDoc: { $first: "$$ROOT" },
-          priceHistory: {
-            $push: {
-              date: "$arrival_date",
-              modal_price: "$modal_price",
-              min_price: "$min_price",
-              max_price: "$max_price",
-            },
-          },
-        },
-      },
-      {
-        $project: {
-          _id: 0,
-          commodity: "$_id.commodity",
-          market: "$_id.market",
-          district: "$_id.district",
-          state: "$latestDoc.state",
-          variety: "$latestDoc.variety",
-          grade: "$latestDoc.grade",
-          arrival_date: "$latestDoc.arrival_date",
-          modal_price: "$latestDoc.modal_price",
-          min_price: "$latestDoc.min_price",
-          max_price: "$latestDoc.max_price",
-          priceHistory: {
-            $slice: ["$priceHistory", days],
-          },
-        },
-      },
-      { $sort: { arrival_date: -1 } },
-    ]).allowDiskUse(true);
-
-    const commoditiesWithTrend = commodities.map((commodity) => {
+    const result = commodities.map((item) => {
       let prev = null;
 
-      const priceHistoryWithTrend = commodity.priceHistory.map((item) => {
+      const priceHistory = item.history.map((h) => {
         let trend = "same";
 
         if (prev !== null) {
-          if (item.modal_price > prev) trend = "up";
-          else if (item.modal_price < prev) trend = "down";
+          if (h.modal_price > prev) trend = "up";
+          else if (h.modal_price < prev) trend = "down";
         }
 
-        prev = item.modal_price;
-        return { ...item, trend };
+        prev = h.modal_price;
+        return { ...h, trend };
       });
 
-      return { ...commodity, priceHistory: priceHistoryWithTrend };
+      return {
+        commodity: item.commodity,
+        market: item.market,
+        district: item.district,
+        state: item.state,
+        variety: item.variety,
+        grade: item.grade,
+        arrival_date: item.latest.date,
+        modal_price: item.latest.modal_price,
+        min_price: item.latest.min_price,
+        max_price: item.latest.max_price,
+        priceHistory,
+      };
     });
 
     res.status(200).json({
       success: true,
-      count: commoditiesWithTrend.length,
-      data: commoditiesWithTrend,
+      count: result.length,
+      data: result,
     });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
