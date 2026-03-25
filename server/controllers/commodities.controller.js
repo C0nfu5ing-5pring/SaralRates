@@ -49,34 +49,22 @@ const buildBulkOps = (records) =>
     const [day, month, year] = item.arrival_date.split("/");
     const arrivalDate = new Date(Date.UTC(year, month - 1, day));
 
-    const historyEntry = {
-      date: arrivalDate,
-      modal_price: Number(item.modal_price) || 0,
-      min_price: Number(item.min_price) || 0,
-      max_price: Number(item.max_price) || 0,
-    };
-
     return {
       updateOne: {
         filter: {
-          commodity: item.commodity,
-          market: item.market,
+          state: item.state,
           district: item.district,
-          "latest.date": { $ne: arrivalDate },
+          market: item.market,
+          commodity: item.commodity,
+          variety: item.variety,
+          arrival_date: arrivalDate,
         },
         update: {
           $set: {
-            state: item.state,
-            variety: item.variety,
             grade: item.grade || "",
-            latest: historyEntry,
-          },
-          $push: {
-            history: {
-              $each: [historyEntry],
-              $position: 0,
-              $slice: 5,
-            },
+            min_price: Number(item.min_price) || 0,
+            max_price: Number(item.max_price) || 0,
+            modal_price: Number(item.modal_price) || 0,
           },
         },
         upsert: true,
@@ -105,7 +93,7 @@ export const fetchAndStoreData = async (req, res) => {
     if (count === 0) {
       return res.status(200).json({
         success: true,
-        message: "Mandi data not posted by the government yet",
+        message: "Mandi data not posted yet",
       });
     }
 
@@ -129,45 +117,72 @@ export const fetchAndStoreDataForCron = async () => {
 
 export const getCommodities = async (req, res) => {
   try {
-    const commodities = await Commodity.find()
-      .sort({ "latest.date": -1 })
-      .limit(500)
+    const days = 5;
+
+    const cutoff = new Date();
+    cutoff.setDate(cutoff.getDate() - days);
+
+    const commodities = await Commodity.find({
+      arrival_date: { $gte: cutoff },
+    })
+      .sort({ arrival_date: -1 })
       .lean();
 
-    const result = commodities.map((item) => {
+    const map = new Map();
+
+    for (const item of commodities) {
+      const key = `${item.commodity}-${item.market}-${item.district}`;
+
+      if (!map.has(key)) {
+        map.set(key, {
+          commodity: item.commodity,
+          market: item.market,
+          district: item.district,
+          state: item.state,
+          variety: item.variety,
+          grade: item.grade,
+          arrival_date: item.arrival_date,
+          modal_price: item.modal_price,
+          min_price: item.min_price,
+          max_price: item.max_price,
+          priceHistory: [],
+        });
+      }
+
+      const entry = map.get(key);
+
+      if (entry.priceHistory.length < days) {
+        entry.priceHistory.push({
+          date: item.arrival_date,
+          modal_price: item.modal_price,
+          min_price: item.min_price,
+          max_price: item.max_price,
+        });
+      }
+    }
+
+    const result = Array.from(map.values()).map((commodity) => {
       let prev = null;
 
-      const priceHistory = (item.history || []).map((h) => {
+      const priceHistory = commodity.priceHistory.map((item) => {
         let trend = "same";
 
         if (prev !== null) {
-          if (h.modal_price > prev) trend = "up";
-          else if (h.modal_price < prev) trend = "down";
+          if (item.modal_price > prev) trend = "up";
+          else if (item.modal_price < prev) trend = "down";
         }
 
-        prev = h.modal_price;
-        return { ...h, trend };
+        prev = item.modal_price;
+        return { ...item, trend };
       });
 
-      return {
-        commodity: item.commodity,
-        market: item.market,
-        district: item.district,
-        state: item.state,
-        variety: item.variety,
-        grade: item.grade,
-        arrival_date: item.latest?.date || null,
-        modal_price: item.latest?.modal_price || 0,
-        min_price: item.latest?.min_price || 0,
-        max_price: item.latest?.max_price || 0,
-        priceHistory,
-      };
+      return { ...commodity, priceHistory };
     });
 
     res.status(200).json({
       success: true,
       count: result.length,
-      data: result,
+      data: result.slice(0, 500),
     });
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
