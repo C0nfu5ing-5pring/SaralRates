@@ -83,9 +83,6 @@ const fetchAndStore = async () => {
   const bulkOps = buildBulkOps(todayRecords);
   await Commodity.bulkWrite(bulkOps);
 
-  console.log("Total API records:", records.length);
-  console.log("Today's records:", todayRecords.length);
-
   return todayRecords.length;
 };
 
@@ -105,7 +102,6 @@ export const fetchAndStoreData = async (req, res) => {
       message: `Updated ${count} records`,
     });
   } catch (err) {
-    console.error("Error fetching mandi data:", err.message);
     res.status(500).json({ success: false, message: err.message });
   }
 };
@@ -113,10 +109,8 @@ export const fetchAndStoreData = async (req, res) => {
 export const fetchAndStoreDataForCron = async () => {
   try {
     const count = await fetchAndStore();
-    if (count > 0) console.log(`Cron updated ${count} records`);
     return count > 0;
-  } catch (err) {
-    console.error("Cron error:", err.message);
+  } catch {
     return false;
   }
 };
@@ -127,10 +121,14 @@ export const getCommodities = async (req, res) => {
 
     const cutoff = new Date();
     cutoff.setDate(cutoff.getDate() - days);
+    cutoff.setUTCHours(0, 0, 0, 0);
 
     const commodities = await Commodity.aggregate([
       {
         $match: { arrival_date: { $gte: cutoff } },
+      },
+      {
+        $sort: { arrival_date: -1 },
       },
       {
         $group: {
@@ -139,13 +137,7 @@ export const getCommodities = async (req, res) => {
             market: "$market",
             district: "$district",
           },
-          latestDoc: {
-            $top: {
-              sortBy: { arrival_date: -1 },
-              output: "$$ROOT",
-            },
-          },
-
+          latestDoc: { $first: "$$ROOT" },
           priceHistory: {
             $push: {
               date: "$arrival_date",
@@ -170,20 +162,12 @@ export const getCommodities = async (req, res) => {
           min_price: "$latestDoc.min_price",
           max_price: "$latestDoc.max_price",
           priceHistory: {
-            $slice: [
-              {
-                $sortArray: {
-                  input: "$priceHistory",
-                  sortBy: { date: -1 },
-                },
-              },
-              days,
-            ],
+            $slice: ["$priceHistory", days],
           },
         },
       },
       { $sort: { arrival_date: -1 } },
-    ]);
+    ]).allowDiskUse(true);
 
     const commoditiesWithTrend = commodities.map((commodity) => {
       let prev = null;
@@ -209,7 +193,6 @@ export const getCommodities = async (req, res) => {
       data: commoditiesWithTrend,
     });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ success: false, message: error.message });
   }
 };
