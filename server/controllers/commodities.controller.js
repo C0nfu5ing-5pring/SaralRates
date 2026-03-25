@@ -106,10 +106,7 @@ export const fetchAndStoreData = async (req, res) => {
     });
   } catch (err) {
     console.error("Error fetching mandi data:", err.message);
-    res.status(500).json({
-      success: false,
-      message: err.message,
-    });
+    res.status(500).json({ success: false, message: err.message });
   }
 };
 
@@ -136,19 +133,19 @@ export const getCommodities = async (req, res) => {
         $match: { arrival_date: { $gte: cutoff } },
       },
       {
-        $sort: { arrival_date: -1 },
-      },
-      {
         $group: {
           _id: {
             commodity: "$commodity",
             market: "$market",
             district: "$district",
           },
-          state: { $first: "$state" },
-          variety: { $first: "$variety" },
-          grade: { $first: "$grade" },
-          latest: { $first: "$$ROOT" },
+          latestDoc: {
+            $top: {
+              sortBy: { arrival_date: -1 },
+              output: "$$ROOT",
+            },
+          },
+
           priceHistory: {
             $push: {
               date: "$arrival_date",
@@ -165,36 +162,38 @@ export const getCommodities = async (req, res) => {
           commodity: "$_id.commodity",
           market: "$_id.market",
           district: "$_id.district",
-          state: 1,
-          variety: 1,
-          grade: 1,
-          arrival_date: "$latest.arrival_date",
-          modal_price: "$latest.modal_price",
-          min_price: "$latest.min_price",
-          max_price: "$latest.max_price",
+          state: "$latestDoc.state",
+          variety: "$latestDoc.variety",
+          grade: "$latestDoc.grade",
+          arrival_date: "$latestDoc.arrival_date",
+          modal_price: "$latestDoc.modal_price",
+          min_price: "$latestDoc.min_price",
+          max_price: "$latestDoc.max_price",
           priceHistory: {
-            $slice: ["$priceHistory", days],
+            $slice: [
+              {
+                $sortArray: {
+                  input: "$priceHistory",
+                  sortBy: { date: -1 },
+                },
+              },
+              days,
+            ],
           },
         },
       },
-      {
-        $sort: { arrival_date: -1 },
-      },
-    ]).allowDiskUse(true);
+      { $sort: { arrival_date: -1 } },
+    ]);
 
     const commoditiesWithTrend = commodities.map((commodity) => {
-      const history = commodity.priceHistory;
       let prev = null;
 
-      const priceHistoryWithTrend = history.map((item) => {
+      const priceHistoryWithTrend = commodity.priceHistory.map((item) => {
         let trend = "same";
 
         if (prev !== null) {
-          if (item.modal_price > prev) {
-            trend = "up";
-          } else if (item.modal_price < prev) {
-            trend = "down";
-          }
+          if (item.modal_price > prev) trend = "up";
+          else if (item.modal_price < prev) trend = "down";
         }
 
         prev = item.modal_price;
@@ -211,9 +210,6 @@ export const getCommodities = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
