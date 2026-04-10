@@ -4,37 +4,43 @@ import { fetchAndStoreDataForCron } from "../controllers/commodities.controller.
 let pollInterval = null;
 let isRunning = false;
 
-cron.schedule("46 9 * * *", () => {
-  console.log("Cron triggered at:", new Date().toLocaleTimeString());
+cron.schedule(
+  "54 16 * * *",
+  () => {
+    console.log("Cron triggered at:", new Date().toLocaleTimeString());
 
-  if (pollInterval) return;
+    if (pollInterval) return;
 
-  pollInterval = setInterval(
-    async () => {
-      if (isRunning) return;
-      isRunning = true;
+    pollInterval = setInterval(
+      async () => {
+        if (isRunning) return;
+        isRunning = true;
 
-      console.log(
-        "Polling API for today's data at",
-        new Date().toLocaleTimeString(),
-      );
+        console.log(
+          "Polling API for today's data at",
+          new Date().toLocaleTimeString(),
+        );
 
-      try {
-        const success = await fetchAndStoreDataForCron();
+        try {
+          const success = await fetchAndStoreDataForCron();
 
-        if (success) {
-          console.log("Today's mandi data fetched and added to DB!");
-          clearInterval(pollInterval);
-          pollInterval = null;
-        } else {
-          console.log("Today's data not posted by the govt. yet. Retrying...");
+          if (success) {
+            console.log("Today's mandi data fetched and added to DB!");
+            clearInterval(pollInterval);
+            pollInterval = null;
+          } else {
+            console.log(
+              "Today's data not posted by the govt. yet. Retrying...",
+            );
+          }
+        } catch (err) {
+          console.error("Error during polling:", err.message);
+        } finally {
+          isRunning = false;
         }
-      } catch (err) {
-        console.error("Error during polling:", err.message);
-      } finally {
-        isRunning = false;
-      }
-    },
-    5 * 60 * 1000,
-  );
-});
+      },
+      1 * 60 * 1000,
+    );
+  },
+  { timezone: "Asia/Kolkata" },
+);

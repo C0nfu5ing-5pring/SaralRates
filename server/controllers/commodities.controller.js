@@ -77,6 +77,8 @@ const fetchAndStore = async () => {
   if (!records.length) return 0;
 
   const todayStr = getTodayStr();
+  console.log("Looking for date:", todayStr);
+  console.log("Sample arrival_date from API:", records[0]?.arrival_date);
   const todayRecords = records.filter((r) => r.arrival_date === todayStr);
   if (!todayRecords.length) return 0;
 
