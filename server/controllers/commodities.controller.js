@@ -35,6 +35,7 @@ const fetchAllGovData = async () => {
 
 const getTodayStr = () => {
   const today = new Date();
+  today.setDate(today.getDate() - 1);
   return (
     String(today.getUTCDate()).padStart(2, "0") +
     "/" +
