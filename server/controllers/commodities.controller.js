@@ -34,13 +34,14 @@ const fetchAllGovData = async () => {
 };
 
 const getTodayStr = () => {
-  const today = new Date();
+  const now = new Date();
+  const ist = new Date(now.getTime() + 5.5 * 60 * 60 * 1000);
   return (
-    String(today.getUTCDate()).padStart(2, "0") +
+    String(ist.getUTCDate()).padStart(2, "0") +
     "/" +
-    String(today.getUTCMonth() + 1).padStart(2, "0") +
+    String(ist.getUTCMonth() + 1).padStart(2, "0") +
     "/" +
-    today.getUTCFullYear()
+    ist.getUTCFullYear()
   );
 };
 
@@ -76,18 +77,30 @@ const fetchAndStore = async () => {
   const records = await fetchAllGovData();
   if (!records.length) return 0;
 
-  const todayStr = getTodayStr();
-  const todayRecords = records.filter((r) => r.arrival_date === todayStr);
-  if (!todayRecords.length) return 0;
+  const latestDate = records
+    .map((r) => r.arrival_date)
+    .sort()
+    .at(-1);
 
-  const bulkOps = buildBulkOps(todayRecords);
+  const todayStr = getTodayStr();
+
+  if (latestDate !== todayStr) {
+    console.warn(
+      `API data is stale. Latest: ${latestDate}, Expected: ${todayStr}`,
+    );
+  }
+
+  const latestRecords = records.filter((r) => r.arrival_date === latestDate);
+  if (!latestRecords.length) return 0;
+
+  const bulkOps = buildBulkOps(latestRecords);
   await Commodity.bulkWrite(bulkOps);
 
   const cutoff = new Date();
   cutoff.setDate(cutoff.getDate() - 7);
   await Commodity.deleteMany({ arrival_date: { $lt: cutoff } });
 
-  return todayRecords.length;
+  return latestRecords.length;
 };
 
 export const fetchAndStoreData = async (req, res) => {
@@ -97,7 +110,7 @@ export const fetchAndStoreData = async (req, res) => {
     if (count === 0) {
       return res.status(200).json({
         success: true,
-        message: "Mandi data not posted yet",
+        message: "No mandi data available from source",
       });
     }
 
