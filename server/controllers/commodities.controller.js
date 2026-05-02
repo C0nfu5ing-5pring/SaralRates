@@ -96,7 +96,9 @@ const fetchAndStore = async () => {
   const bulkOps = buildBulkOps(latestRecords);
   await Commodity.bulkWrite(bulkOps);
 
-  const cutoff = new Date();
+  const [day, month, year] = latestDate.split("/");
+  const latestDateObj = new Date(Date.UTC(year, month - 1, day));
+  const cutoff = new Date(latestDateObj);
   cutoff.setDate(cutoff.getDate() - 7);
   await Commodity.deleteMany({ arrival_date: { $lt: cutoff } });
 
@@ -136,7 +138,13 @@ export const getCommodities = async (req, res) => {
   try {
     const days = 5;
 
-    const cutoff = new Date();
+    const latest = await Commodity.findOne().sort({ arrival_date: -1 }).lean();
+
+    if (!latest) {
+      return res.status(200).json({ success: true, count: 0, data: [] });
+    }
+
+    const cutoff = new Date(latest.arrival_date);
     cutoff.setDate(cutoff.getDate() - days);
 
     const commodities = await Commodity.find({

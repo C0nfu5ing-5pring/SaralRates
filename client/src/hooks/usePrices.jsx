@@ -7,7 +7,6 @@ const API_URL = import.meta.env.VITE_API_URL;
 export function usePrices(search, view, hasPriceHistory) {
   const [cardArray, setCardArray] = useState([]);
   const [loading, setLoading] = useState(true);
-
   const [favourites, setFavourites] = useState(() =>
     JSON.parse(localStorage.getItem("favourites") || "[]"),
   );
@@ -18,89 +17,47 @@ export function usePrices(search, view, hasPriceHistory) {
   const fetchPrices = async () => {
     const cached = JSON.parse(localStorage.getItem("cachedRecords") || "[]");
 
-    const today = new Date();
-    const todayStr = today.toLocaleDateString("en-CA", {
-      timeZone: "Asia/Kolkata",
-    });
-
-    const yesterday = new Date();
-    yesterday.setDate(yesterday.getDate() - 1);
-    const yesterdayStr = yesterday.toLocaleDateString("en-CA", {
-      timeZone: "Asia/Kolkata",
-    });
-
     try {
-      const todayRes = await axios.get(
-        `${API_URL}/api/commodities?date=${todayStr}`,
-      );
+      const res = await axios.get(`${API_URL}/api/commodities`, {
+        timeout: 15000,
+      });
 
-      const prevRes = await axios.get(
-        `${API_URL}/api/commodities?date=${yesterdayStr}`,
-      );
+      const records = res.data?.data || [];
 
-      const todayRecords = todayRes.data?.data || [];
-      const prevRecords = prevRes.data?.data || [];
-
-      if (!todayRecords.length && !prevRecords.length) {
+      if (!records.length) {
         toastWithSound(
           "New prices not available yet. Showing cached data",
           "info",
         );
-        setCardArray(cached);
+        if (cached.length) setCardArray(cached);
         return;
       }
 
-      const prevMap = new Map();
-      prevRecords.forEach((item) => {
-        prevMap.set(getKey(item), item);
-      });
-
-      const mergedRecords = todayRecords.map((item) => {
-        const key = getKey(item);
-        const prev = prevMap.get(key);
-
-        let trend = "new";
-        let previousModalPrice = null;
-
-        if (prev) {
-          previousModalPrice = prev.modal_price;
-
-          if (item.modal_price > prev.modal_price) trend = "up";
-          else if (item.modal_price < prev.modal_price) trend = "down";
-          else trend = "same";
-        }
-
-        return {
-          ...item,
-          trend,
-          previousModalPrice,
-        };
-      });
-
-      mergedRecords.sort(
+      const sorted = [...records].sort(
         (a, b) => new Date(b.arrival_date) - new Date(a.arrival_date),
       );
-      setCardArray(mergedRecords);
-      localStorage.setItem("cachedRecords", JSON.stringify(mergedRecords));
-      localStorage.setItem("lastFetchedDate", todayStr);
+
+      setCardArray(sorted);
+      localStorage.setItem("cachedRecords", JSON.stringify(sorted));
     } catch (err) {
       console.error("API fetch error:", err);
-      setCardArray(cached);
+      if (cached.length) setCardArray(cached);
       toastWithSound("Live price update failed. Showing cached data.", "info");
-      return false;
     }
   };
 
   useEffect(() => {
     const cached = JSON.parse(localStorage.getItem("cachedRecords") || "[]");
-
     if (cached.length > 0) {
       setCardArray(cached);
     }
 
     const load = async () => {
-      await fetchPrices();
-      setLoading(false);
+      try {
+        await fetchPrices();
+      } finally {
+        setLoading(false);
+      }
     };
 
     load();
@@ -108,7 +65,6 @@ export function usePrices(search, view, hasPriceHistory) {
 
   const filtered = useMemo(() => {
     const q = search.toLowerCase();
-
     return cardArray.filter(
       (c) =>
         c.commodity?.toLowerCase().includes(q) ||
@@ -125,20 +81,14 @@ export function usePrices(search, view, hasPriceHistory) {
 
   const toggleFavourite = (item) => {
     const key = getKey(item);
-    let updated;
     const exists = favourites.some((f) => f.key === key);
+    let updated;
 
     if (exists) {
       updated = favourites.filter((f) => f.key !== key);
       toastWithSound(`${item.commodity} removed from favourites`, "info");
     } else {
-      updated = [
-        ...favourites,
-        {
-          key,
-          arrival_date: item.arrival_date,
-        },
-      ];
+      updated = [...favourites, { key, arrival_date: item.arrival_date }];
       toastWithSound(`${item.commodity} added to favourites`, "success");
     }
 
@@ -161,10 +111,5 @@ export function usePrices(search, view, hasPriceHistory) {
     }
   }, [filtered, view, favourites, hasPriceHistory]);
 
-  return {
-    finalList,
-    loading,
-    favourites,
-    toggleFavourite,
-  };
+  return { finalList, loading, favourites, toggleFavourite };
 }
