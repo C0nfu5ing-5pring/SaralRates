@@ -5,7 +5,7 @@ let pollInterval = null;
 let isRunning = false;
 
 cron.schedule(
-  "32 7 * * *",
+  "23 10 * * *",
   () => {
     console.log("Cron triggered at:", new Date().toLocaleTimeString());
 
@@ -35,7 +35,7 @@ cron.schedule(
       } finally {
         isRunning = false;
       }
-    }, 60 * 1000);
+    }, 10 * 1000);
   },
   { timezone: "Asia/Kolkata" },
 );
