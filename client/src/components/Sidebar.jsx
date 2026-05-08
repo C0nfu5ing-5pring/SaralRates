@@ -132,7 +132,7 @@ const Sidebar = ({ view, setView, hasPriceHistory, favourites }) => {
             <h1 className="text-sm">Updated</h1>
             <p className="text-[var(--variety-bg)] text-xs">
               {/* {lastFetchedDate} */}
-              07/05/2026
+              08/05/2026
             </p>
           </div>
           <div className="flex flex-col mt-2">
