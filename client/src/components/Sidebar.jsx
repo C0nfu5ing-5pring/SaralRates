@@ -26,8 +26,6 @@ const Sidebar = ({ view, setView, hasPriceHistory, favourites }) => {
     "bg-[var(--sidebar-active)] text-white border-[var(--border-darker)]";
   const inactiveClasses = "hover:border-[var(--border)] hover:border-2";
 
-  // const lastFetchedDate = localStorage.getItem("lastFetchedDate");
-
   return (
     <div
       className="
@@ -130,10 +128,7 @@ const Sidebar = ({ view, setView, hasPriceHistory, favourites }) => {
           </div>
           <div className="flex justify-between">
             <h1 className="text-sm">Updated</h1>
-            <p className="text-[var(--variety-bg)] text-xs">
-              {/* {lastFetchedDate} */}
-              14/05/2026
-            </p>
+            <p className="text-[var(--variety-bg)] text-xs">15/05/2026</p>
           </div>
           <div className="flex flex-col mt-2">
             <p className="text-xs">Indicative prices only.</p>
