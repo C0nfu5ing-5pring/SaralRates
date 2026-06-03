@@ -5,7 +5,7 @@ let pollInterval = null;
 let isRunning = false;
 
 cron.schedule(
-  "18 16 * * *",
+  "47 17 * * *",
   () => {
     console.log("Cron triggered at:", new Date().toLocaleTimeString());
 
