@@ -1,0 +1,51 @@
+const Footer = () => {
+  const lastFetchedDate = localStorage.getItem("lastFetchedDate");
+  return (
+    <footer className="text-[var[--text]] w-full mt-5 px-4 sm:px-6 lg:px-20 py-6 select-none">
+      <div className="border-2 flex lg:hidden shadow-xl shadow-[var(--shadow)] border-[var(--darker-border)] rounded-2xl p-6 sm:p-10 flex-col lg:flex-row items-center justify-between gap-6">
+        <div className="w-full lg:w-[45%] flex justify-center">
+          <div className="w-full flex lg:hidden flex-col gap-2">
+            <div className="flex justify-start gap-3">
+              <div className="text-xs md:text-sm cursor-pointer px-3 py-1 rounded-lg bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 tracking-wide">
+                v0.7.1
+              </div>
+              <div className="text-xs md:text-sm cursor-pointer px-3 py-1 rounded-lg bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 tracking-wide">
+                Beta
+              </div>
+              <div className="text-xs md:text-sm cursor-pointer px-3 py-1 rounded-lg bg-green-500/10 border border-green-500/30 text-green-400 tracking-wide flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" />
+                Live
+              </div>
+            </div>
+            <div className="flex flex-col">
+              <div className="flex justify-between">
+                <h1 className="text-sm md:text-base">Source</h1>
+                <a
+                  href="https://www.data.gov.in/resource/current-daily-price-various-commodities-various-markets-mandi"
+                  target="_blank"
+                  className="text-[var(--variety-bg)]  text-xs md:text-base"
+                >
+                  data.gov.in
+                </a>
+              </div>
+              <div className="flex justify-between">
+                <h1 className="text-sm md:text-base">Updated</h1>
+                <p className="text-[var(--variety-bg)] text-xs md:text-base">
+                  {lastFetchedDate}
+                </p>
+              </div>
+              <div className="flex justify-between mt-2">
+                <p className="text-xs">
+                  Indicative prices only. Real prices may vary from place to
+                  place
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
