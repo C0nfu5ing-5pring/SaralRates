@@ -5,12 +5,14 @@ import Card from "../components/Card";
 import Sidebar from "../components/Sidebar";
 import Footer from "../components/Footer";
 import LaunchModal from "../components/LaunchModal";
+import { ToastContainer } from "react-toastify";
 
-const Dashboard = ({ cycleTheme }) => {
+const Dashboard = () => {
   const [search, setSearch] = useState("");
   const [view, setView] = useState("all");
   const [commodities, setCommodities] = useState([]);
   const [favourites, setFavourites] = useState([]);
+  const [theme, setTheme] = useState("light");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,9 +41,40 @@ const Dashboard = ({ cycleTheme }) => {
     setFirstVisit(localStorage.getItem("hasVisited"));
   }, []);
 
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme") || "light";
+    setTheme(savedTheme);
+  }, []);
+
+  useEffect(() => {
+    if (theme === "light") {
+      document.documentElement.removeAttribute("data-theme");
+    } else {
+      document.documentElement.setAttribute("data-theme", theme);
+    }
+
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const cycleTheme = () => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  };
+
   return (
     <>
       {firstVisit ? null : <LaunchModal />}
+
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar
+        closeOnClick
+        pauseOnHover
+        toastStyle={{
+          background: "transparent",
+          boxShadow: "none",
+        }}
+      />
 
       <div className="flex flex-col bg-[var(--bg)] text-[var(--text)] transition-colors duration-300">
         <Header cycleTheme={cycleTheme} search={search} setSearch={setSearch} />
