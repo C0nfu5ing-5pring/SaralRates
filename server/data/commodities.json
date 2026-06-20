@@ -1,0 +1,2424 @@
+[{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27feee"
+  },
+  "market": "Kosli APMC",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "state": "Haryana",
+  "variety": "Bhindi",
+  "district": "Rewari",
+  "commodity": "Bhindi(Ladies Finger)",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "FAQ",
+  "max_price": 2000,
+  "min_price": 2000,
+  "modal_price": 2000,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.129Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27feef"
+  },
+  "district": "Alappuzha",
+  "commodity": "Ashgourd",
+  "market": "Harippad Market",
+  "variety": "Other",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "state": "Keralam",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "FAQ",
+  "max_price": 4000,
+  "min_price": 3500,
+  "modal_price": 3500,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.126Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27fef0"
+  },
+  "state": "Keralam",
+  "commodity": "Cabbage",
+  "district": "Alappuzha",
+  "market": "Harippad Market",
+  "variety": "Cabbage",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "FAQ",
+  "max_price": 5000,
+  "min_price": 4500,
+  "modal_price": 4500,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.127Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27fef1"
+  },
+  "district": "Alappuzha",
+  "commodity": "Cauliflower",
+  "market": "Harippad Market",
+  "variety": "Cauliflower",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "state": "Keralam",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "FAQ",
+  "max_price": 5000,
+  "min_price": 4500,
+  "modal_price": 4500,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.129Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27fef2"
+  },
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Bhindi(Ladies Finger)",
+  "market": "Perumbavoor Market",
+  "district": "Ernakulam",
+  "state": "Keralam",
+  "variety": "Bhindi",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Medium",
+  "max_price": 4500,
+  "min_price": 3500,
+  "modal_price": 4000,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.128Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27fef3"
+  },
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Papaya",
+  "market": "Viruthachalam(Uzhavar Sandhai )",
+  "district": "Cuddalore",
+  "state": "Tamil Nadu",
+  "variety": "Papaya",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 4500,
+  "min_price": 4000,
+  "modal_price": 4250,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.126Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27fef4"
+  },
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Cluster beans",
+  "market": "Viruthachalam(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "district": "Cuddalore",
+  "variety": "Cluster Beans",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 4000,
+  "min_price": 4000,
+  "modal_price": 4000,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.128Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27fef5"
+  },
+  "market": "Viruthachalam(Uzhavar Sandhai )",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "state": "Tamil Nadu",
+  "variety": "Pumpkin",
+  "commodity": "Pumpkin",
+  "district": "Cuddalore",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 2500,
+  "min_price": 2500,
+  "modal_price": 2500,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.128Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27fef6"
+  },
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Amaranthus",
+  "market": "Viruthachalam(Uzhavar Sandhai )",
+  "district": "Cuddalore",
+  "state": "Tamil Nadu",
+  "variety": "Amaranthus",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 2500,
+  "min_price": 2000,
+  "modal_price": 2250,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27fef7"
+  },
+  "state": "Tamil Nadu",
+  "commodity": "Banana - Green",
+  "district": "Cuddalore",
+  "market": "Viruthachalam(Uzhavar Sandhai )",
+  "variety": "Banana - Green",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 2500,
+  "min_price": 2500,
+  "modal_price": 2500,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27fef8"
+  },
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Beans",
+  "market": "Viruthachalam(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "district": "Cuddalore",
+  "variety": "Beans (Whole)",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 8000,
+  "min_price": 8000,
+  "modal_price": 8000,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.127Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27fef9"
+  },
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Mango",
+  "market": "Dharmapuri(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "district": "Dharmapuri",
+  "variety": "Safeda",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 5000,
+  "min_price": 4600,
+  "modal_price": 4800,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.126Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27fefa"
+  },
+  "district": "Dharmapuri",
+  "commodity": "Potato",
+  "market": "Dharmapuri(Uzhavar Sandhai )",
+  "variety": "Red Nanital",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 2800,
+  "min_price": 2600,
+  "modal_price": 2700,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27fefb"
+  },
+  "market": "Dharmapuri(Uzhavar Sandhai )",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "state": "Tamil Nadu",
+  "variety": "Round",
+  "commodity": "Brinjal",
+  "district": "Dharmapuri",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 4000,
+  "min_price": 3800,
+  "modal_price": 3900,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.128Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27fefc"
+  },
+  "commodity": "Coriander(Leaves)",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Dharmapuri(Uzhavar Sandhai )",
+  "district": "Dharmapuri",
+  "state": "Tamil Nadu",
+  "variety": "I Sort",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 8000,
+  "min_price": 7500,
+  "modal_price": 7750,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.128Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27fefd"
+  },
+  "state": "Tamil Nadu",
+  "commodity": "Papaya",
+  "district": "Dharmapuri",
+  "market": "Dharmapuri(Uzhavar Sandhai )",
+  "variety": "Papaya",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 3000,
+  "min_price": 2800,
+  "modal_price": 2900,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27fefe"
+  },
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Tomato",
+  "market": "Dharmapuri(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "district": "Dharmapuri",
+  "variety": "Local",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 4000,
+  "min_price": 3800,
+  "modal_price": 3900,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.126Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27feff"
+  },
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Bottle gourd",
+  "market": "Dharmapuri(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "district": "Dharmapuri",
+  "variety": "Bottle Gourd",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 2000,
+  "min_price": 1800,
+  "modal_price": 1900,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.127Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff00"
+  },
+  "district": "Dharmapuri",
+  "commodity": "Banana - Green",
+  "market": "Dharmapuri(Uzhavar Sandhai )",
+  "variety": "Banana - Green",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 3000,
+  "min_price": 2800,
+  "modal_price": 2900,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff01"
+  },
+  "market": "Dharmapuri(Uzhavar Sandhai )",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "state": "Tamil Nadu",
+  "variety": "Beans (Whole)",
+  "commodity": "Beans",
+  "district": "Dharmapuri",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 8400,
+  "min_price": 8000,
+  "modal_price": 8200,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.127Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff02"
+  },
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Ginger(Green)",
+  "market": "Dharmapuri(Uzhavar Sandhai )",
+  "district": "Dharmapuri",
+  "state": "Tamil Nadu",
+  "variety": "Green Ginger",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 16800,
+  "min_price": 16300,
+  "modal_price": 16550,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.128Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff03"
+  },
+  "state": "Tamil Nadu",
+  "commodity": "Coconut",
+  "district": "Dharmapuri",
+  "market": "Dharmapuri(Uzhavar Sandhai )",
+  "variety": "Coconut",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 6400,
+  "min_price": 6000,
+  "modal_price": 6200,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.127Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff04"
+  },
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Carrot",
+  "market": "Dharmapuri(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "district": "Dharmapuri",
+  "variety": "Pusakesar",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 7600,
+  "min_price": 7200,
+  "modal_price": 7400,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff05"
+  },
+  "commodity": "Cucumbar(Kheera)",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Dharmapuri(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "district": "Dharmapuri",
+  "variety": "Cucumbar",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 3800,
+  "min_price": 3500,
+  "modal_price": 3650,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.127Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff06"
+  },
+  "district": "Dharmapuri",
+  "commodity": "Drumstick",
+  "market": "Dharmapuri(Uzhavar Sandhai )",
+  "variety": "Drumstick",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 7000,
+  "min_price": 6600,
+  "modal_price": 6800,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff07"
+  },
+  "market": "Dharmapuri(Uzhavar Sandhai )",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "state": "Tamil Nadu",
+  "variety": "Mashrooms",
+  "commodity": "Mashrooms",
+  "district": "Dharmapuri",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 15000,
+  "min_price": 14000,
+  "modal_price": 14500,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.126Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff08"
+  },
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Onion Green",
+  "market": "Dharmapuri(Uzhavar Sandhai )",
+  "district": "Dharmapuri",
+  "state": "Tamil Nadu",
+  "variety": "Onion Green",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 4800,
+  "min_price": 4500,
+  "modal_price": 4650,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff09"
+  },
+  "state": "Tamil Nadu",
+  "commodity": "Garlic",
+  "district": "Dharmapuri",
+  "market": "Karimangalam(Uzhavar Sandhai)",
+  "variety": "Garlic",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 16000,
+  "min_price": 15000,
+  "modal_price": 15500,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.127Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff0a"
+  },
+  "commodity": "Cauliflower",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Karimangalam(Uzhavar Sandhai)",
+  "state": "Tamil Nadu",
+  "district": "Dharmapuri",
+  "variety": "Ranchi",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 4000,
+  "min_price": 3800,
+  "modal_price": 3900,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff0b"
+  },
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Chikoos(Sapota)",
+  "market": "Karimangalam(Uzhavar Sandhai)",
+  "state": "Tamil Nadu",
+  "district": "Dharmapuri",
+  "variety": "Sapota",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 3500,
+  "min_price": 3300,
+  "modal_price": 3400,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.128Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff0c"
+  },
+  "district": "Dharmapuri",
+  "variety": "Other",
+  "commodity": "Bitter gourd",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Karimangalam(Uzhavar Sandhai)",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 4000,
+  "min_price": 3800,
+  "modal_price": 3900,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.127Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff0d"
+  },
+  "market": "Karimangalam(Uzhavar Sandhai)",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "state": "Tamil Nadu",
+  "variety": "Green Ginger",
+  "commodity": "Ginger(Green)",
+  "district": "Dharmapuri",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 13000,
+  "min_price": 12000,
+  "modal_price": 12500,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.128Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff0e"
+  },
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Carrot",
+  "market": "Karimangalam(Uzhavar Sandhai)",
+  "district": "Dharmapuri",
+  "state": "Tamil Nadu",
+  "variety": "Pusakesar",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 7600,
+  "min_price": 7000,
+  "modal_price": 7300,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.128Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff0f"
+  },
+  "district": "Dharmapuri",
+  "variety": "Snakeguard",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Snakeguard",
+  "market": "Karimangalam(Uzhavar Sandhai)",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 3000,
+  "min_price": 2800,
+  "modal_price": 2900,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.128Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff10"
+  },
+  "district": "Dharmapuri",
+  "variety": "Beetroot",
+  "commodity": "Beetroot",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Karimangalam(Uzhavar Sandhai)",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 4800,
+  "min_price": 4500,
+  "modal_price": 4650,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.127Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff11"
+  },
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Green Avare(W)",
+  "market": "Karimangalam(Uzhavar Sandhai)",
+  "state": "Tamil Nadu",
+  "district": "Dharmapuri",
+  "variety": "Other",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 6000,
+  "min_price": 5500,
+  "modal_price": 5750,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff12"
+  },
+  "district": "Dharmapuri",
+  "variety": "Onion Green",
+  "commodity": "Onion Green",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Karimangalam(Uzhavar Sandhai)",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 4000,
+  "min_price": 3800,
+  "modal_price": 3900,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.127Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff13"
+  },
+  "market": "Palacode(Uzhavar Sandhai )",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "state": "Tamil Nadu",
+  "variety": "Karpura",
+  "commodity": "Banana",
+  "district": "Dharmapuri",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 4500,
+  "min_price": 4000,
+  "modal_price": 4250,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff14"
+  },
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Onion",
+  "market": "Palacode(Uzhavar Sandhai )",
+  "district": "Dharmapuri",
+  "state": "Tamil Nadu",
+  "variety": "Bellary",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 2800,
+  "min_price": 2500,
+  "modal_price": 2650,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff15"
+  },
+  "district": "Dharmapuri",
+  "variety": "Other",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Brinjal",
+  "market": "Palacode(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 4000,
+  "min_price": 3500,
+  "modal_price": 3750,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.127Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff16"
+  },
+  "district": "Dharmapuri",
+  "variety": "Beans (Whole)",
+  "commodity": "Beans",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Palacode(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 8000,
+  "min_price": 7500,
+  "modal_price": 7750,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.127Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff17"
+  },
+  "commodity": "Thondekai",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Palacode(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "district": "Dharmapuri",
+  "variety": "Thondekai",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 5000,
+  "min_price": 4600,
+  "modal_price": 4800,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.128Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff18"
+  },
+  "district": "Dharmapuri",
+  "variety": "Green Avare (W)",
+  "commodity": "Green Avare(W)",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Palacode(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 6400,
+  "min_price": 6000,
+  "modal_price": 6200,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.128Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff19"
+  },
+  "market": "Palacode(Uzhavar Sandhai )",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "state": "Tamil Nadu",
+  "variety": "Guava Allahabad",
+  "commodity": "Guava",
+  "district": "Dharmapuri",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 5000,
+  "min_price": 4500,
+  "modal_price": 4750,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.126Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff1a"
+  },
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Mint(Pudina)",
+  "market": "Palacode(Uzhavar Sandhai )",
+  "district": "Dharmapuri",
+  "state": "Tamil Nadu",
+  "variety": "Mint(Pudina)",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 6000,
+  "min_price": 5500,
+  "modal_price": 5750,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.127Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff1b"
+  },
+  "district": "Dharmapuri",
+  "variety": "Sweet Corn ",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Sweet Corn ",
+  "market": "Palacode(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 3000,
+  "min_price": 2800,
+  "modal_price": 2900,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.126Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff1c"
+  },
+  "district": "Dharmapuri",
+  "variety": "Garlic",
+  "commodity": "Garlic",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Pennagaram(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 17000,
+  "min_price": 16000,
+  "modal_price": 16500,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff1d"
+  },
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Papaya",
+  "market": "Pennagaram(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "district": "Dharmapuri",
+  "variety": "Papaya",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 3000,
+  "min_price": 2800,
+  "modal_price": 2900,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.126Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff1e"
+  },
+  "district": "Dharmapuri",
+  "variety": "Bhindi",
+  "commodity": "Bhindi(Ladies Finger)",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Pennagaram(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 3000,
+  "min_price": 2800,
+  "modal_price": 2900,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.126Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff1f"
+  },
+  "market": "Pennagaram(Uzhavar Sandhai )",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "state": "Tamil Nadu",
+  "variety": "Hosur Red",
+  "commodity": "Sweet Potato",
+  "district": "Dharmapuri",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 3000,
+  "min_price": 2800,
+  "modal_price": 2900,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.128Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff20"
+  },
+  "commodity": "Cabbage",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Pennagaram(Uzhavar Sandhai )",
+  "district": "Dharmapuri",
+  "state": "Tamil Nadu",
+  "variety": "Cabbage",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 4500,
+  "min_price": 4200,
+  "modal_price": 4350,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.128Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff21"
+  },
+  "district": "Dharmapuri",
+  "variety": "Capsicum",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Capsicum",
+  "market": "Pennagaram(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 6000,
+  "min_price": 5600,
+  "modal_price": 5800,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff22"
+  },
+  "district": "Dharmapuri",
+  "variety": "Chow Chow",
+  "commodity": "Chow Chow",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Pennagaram(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 5000,
+  "min_price": 4600,
+  "modal_price": 4800,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff23"
+  },
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Mango(Raw-Ripe)",
+  "market": "Pennagaram(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "district": "Dharmapuri",
+  "variety": "Mango - Raw-Ripe",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 3000,
+  "min_price": 2800,
+  "modal_price": 2900,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff24"
+  },
+  "district": "Dharmapuri",
+  "variety": "Guava Allahabad",
+  "commodity": "Guava",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Pennagaram(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 5000,
+  "min_price": 4600,
+  "modal_price": 4800,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.126Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff25"
+  },
+  "market": "Pennagaram(Uzhavar Sandhai )",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "state": "Tamil Nadu",
+  "variety": "Onion Green",
+  "commodity": "Onion Green",
+  "district": "Dharmapuri",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 5000,
+  "min_price": 4600,
+  "modal_price": 4800,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff26"
+  },
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Ashgourd",
+  "market": "Periyar Nagar(Uzhavar Sandhai )",
+  "district": "Erode",
+  "state": "Tamil Nadu",
+  "variety": "Gouard",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 2000,
+  "min_price": 1800,
+  "modal_price": 1900,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.128Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff27"
+  },
+  "district": "Erode",
+  "variety": "Amaranthus",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Amaranthus",
+  "market": "Periyar Nagar(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 3000,
+  "min_price": 2500,
+  "modal_price": 2750,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.128Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff28"
+  },
+  "district": "Erode",
+  "variety": "Hosur Red",
+  "commodity": "Sweet Potato",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Periyar Nagar(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 4000,
+  "min_price": 3500,
+  "modal_price": 3750,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.128Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff29"
+  },
+  "commodity": "Ridgeguard(Tori)",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Periyar Nagar(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "district": "Erode",
+  "variety": "Ridgeguard(Tori)",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 3800,
+  "min_price": 3500,
+  "modal_price": 3650,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff2a"
+  },
+  "district": "Erode",
+  "variety": "Amla",
+  "commodity": "Amla(Nelli Kai)",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Periyar Nagar(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 7000,
+  "min_price": 6500,
+  "modal_price": 6750,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.127Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff2b"
+  },
+  "market": "Perundurai(Uzhavar Sandhai )",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "state": "Tamil Nadu",
+  "variety": "Bellary",
+  "commodity": "Onion",
+  "district": "Erode",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 3400,
+  "min_price": 3000,
+  "modal_price": 3200,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.128Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff2c"
+  },
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Potato",
+  "market": "Perundurai(Uzhavar Sandhai )",
+  "district": "Erode",
+  "state": "Tamil Nadu",
+  "variety": "Other",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 3500,
+  "min_price": 3000,
+  "modal_price": 3250,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.128Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff2d"
+  },
+  "district": "Erode",
+  "variety": "Other",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Brinjal",
+  "market": "Perundurai(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 4000,
+  "min_price": 3600,
+  "modal_price": 3800,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff2e"
+  },
+  "district": "Erode",
+  "variety": "Amaranthus",
+  "commodity": "Amaranthus",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Perundurai(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 3500,
+  "min_price": 3000,
+  "modal_price": 3250,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff2f"
+  },
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Green Chilli",
+  "market": "Perundurai(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "district": "Erode",
+  "variety": "Green Chilly",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 4800,
+  "min_price": 4400,
+  "modal_price": 4600,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff30"
+  },
+  "district": "Erode",
+  "variety": "Beans (Whole)",
+  "commodity": "Beans",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Perundurai(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 8000,
+  "min_price": 7400,
+  "modal_price": 7700,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.126Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff31"
+  },
+  "market": "Perundurai(Uzhavar Sandhai )",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "state": "Tamil Nadu",
+  "variety": "Coconut",
+  "commodity": "Coconut",
+  "district": "Erode",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 4000,
+  "min_price": 3600,
+  "modal_price": 3800,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff32"
+  },
+  "commodity": "Chow Chow",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Perundurai(Uzhavar Sandhai )",
+  "district": "Erode",
+  "state": "Tamil Nadu",
+  "variety": "Chow Chow",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 4800,
+  "min_price": 4400,
+  "modal_price": 4600,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.126Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff33"
+  },
+  "district": "Erode",
+  "variety": "Drumstick",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Drumstick",
+  "market": "Perundurai(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 4800,
+  "min_price": 4400,
+  "modal_price": 4600,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff34"
+  },
+  "district": "Erode",
+  "variety": "Mango - Raw-Ripe",
+  "commodity": "Mango(Raw-Ripe)",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Perundurai(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 2000,
+  "min_price": 1800,
+  "modal_price": 1900,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.128Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff35"
+  },
+  "commodity": "Cauliflower",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Thalavadi(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "district": "Erode",
+  "variety": "Ranchi",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 2800,
+  "min_price": 2400,
+  "modal_price": 2600,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.126Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff36"
+  },
+  "district": "Erode",
+  "variety": "Other",
+  "commodity": "Bitter gourd",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Thalavadi(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 3000,
+  "min_price": 2400,
+  "modal_price": 2700,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.126Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff37"
+  },
+  "market": "Thalavadi(Uzhavar Sandhai )",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "state": "Tamil Nadu",
+  "variety": "Bottle Gourd",
+  "commodity": "Bottle gourd",
+  "district": "Erode",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 1600,
+  "min_price": 1200,
+  "modal_price": 1400,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.128Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff38"
+  },
+  "commodity": "Ginger(Green)",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Thalavadi(Uzhavar Sandhai )",
+  "district": "Erode",
+  "state": "Tamil Nadu",
+  "variety": "Green Ginger",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 12000,
+  "min_price": 11000,
+  "modal_price": 11500,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.126Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff39"
+  },
+  "district": "Erode",
+  "variety": "Raddish",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Raddish",
+  "market": "Thalavadi(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 2800,
+  "min_price": 2400,
+  "modal_price": 2600,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.127Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff3a"
+  },
+  "district": "Erode",
+  "variety": "Chow Chow",
+  "commodity": "Chow Chow",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Thalavadi(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 3800,
+  "min_price": 3400,
+  "modal_price": 3600,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.126Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff3b"
+  },
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Drumstick",
+  "market": "Thalavadi(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "district": "Erode",
+  "variety": "Drumstick",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 5500,
+  "min_price": 5000,
+  "modal_price": 5250,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff3c"
+  },
+  "district": "Erode",
+  "variety": "Mango - Raw-Ripe",
+  "commodity": "Mango(Raw-Ripe)",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Thalavadi(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 2400,
+  "min_price": 2000,
+  "modal_price": 2200,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff3d"
+  },
+  "market": "Thalavadi(Uzhavar Sandhai )",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "state": "Tamil Nadu",
+  "variety": "Guava Allahabad",
+  "commodity": "Guava",
+  "district": "Erode",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 5500,
+  "min_price": 5000,
+  "modal_price": 5250,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff3e"
+  },
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Lemon",
+  "market": "Thalavadi(Uzhavar Sandhai )",
+  "district": "Erode",
+  "state": "Tamil Nadu",
+  "variety": "Lemon",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 12000,
+  "min_price": 11000,
+  "modal_price": 11500,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff3f"
+  },
+  "district": "Erode",
+  "variety": "Onion Green",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Onion Green",
+  "market": "Thalavadi(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 4000,
+  "min_price": 3500,
+  "modal_price": 3750,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.128Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff40"
+  },
+  "district": "Erode",
+  "variety": "Mint(Pudina)",
+  "commodity": "Mint(Pudina)",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Thalavadi(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 4600,
+  "min_price": 4000,
+  "modal_price": 4300,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.128Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff41"
+  },
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Chikoos(Sapota)",
+  "market": "Sankarapuram(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "district": "Kallakuruchi",
+  "variety": "Sapota",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 4000,
+  "min_price": 4000,
+  "modal_price": 4000,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.128Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff42"
+  },
+  "district": "Kallakuruchi",
+  "variety": "Bottle Gourd",
+  "commodity": "Bottle gourd",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Sankarapuram(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 2500,
+  "min_price": 2500,
+  "modal_price": 2500,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.128Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff43"
+  },
+  "market": "Sankarapuram(Uzhavar Sandhai )",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "state": "Tamil Nadu",
+  "variety": "Pumpkin",
+  "commodity": "Pumpkin",
+  "district": "Kallakuruchi",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 2500,
+  "min_price": 2500,
+  "modal_price": 2500,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff44"
+  },
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Green Chilli",
+  "market": "Sankarapuram(Uzhavar Sandhai )",
+  "district": "Kallakuruchi",
+  "state": "Tamil Nadu",
+  "variety": "Green Chilly",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 6000,
+  "min_price": 6000,
+  "modal_price": 6000,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.127Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff45"
+  },
+  "district": "Kallakuruchi",
+  "variety": "Raddish",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Raddish",
+  "market": "Sankarapuram(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 4000,
+  "min_price": 4000,
+  "modal_price": 4000,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff46"
+  },
+  "district": "Kallakuruchi",
+  "variety": "Thondekai",
+  "commodity": "Thondekai",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Sankarapuram(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 4000,
+  "min_price": 4000,
+  "modal_price": 4000,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.127Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff47"
+  },
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Tomato",
+  "market": "Kundrathur(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "district": "Kancheepuram",
+  "variety": "Other",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 3400,
+  "min_price": 3200,
+  "modal_price": 3300,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.127Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff48"
+  },
+  "district": "Kancheepuram",
+  "variety": "Bitter Gourd",
+  "commodity": "Bitter gourd",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Kundrathur(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 4000,
+  "min_price": 4000,
+  "modal_price": 4000,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff49"
+  },
+  "market": "Kundrathur(Uzhavar Sandhai )",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "state": "Tamil Nadu",
+  "variety": "Hosur Red",
+  "commodity": "Sweet Potato",
+  "district": "Kancheepuram",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 3500,
+  "min_price": 3500,
+  "modal_price": 3500,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.126Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff4a"
+  },
+  "commodity": "Cucumbar(Kheera)",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Kundrathur(Uzhavar Sandhai )",
+  "district": "Kancheepuram",
+  "state": "Tamil Nadu",
+  "variety": "Cucumbar",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 3000,
+  "min_price": 3000,
+  "modal_price": 3000,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.128Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff4b"
+  },
+  "district": "Kancheepuram",
+  "variety": "Mango - Raw-Ripe",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Mango(Raw-Ripe)",
+  "market": "Kundrathur(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 2000,
+  "min_price": 2000,
+  "modal_price": 2000,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.127Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff4c"
+  },
+  "district": "Kancheepuram",
+  "variety": "Karpura",
+  "commodity": "Banana",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Sunguvarchatram(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 4000,
+  "min_price": 3500,
+  "modal_price": 3750,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.128Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff4d"
+  },
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Potato",
+  "market": "Sunguvarchatram(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "district": "Kancheepuram",
+  "variety": "Other",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 2500,
+  "min_price": 2500,
+  "modal_price": 2500,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff4e"
+  },
+  "district": "Kancheepuram",
+  "variety": "Papaya",
+  "commodity": "Papaya",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Sunguvarchatram(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 3500,
+  "min_price": 3500,
+  "modal_price": 3500,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.127Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff4f"
+  },
+  "market": "Sunguvarchatram(Uzhavar Sandhai )",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "state": "Tamil Nadu",
+  "variety": "Gouard",
+  "commodity": "Ashgourd",
+  "district": "Kancheepuram",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 2000,
+  "min_price": 2000,
+  "modal_price": 2000,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff50"
+  },
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Green Chilli",
+  "market": "Sunguvarchatram(Uzhavar Sandhai )",
+  "district": "Kancheepuram",
+  "state": "Tamil Nadu",
+  "variety": "Green Chilly",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 5000,
+  "min_price": 4500,
+  "modal_price": 4750,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.128Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff51"
+  },
+  "district": "Kancheepuram",
+  "variety": "Banana - Green",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "commodity": "Banana - Green",
+  "market": "Sunguvarchatram(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 3000,
+  "min_price": 3000,
+  "modal_price": 3000,
+  "updatedAt": {
+    "$date": "2026-06-07T01:44:14.126Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a23a4e9725d1aa8ca27ff52"
+  },
+  "district": "Kancheepuram",
+  "variety": "Beans (Whole)",
+  "commodity": "Beans",
+  "arrival_date": {
+    "$date": "2026-06-06T00:00:00.000Z"
+  },
+  "market": "Sunguvarchatram(Uzhavar Sandhai )",
+  "state": "Tamil Nadu",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  },
+  "grade": "Local",
+  "max_price": 5000,
+  "min_price": 4000,
+  "modal_price": 4500,
+  "updatedAt": {
+    "$date": "2026-06-06T04:41:12.618Z"
+  }
+}
