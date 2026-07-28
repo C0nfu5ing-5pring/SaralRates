@@ -1,11 +1,18 @@
-import app from "./app.js";
-import commodityRoutes from "./routes/commodities.routes.js";
-import "./cron/updatePrices.cron.js";
+import express from "express";
 
-const PORT = 5050;
+const app = express();
+app.use(express.json());
 
-app.use("/api", commodityRoutes);
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port: ${PORT}`);
+app.get("/", (req, res) => {
+  res.json({
+    status: "API is running",
+    endpoints: ["/api/commodities"],
+  });
 });
+
+app.use((req, res) => {
+  res.status(404).json({
+    error: "Route not found",
+  });
+});
+export default app;

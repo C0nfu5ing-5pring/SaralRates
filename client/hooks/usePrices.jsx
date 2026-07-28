@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { toastWithSound } from "../utils/toast.jsx";
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export function usePrices(search, view, hasPriceHistory) {
   const [cardArray, setCardArray] = useState([]);
