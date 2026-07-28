@@ -1,18 +1,7 @@
-import express from "express";
+import app from "./app.js";
 
-const app = express();
-app.use(express.json());
+const PORT = process.env.PORT || 5050;
 
-app.get("/", (req, res) => {
-  res.json({
-    status: "API is running",
-    endpoints: ["/api/commodities"],
-  });
+app.listen(PORT, () => {
+  console.log("Server running on port ${PORT}");
 });
-
-app.use((req, res) => {
-  res.status(404).json({
-    error: "Route not found",
-  });
-});
-export default app;
