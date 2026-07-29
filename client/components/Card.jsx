@@ -49,11 +49,13 @@ export default function Card({
     let updatedFavourites;
     let nowFavourite;
 
-    if (favourites.some((f) => f.key === key)) {
-      updatedFavourites = favourites.filter((f) => f.key !== key);
+    const currentFavourites = favourites || [];
+
+    if (currentFavourites.some((f) => f.key === key)) {
+      updatedFavourites = currentFavourites.filter((f) => f.key !== key);
       nowFavourite = false;
     } else {
-      updatedFavourites = [...favourites, { key, item }];
+      updatedFavourites = [...currentFavourites, { key, item }];
       nowFavourite = true;
     }
 
@@ -68,6 +70,7 @@ export default function Card({
     }
 
     const filtered = data
+      .filter((item) => item != null)
       .map((item) => {
         const today = item.history?.[0];
         const yesterday = item.history?.[1];
@@ -87,7 +90,7 @@ export default function Card({
         return { ...item, trend, priceChange };
       })
       .filter((item) => {
-        return item.commodity.toLowerCase().includes(search.toLowerCase());
+        return item.commodity?.toLowerCase().includes(search.toLowerCase());
       })
       .filter((item) => {
         if (view === "increase") {
@@ -101,7 +104,7 @@ export default function Card({
             .toLowerCase()
             .replace(/\s+/g, " ")
             .trim();
-          return favourites.some((f) => f.key === key);
+          return (favourites || []).some((f) => f.key === key);
         }
         return true;
       });
@@ -115,7 +118,7 @@ export default function Card({
       .toLowerCase()
       .replace(/\s+/g, " ")
       .trim();
-    return favourites.some((f) => f.key === key);
+    return (favourites || []).some((f) => f.key === key);
   };
 
   if (loading) {
