@@ -69,8 +69,8 @@ export default function Card({
 
     const filtered = data
       .map((item) => {
-        const today = item.priceHistory[0];
-        const yesterday = item.priceHistory[1];
+        const today = item.history?.[0];
+        const yesterday = item.history?.[1];
 
         let trend = "same";
         let priceChange = 0;
