@@ -102,6 +102,7 @@ export default function CardGrid({
             isComparing={isComparing}
             onCompare={() => toggleCompare(card)}
           />
+          // <div className="border p-4">{card.commodity}</div>
         );
       }}
     />

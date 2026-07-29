@@ -33,14 +33,16 @@ export default function PriceCard({
     }
   };
 
-  const formattedData = [...card.priceHistory].reverse().map((item) => ({
+  const history = card.history ?? [];
+  const latest = history[0] ?? {};
+
+  const formattedData = [...history].reverse().map((item) => ({
     ...item,
     date: new Date(item.date).toLocaleDateString("en-IN", {
       day: "2-digit",
       month: "short",
     }),
   }));
-
   const cardRef = useRef(null);
 
   const longPressTimer = useRef(null);
@@ -99,12 +101,12 @@ export default function PriceCard({
                 : card.commodity.split("/")[0]}
             </h1>
 
-            {card.variety
+            {(latest.variety ?? "")
               .toLowerCase()
               .includes(card.commodity.toLowerCase()) ? null : (
               <div className="bg-[var(--variety-bg)] w-fit px-2 text-[9px] md:text-xs lg:text-xs text-[var(--variety-text)] rounded-sm">
-                <p className="line-clamp-1" title={card.variety}>
-                  {card.variety}
+                <p className="line-clamp-1" title={latest.variety}>
+                  {latest.variety}
                 </p>
               </div>
             )}
@@ -137,11 +139,11 @@ export default function PriceCard({
             <div className="flex flex-col md:flex-row items-baseline md:gap-2">
               <div className="px-1 py-2">
                 <h1 className="text-2xl md:text-3xl lg:text-3xl">
-                  {intl.format(card.modal_price).split(".")[0]}
+                  {intl.format(latest.modal_price).split(".")[0]}
                 </h1>
               </div>
               <p className="font-thin leading-0 text-[11px] md:text-xs lg:text-sm">
-                ≈ {intl.format(card.modal_price / 100).split(".")[0]}/kg
+                ≈ {intl.format(latest.modal_price / 100).split(".")[0]}/kg
               </p>
             </div>
           </div>
@@ -188,7 +190,7 @@ export default function PriceCard({
           </div>
 
           <div className="flex justify-center gap-1">
-            {card.priceHistory
+            {history
               .slice(0, 5)
               .reverse()
               .map((item, id) => {
