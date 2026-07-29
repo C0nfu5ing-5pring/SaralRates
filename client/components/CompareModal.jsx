@@ -17,18 +17,19 @@ const intl = new Intl.NumberFormat("en-IN", {
 export default function CompareModal({ items, onClose }) {
   const [a, b] = items;
 
-  const mergedHistory = [...(a.priceHistory ?? [])]
-    .reverse()
-    .map((entry, i) => ({
-      date: new Date(entry.date).toLocaleDateString("en-IN", {
-        day: "2-digit",
-        month: "short",
-      }),
-      a: entry.modal_price,
-      b: b.priceHistory
-        ? ([...b.priceHistory].reverse()[i]?.modal_price ?? null)
-        : null,
-    }));
+  const historyA = a.history ?? [];
+  const historyB = b.history ?? [];
+  const latestA = historyA[0] ?? {};
+  const latestB = historyB[0] ?? {};
+
+  const mergedHistory = [...historyA].reverse().map((entry, i) => ({
+    date: new Date(entry.date).toLocaleDateString("en-IN", {
+      day: "2-digit",
+      month: "short",
+    }),
+    a: entry.modal_price,
+    b: [...historyB].reverse()[i]?.modal_price ?? null,
+  }));
 
   return (
     <div
@@ -72,10 +73,28 @@ export default function CompareModal({ items, onClose }) {
                   Common price
                 </p>
                 <p className="text-2xl font-medium text-[var(--icon)]">
-                  {intl.format(item.modal_price).split(".")[0]}
+                  {
+                    intl
+                      .format(
+                        id === 0
+                          ? (latestA.modal_price ?? 0)
+                          : (latestB.modal_price ?? 0),
+                      )
+                      .split(".")[0]
+                  }
                 </p>
                 <p className="text-xs text-[var(--text-muted)]">
-                  ≈ {intl.format(item.modal_price / 100).split(".")[0]}/kg
+                  ≈{" "}
+                  {
+                    intl
+                      .format(
+                        (id === 0
+                          ? (latestA.modal_price ?? 0)
+                          : (latestB.modal_price ?? 0)) / 100,
+                      )
+                      .split(".")[0]
+                  }
+                  /kg
                 </p>
               </div>
             </div>
@@ -158,7 +177,7 @@ export default function CompareModal({ items, onClose }) {
                 {id === 0 ? "A" : "B"} - Daily
               </p>
               <div className="flex gap-1">
-                {[...(item.priceHistory ?? [])]
+                {[...(item.history ?? [])]
                   .slice(0, 7)
                   .reverse()
                   .map((item, id) => (
