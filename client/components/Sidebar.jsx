@@ -78,7 +78,10 @@ const Sidebar = ({ view, setView, hasPriceHistory, favourites }) => {
                     </div>
 
                     <p className="text-base text-[var(--icon)]">
-                      {(item?.item?.modal_price / 1000).toFixed(1)}k
+                      {(
+                        (item?.item?.history?.[0]?.modal_price ?? 0) / 1000
+                      ).toFixed(1)}
+                      k
                     </p>
                   </div>
                 );
