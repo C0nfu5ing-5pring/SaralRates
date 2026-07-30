@@ -158,11 +158,11 @@ const Sidebar = ({
       <div className="w-full hidden lg:flex flex-col gap-2">
         <hr className="border-[var(--variety-bg)] w-full" />
         <div className="flex flex-wrap gap-2 justify-center">
-          <div className="text-xs text-center cursor-pointer px-3 py-1 rounded-lg bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 tracking-wide">
-            v0.8.2
+          <div className="text-xs text-center cursor-pointer px-3 py-1 rounded-lg bg-green-500/10 border border-green-500/30 text-green-400 tracking-wide">
+            v1.0.0
           </div>
-          <div className="text-xs text-center cursor-pointer px-3 py-1 rounded-lg bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 tracking-wide">
-            Beta
+          <div className="text-xs text-center cursor-pointer px-3 py-1 rounded-lg bg-green-500/10 border border-green-500/30 text-green-400 tracking-wide">
+            Prod
           </div>
           <div className="text-xs text-center cursor-pointer px-3 py-1 rounded-lg bg-green-500/10 border border-green-500/30 text-green-400 tracking-wide flex items-center gap-1.5">
             <span className="w-1.5 h-1.5 rounded-full bg-green-400 inline-block" />
