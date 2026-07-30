@@ -20,6 +20,16 @@ const Sidebar = ({
   text-xs md:text-sm lg:text-lg text-[var(--text)]
   flex-shrink-0 lg:w-full
 `;
+  const baseBtnClasses2 = `
+  border border-[var(--darker-border)]
+  active:scale-95 hover:shadow-md
+  shadow-[var(--shadow)]
+  text-center
+  transition-all cursor-pointer
+  text-xs md:text-sm lg:text-lg text-[var(--text)]
+  py-1 px-2
+  rounded-xl
+`;
   const baseCardClasses = `
   hidden lg:flex
   border border-[var(--darker-border)] hover:shadow-md
@@ -67,7 +77,7 @@ const Sidebar = ({
         <select
           value={stateFilter}
           onChange={handleStateChange}
-          className={`${baseBtnClasses} bg-[var(--view-bg)]`}
+          className={`${baseBtnClasses2} bg-[var(--view-bg)]`}
         >
           <option value="">All States</option>
           {uniqueStates.map((state) => (
@@ -81,7 +91,7 @@ const Sidebar = ({
           value={districtFilter}
           onChange={(e) => setDistrictFilter(e.target.value)}
           disabled={!stateFilter}
-          className={`${baseBtnClasses} bg-[var(--view-bg)] ${!stateFilter ? "opacity-50 cursor-not-allowed" : ""}`}
+          className={`${baseBtnClasses2} bg-[var(--view-bg)] ${!stateFilter ? "opacity-50 cursor-not-allowed" : ""}`}
         >
           <option value="">All Districts</option>
           {uniqueDistricts.map((district) => (
