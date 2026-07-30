@@ -1,6 +1,7 @@
 # Saral Rates
 
 Saral Rates is a website for traders and farmers to check prices of different commodities published by the Indian Government daily.
+![Logo](client/public/images/logo.png)
 
 # Features
 
@@ -8,7 +9,7 @@ Saral Rates is a website for traders and farmers to check prices of different co
 - Then you will be shown the dashboard which consists of the header, footer, sidebar and the main region where all the cards and details are displayed
 - The sidebar inclues home, favourites, increase, latest favourites (for larger screens only) and decrease
 - Home is for seeing all the cards at once obv.
-- When you click on favourites, you will see all the bookmarked cards. Max limit is 5 days, so you can see bookmars of up to 4-5 days
+- When you click on favourites, you will see all the bookmarked cards. Max limit is 7 days, so you can see bookmars of up to 7 days
 - Then comes the increase section where you can see all the commodities whose prices has increase as compared to a day before
 - With same but opposite functionality is the decreased section
 - Now on to the header, it consists of logo, theme toggle button and search bar
@@ -19,17 +20,19 @@ Saral Rates is a website for traders and farmers to check prices of different co
 - You can also compare two prices, I mean cards by right click on both of them on larger screen devices and if you are on a mobile phone or a devices that responds to touch then just hold onto a card for some time and it'll get selected then again hold onto another card to select the second card
 - Comparision will be done on the basis of common price and last 7 days of prices
 - Also, you can click on the data.gov.in text to see where I get the data from
-- The current version doesn't have caching as localStorage can't fit this much big data. I'll figure something out later
+- You can filter commodities according the state and their districts too!
 
 # Functionality
 
-- My app sends request to government api which is, [this](https://www.data.gov.in/resource/current-daily-price-various-commodities-various-markets-mandi)
-- Like it pings the api everyday at a certain time (this is done manually obv) then checks whether new data is available or not, if the data is updated or new it only fetches that day
-- It fetches and stores it in the database (I am using MongoDB).
-- This thing will hopefully repeat up to 100-120 days
-- After that time period, all the old data will be deleted (I have to do this because I am using free tier of MongoDB Cluster and also keeping such old prices doesn't make any sense)
-- And now the frontend fetches the data from the backend and displayes it
-- Currently on every reload, fetch is performed (which is a shame ik). I'll get into it later
+- I get data from here a govt API that is, [this](https://www.data.gov.in/resource/current-daily-price-various-commodities-various-markets-mandi)
+- My raspberry pi runs cron job daily and stores data in mariaDB which is again on the raspberry pi.
+- Pi then through the cloudflare tunnel exposes REST API to the frontend after the data is processed, duplicates are removed, everything else is properly stored into different tables in the DB.
+- Then the frontend displays all the cards
+- it finally reaches you
+
+# Architecture
+
+![Architecture Diagram](client/public/images/architecture.png)
 
 # Source
 
@@ -41,16 +44,16 @@ Saral Rates is a website for traders and farmers to check prices of different co
 - Reactjs
 - TailwindCSS
 - Javascript
-- MongoDB Compass
-- mongoose
+- NextJS
+- MariaDB
 - motion.dev
 - floating-ui
-- react-router-dom
 - react-virtuoso
 - react-spinners
 - html2canvas
 - react-toastify
 - lucide-react
+- Raspberry Pi
 
 # Current Status
 
