@@ -12,6 +12,8 @@ export default function Card({
   data,
   favourites,
   setFavourites,
+  stateFilter,
+  districtFilter,
 }) {
   const [finalList, setFinalList] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -93,6 +95,11 @@ export default function Card({
         return item.commodity?.toLowerCase().includes(search.toLowerCase());
       })
       .filter((item) => {
+        if (stateFilter && item.state !== stateFilter) return false;
+        if (districtFilter && item.district !== districtFilter) return false;
+        return true;
+      })
+      .filter((item) => {
         if (view === "increase") {
           return item.trend === "increase";
         }
@@ -111,7 +118,7 @@ export default function Card({
 
     setFinalList(filtered);
     setLoading(false);
-  }, [data, search, view, favourites]);
+  }, [data, search, view, favourites, stateFilter, districtFilter]);
 
   const isFavourite = (item) => {
     const key = `${item.commodity}|${item.market}|${item.district}`

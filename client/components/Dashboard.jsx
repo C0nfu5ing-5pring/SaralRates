@@ -12,6 +12,8 @@ const Dashboard = () => {
   const [view, setView] = useState("all");
   const [commodities, setCommodities] = useState([]);
   const [favourites, setFavourites] = useState([]);
+  const [stateFilter, setStateFilter] = useState("");
+  const [districtFilter, setDistrictFilter] = useState("");
   const [theme, setTheme] = useState("light");
 
   useEffect(() => {
@@ -87,6 +89,11 @@ const Dashboard = () => {
                   view={view}
                   setView={setView}
                   favourites={favourites}
+                  commodities={commodities}
+                  stateFilter={stateFilter}
+                  setStateFilter={setStateFilter}
+                  districtFilter={districtFilter}
+                  setDistrictFilter={setDistrictFilter}
                 />
               </div>
             </div>
@@ -98,6 +105,8 @@ const Dashboard = () => {
               view={view}
               favourites={favourites}
               setFavourites={setFavourites}
+              stateFilter={stateFilter}
+              districtFilter={districtFilter}
             />
           </div>
         </div>

@@ -1,4 +1,14 @@
-const Sidebar = ({ view, setView, hasPriceHistory, favourites }) => {
+const Sidebar = ({
+  view,
+  setView,
+  hasPriceHistory,
+  favourites,
+  commodities,
+  stateFilter,
+  setStateFilter,
+  districtFilter,
+  setDistrictFilter,
+}) => {
   const baseBtnClasses = `
   border border-[var(--darker-border)]
   active:scale-95 hover:shadow-md
@@ -26,6 +36,24 @@ const Sidebar = ({ view, setView, hasPriceHistory, favourites }) => {
     "bg-[var(--sidebar-active)] text-white border-[var(--border-darker)]";
   const inactiveClasses = "hover:border-[var(--border)] hover:border-2";
 
+  const uniqueStates = [
+    ...new Set((commodities || []).map((c) => c.state).filter(Boolean)),
+  ].sort();
+
+  const uniqueDistricts = [
+    ...new Set(
+      (commodities || [])
+        .filter((c) => !stateFilter || c.state === stateFilter)
+        .map((c) => c.district)
+        .filter(Boolean),
+    ),
+  ].sort();
+
+  const handleStateChange = (e) => {
+    setStateFilter(e.target.value);
+    setDistrictFilter("");
+  };
+
   return (
     <div className="flex flex-col gap-3 w-full overflow-x-auto lg:flex lg:flex-col lg:gap-6 items-center p-3 lg:py-7 lg:px-5 justify-between lg:h-[82.520vh] transition-colors duration-300">
       <div className="flex md:flex-col justify-center w-full gap-3">
@@ -35,6 +63,33 @@ const Sidebar = ({ view, setView, hasPriceHistory, favourites }) => {
         >
           Home
         </button>
+
+        <select
+          value={stateFilter}
+          onChange={handleStateChange}
+          className={`${baseBtnClasses} bg-[var(--view-bg)]`}
+        >
+          <option value="">States</option>
+          {uniqueStates.map((state) => (
+            <option key={state} value={state}>
+              {state}
+            </option>
+          ))}
+        </select>
+
+        <select
+          value={districtFilter}
+          onChange={(e) => setDistrictFilter(e.target.value)}
+          disabled={!stateFilter}
+          className={`${baseBtnClasses} bg-[var(--view-bg)] ${!stateFilter ? "opacity-50 cursor-not-allowed" : ""}`}
+        >
+          <option value="">Districts</option>
+          {uniqueDistricts.map((district) => (
+            <option key={district} value={district}>
+              {district}
+            </option>
+          ))}
+        </select>
 
         <button
           onClick={() => setView("favourites")}
