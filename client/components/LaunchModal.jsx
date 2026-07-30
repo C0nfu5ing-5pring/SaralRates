@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
 import compareTwo from "../public/images/compareTwo.png";
 import decrease from "../public/images/decrease.png";
 import increase from "../public/images/increase.png";
@@ -13,7 +14,6 @@ const LaunchModal = () => {
   const modalContent = [
     {
       title: "Welcome!",
-      img: null,
       content:
         "Welcome to the SaralRates! This is my first major project! So, SaralRates is a price-tracking web-app that uses Indian Government API of daily prices for different commodities. Main purpose of this site is to spread awareness about the actual prices and to avoid being scammed by the middle man.",
     },
@@ -74,9 +74,12 @@ const LaunchModal = () => {
             <h1 className="text-center text-3xl leading-8 lg:text-4xl text-[var(--logo)]">
               {current.title}
             </h1>
-            <img
+            <Image
               className={`border-2 border-[var(--logo)] rounded-xl ${!current.img ? "hidden" : "block"} `}
               src={current.img}
+              alt={current.title}
+              width={400}
+              height={300}
             />
             <p className="text-center text-[var(--text)]">{current.content}</p>
             {count < modalContent.length - 1 ? (

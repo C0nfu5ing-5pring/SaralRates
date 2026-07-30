@@ -124,6 +124,7 @@ export default function PriceCard({
             <Share
               onClick={(e) => {
                 e.stopPropagation();
+                console.log("Share clicked", Date.now());
                 onShare(cardRef.current);
               }}
               className="cursor-pointer active:scale-90 transition-all text-(--icon)"

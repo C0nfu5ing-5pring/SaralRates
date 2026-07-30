@@ -3,6 +3,7 @@ import PriceCard from "./PriceCard";
 import html2canvas from "html2canvas";
 import { toast } from "react-toastify";
 import CustomToast from "./CustomToast";
+import { useRef } from "react";
 
 export default function CardGrid({
   list,
@@ -11,8 +12,11 @@ export default function CardGrid({
   compareList,
   toggleCompare,
 }) {
+  const isSharingRef = useRef(false);
   const shareCardAsImage = async (element) => {
     if (!element) return;
+    if (isSharingRef.current) return;
+    isSharingRef.current = true;
 
     try {
       const canvas = await html2canvas(element, {
@@ -75,6 +79,8 @@ export default function CardGrid({
           type="info"
         />,
       );
+    } finally {
+      isSharingRef.current = false;
     }
   };
 

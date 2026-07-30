@@ -69,7 +69,7 @@ const Sidebar = ({
           onChange={handleStateChange}
           className={`${baseBtnClasses} bg-[var(--view-bg)]`}
         >
-          <option value="">States</option>
+          <option value="">All States</option>
           {uniqueStates.map((state) => (
             <option key={state} value={state}>
               {state}
@@ -83,7 +83,7 @@ const Sidebar = ({
           disabled={!stateFilter}
           className={`${baseBtnClasses} bg-[var(--view-bg)] ${!stateFilter ? "opacity-50 cursor-not-allowed" : ""}`}
         >
-          <option value="">Districts</option>
+          <option value="">All Districts</option>
           {uniqueDistricts.map((district) => (
             <option key={district} value={district}>
               {district}
